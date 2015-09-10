@@ -1,0 +1,27 @@
+Start TypeScript compiler in watch mode:
+tsc --watch -m commonjs -t es5 --emitDecoratorMetadata --experimentalDecorators app.ts
+tsc --watch -m commonjs -t es5 --emitDecoratorMetadata --experimentalDecorators *.ts
+
+Start server:
+http-server
+
+5 Minutes Quickstart:
+https://angular.io/docs/js/latest/quickstart.html
+
+tsconfig.json explained:
+https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md
+
+
+
+Angular 2 in Visual Studio Code (vom April):
+http://blogs.msdn.com/b/typescript/archive/2015/04/30/using-typescript-in-visual-studio-code.aspx
+
+AngularJS in Visual Studio Code (vom Mai):
+http://blogs.msdn.com/b/vscode/archive/2015/05/22/getting-started-with-angular-and-visual-studio-code.aspx
+
+Test-URL:
+http://127.0.0.1:8080/
+
+EmberJS vs. Backbone.js vs. Angular:
+http://www.quora.com/How-do-AngularJs-2-0-and-EmberJs-1-10-0-compare
+https://www.airpair.com/js/javascript-framework-comparison
