@@ -7,8 +7,11 @@
         "sourceMap": true
     },
     "files": [
-        "app.ts",
+        "application.ts",
         "board.ts",
-        "typings/tsd.d.ts"
+        "field.ts",
+        "typings/tsd.d.ts",
+        "parameter/game.ts",
+        "parameter/playground.ts"
     ]
 }

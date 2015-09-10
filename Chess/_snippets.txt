@@ -1,0 +1,3 @@
+ondragstart="ajax:board.ondragstart(rowStatus.index,columnStatus.index)"
+ondragover="if (targets.indexOf('(#{rowStatus.index},#{columnStatus.index})')>=0) event.preventDefault();"
+ondrop="ajax:board.ondragdrop(rowStatus.index,columnStatus.index)"

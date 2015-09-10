@@ -9,22 +9,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2', "chessboard"], function (require, exports, angular2_1, chessboard_1) {
-    var AppComponent = (function () {
-        function AppComponent() {
+define(["require", "exports", 'angular2/angular2'], function (require, exports, angular2_1) {
+    var PlaygroundComponent = (function () {
+        function PlaygroundComponent() {
+            this.name = "initial value";
         }
-        AppComponent = __decorate([
+        PlaygroundComponent = __decorate([
             angular2_1.Component({
-                selector: 'app'
+                selector: 'playground',
+                properties: ['name']
             }),
             angular2_1.View({
-                templateUrl: 'application.html',
-                directives: [chessboard_1.ChessBoardComponent]
+                templateUrl: "playground.html"
             }), 
             __metadata('design:paramtypes', [])
-        ], AppComponent);
-        return AppComponent;
+        ], PlaygroundComponent);
+        return PlaygroundComponent;
     })();
-    angular2_1.bootstrap(chessboard_1.ChessBoardComponent);
+    exports.PlaygroundComponent = PlaygroundComponent;
 });
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=playground.js.map
