@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "amd",
+        "target": "es5",
+        "sourceMap": true
+    },
+    "files": [
+        "typings/tsd.d.ts",
+        "game.ts",
+        "playground.ts"
+    ]
+}
