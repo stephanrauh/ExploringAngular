@@ -1,5 +1,5 @@
 {
-    "buildOnSave": true,  
+    "buildOnSave": true,
     "compilerOptions": {
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
@@ -7,10 +7,20 @@
         "target": "es5",
         "sourceMap": true
     },
-
     "filesGlob": [
         "*.ts",
         "engine/*.ts",
         "DI-Example/*.ts"
+    ],
+    "files": [
+        "applicationcomponent.ts",
+        "capturedpiecescomponent.ts",
+        "chessboardcomponent.ts",
+        "fieldcomponent.ts",
+        "historycomponent.ts",
+        "engine/chessboard.ts",
+        "engine/move.ts",
+        "engine/moves.ts",
+        "DI-Example/tab0.ts"
     ]
 }

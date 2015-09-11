@@ -64,6 +64,7 @@ EmberJS vs. Backbone.js vs. Angular:
 Atom:
   install package atomatigit for full GIT support (open the panel by hitting cmd-alt-g)
   install atom-typescript
+  install atom-beautify (optional)
 
 Error messages:
   "The selector "chessboard" did not match any elements" means that the HTML file doesn't contain a widget corresponding to the
@@ -74,6 +75,10 @@ Dependency Injection:
   * Option 2: Inject a service. Mark the service class with @Injectable(),
       add the service implementation class to the app's list of component bindings,
       and add the service to the parameter list of the component that needs the service.
+
+Everything is a tree!
+  * You always have to define the component you want to use as child components in the parent component. Otherwise,
+    they simply won't be rendered. More precisely, their source code or pseudo tag will be rendered.
 
 Links:
   http://www.angular2.com/

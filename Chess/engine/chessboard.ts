@@ -14,6 +14,8 @@ export module Engine {
             return this.chessboard.fields;
         }
 
+        get isWhitePlaying(): boolean { return this.chessboard.isWhitePlaying }
+
         onclick(row: number, col: number): void {
             if (!this.isPieceSelected)
                 this.setSelectedPiece(row, col);
@@ -26,12 +28,18 @@ export module Engine {
         }
 
         setSelectedPiece(row: number, col: number): void {
-            if (this.chessboard.fields[row][col] != 0) {
-                this.isPieceSelected = true
-                this.selectedPieceRow = row
-                this.selectedPieceCol = col
+            var piece = this.chessboard.fields[row][col];
+            if (this.isWhitePlaying) {
+                if (piece <= 0) return;
+            } else {
+                if (piece >= 0) return;
             }
+
+            this.isPieceSelected = true
+            this.selectedPieceRow = row
+            this.selectedPieceCol = col
         }
+
 
         isLegalMove2(toRow: number, toCol: number): boolean {
             if (!this.isPieceSelected)
@@ -41,7 +49,7 @@ export module Engine {
 
     }
 
-    class Chessboard {
+    export class Chessboard {
         constructor() {
             console.log("new Chessboard!")
         }
@@ -56,13 +64,28 @@ export module Engine {
             [2, 3, 4, 5, 6, 4, 3, 2]
         ];
 
+        private _isWhitePlaying: boolean = true;
+
+        get isWhitePlaying(): boolean { return this._isWhitePlaying }
+
         get fields(): number[][] {
             return this._fields;
         }
 
         isLegalMove(fromRow, fromCol, toRow, toCol: number): boolean {
             var piece: number = this.fields[fromRow][fromCol]
+            if (this.isWhitePlaying) {
+                if (piece < 0) return false;
+            } else {
+                if (piece > 0) return false;
+            }
+
             var targetPiece: number = this.fields[toRow][toCol]
+            if (this.isWhitePlaying) {
+                if (targetPiece > 0) return false;
+            } else {
+                if (targetPiece < 0) return false;
+            }
             if (targetPiece > 0 && piece > 0)
                 return false;
             if (targetPiece < 0 && piece < 0)
@@ -75,6 +98,7 @@ export module Engine {
             var targetPiece: number = this.fields[toRow][toCol]
             this.fields[fromRow][fromCol] = 0;
             this.fields[toRow][toCol] = piece;
+            this._isWhitePlaying = !this._isWhitePlaying;
         }
     }
-}
+  }

@@ -25,6 +25,11 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                 enumerable: true,
                 configurable: true
             });
+            Object.defineProperty(ChessboardUI.prototype, "isWhitePlaying", {
+                get: function () { return this.chessboard.isWhitePlaying; },
+                enumerable: true,
+                configurable: true
+            });
             ChessboardUI.prototype.onclick = function (row, col) {
                 if (!this.isPieceSelected)
                     this.setSelectedPiece(row, col);
@@ -36,11 +41,18 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                 }
             };
             ChessboardUI.prototype.setSelectedPiece = function (row, col) {
-                if (this.chessboard.fields[row][col] != 0) {
-                    this.isPieceSelected = true;
-                    this.selectedPieceRow = row;
-                    this.selectedPieceCol = col;
+                var piece = this.chessboard.fields[row][col];
+                if (this.isWhitePlaying) {
+                    if (piece <= 0)
+                        return;
                 }
+                else {
+                    if (piece >= 0)
+                        return;
+                }
+                this.isPieceSelected = true;
+                this.selectedPieceRow = row;
+                this.selectedPieceCol = col;
             };
             ChessboardUI.prototype.isLegalMove2 = function (toRow, toCol) {
                 if (!this.isPieceSelected)
@@ -66,8 +78,14 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                     [1, 1, 1, 1, 1, 1, 1, 1],
                     [2, 3, 4, 5, 6, 4, 3, 2]
                 ];
+                this._isWhitePlaying = true;
                 console.log("new Chessboard!");
             }
+            Object.defineProperty(Chessboard.prototype, "isWhitePlaying", {
+                get: function () { return this._isWhitePlaying; },
+                enumerable: true,
+                configurable: true
+            });
             Object.defineProperty(Chessboard.prototype, "fields", {
                 get: function () {
                     return this._fields;
@@ -77,7 +95,23 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
             });
             Chessboard.prototype.isLegalMove = function (fromRow, fromCol, toRow, toCol) {
                 var piece = this.fields[fromRow][fromCol];
+                if (this.isWhitePlaying) {
+                    if (piece < 0)
+                        return false;
+                }
+                else {
+                    if (piece > 0)
+                        return false;
+                }
                 var targetPiece = this.fields[toRow][toCol];
+                if (this.isWhitePlaying) {
+                    if (targetPiece > 0)
+                        return false;
+                }
+                else {
+                    if (targetPiece < 0)
+                        return false;
+                }
                 if (targetPiece > 0 && piece > 0)
                     return false;
                 if (targetPiece < 0 && piece < 0)
@@ -89,9 +123,11 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                 var targetPiece = this.fields[toRow][toCol];
                 this.fields[fromRow][fromCol] = 0;
                 this.fields[toRow][toCol] = piece;
+                this._isWhitePlaying = !this._isWhitePlaying;
             };
             return Chessboard;
         })();
+        Engine.Chessboard = Chessboard;
     })(Engine = exports.Engine || (exports.Engine = {}));
 });
 //# sourceMappingURL=chessboard.js.map

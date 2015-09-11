@@ -1,4 +1,37 @@
-<h1>AngularJS 2.0 plays Chess!</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>AngularJS 2.0 plays Chess!</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{title}}</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-10">
+              <chessboard></chessboard>
+            </div>
+            <div class="col-md-2">
+              <captured-pieces />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-
-<chessboard></chessboard>
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">History</h3>
+        </div>
+        <div class="panel-body">
+          <history></history>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
