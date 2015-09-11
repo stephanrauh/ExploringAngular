@@ -9,9 +9,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2', './field'], function (require, exports, angular2_1, field_1) {
-    var ChessUI;
-    (function (ChessUI) {
+define(["require", "exports", 'angular2/angular2'], function (require, exports, angular2_1) {
+    var Chess;
+    (function (Chess) {
         var ChessBoardComponent = (function () {
             function ChessBoardComponent() {
                 this.fields = [
@@ -66,14 +66,19 @@ define(["require", "exports", 'angular2/angular2', './field'], function (require
                     selector: 'chessboard'
                 }),
                 angular2_1.View({
-                    directives: [angular2_1.NgFor, field_1.FieldComponent],
-                    templateUrl: 'chessboard.html'
+                    directives: [angular2_1.NgFor],
+                    template: '<div *ng-for="#row of fields; var rowindex=index" style="width: 630px; height: 68px; overflow: hidden;" >\
+                  <div *ng-for="#col of row; var colindex=index" style="position: relative; left: 0; top: 0; width: 68px; height: 68px; margin-right:-4px; display: inline-block" >\
+                       <div style="position: relative; top: 0; left: 0;"><img style="width:70px;height:70px" src="{{backgroundFileName(rowindex,colindex)}}" /></div>\
+                       <div style="position: absolute; top: 0px; left: 0px;"><img style="width:70px;height:70px" src="{{fileName(col)}}" /></div>\
+                  </div>\
+             </div>'
                 }), 
                 __metadata('design:paramtypes', [])
             ], ChessBoardComponent);
             return ChessBoardComponent;
         })();
-        ChessUI.ChessBoardComponent = ChessBoardComponent;
-    })(ChessUI = exports.ChessUI || (exports.ChessUI = {}));
+        Chess.ChessBoardComponent = ChessBoardComponent;
+    })(Chess = exports.Chess || (exports.Chess = {}));
 });
-//# sourceMappingURL=chessboard.js.map
+//# sourceMappingURL=board.js.map
