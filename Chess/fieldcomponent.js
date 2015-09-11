@@ -62,21 +62,17 @@ define(["require", "exports", 'angular2/angular2', './chessboardcomponent'], fun
             return "wikimediaimages/" + prefix + pieceName + ".png";
         };
         FieldComponent.prototype.ondragstart = function (row, col) {
-            console.log("drag start:" + row + "/" + col);
             chessboardcomponent_1.ChessBoardComponent.singleton.setSelectedPiece(row, col);
         };
         FieldComponent.prototype.ondragover = function (row, col) {
-            console.log("drag over:" + row + "/" + col);
             if (chessboardcomponent_1.ChessBoardComponent.singleton.isLegalMove(row, col))
                 event.preventDefault();
         };
         FieldComponent.prototype.ondragdrop = function (row, col) {
-            console.log("drag drop:" + row + "/" + col);
+            chessboardcomponent_1.ChessBoardComponent.singleton.onclick(row, col);
         };
-        FieldComponent.prototype.isLegalMove = function (row, col) {
-            if (col < 4)
-                return false;
-            return true;
+        FieldComponent.prototype.onclick = function (row, col) {
+            chessboardcomponent_1.ChessBoardComponent.singleton.onclick(row, col);
         };
         FieldComponent = __decorate([
             angular2_1.Component({
@@ -85,7 +81,7 @@ define(["require", "exports", 'angular2/angular2', './chessboardcomponent'], fun
             }),
             angular2_1.View({
                 directives: [angular2_1.NgFor],
-                templateUrl: 'field.html'
+                templateUrl: 'FieldComponent.html'
             }),
             angular2_1.Inject(chessboardcomponent_1.ChessBoardComponent), 
             __metadata('design:paramtypes', [])

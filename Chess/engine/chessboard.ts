@@ -1,5 +1,5 @@
 export module Engine {
-    export class ChessBoard {
+    export class Chessboard {
 
         public fields: number[][] = [
             [-2, -3, -4, -5, -6, -4, -3, -2],
@@ -20,6 +20,13 @@ export module Engine {
             if (targetPiece < 0 && piece < 0)
                 return false;
             return true;
+        }
+
+        move (fromRow, fromCol, toRow, toCol: number): void {
+          var piece: number = this.fields[fromRow][fromCol]
+          var targetPiece: number = this.fields[toRow][toCol]
+          this.fields[fromRow][fromCol]=0;
+          this.fields[toRow][toCol]=piece;
         }
     }
 }

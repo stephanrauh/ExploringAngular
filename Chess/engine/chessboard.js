@@ -1,8 +1,8 @@
 define(["require", "exports"], function (require, exports) {
     var Engine;
     (function (Engine) {
-        var ChessBoard = (function () {
-            function ChessBoard() {
+        var Chessboard = (function () {
+            function Chessboard() {
                 this.fields = [
                     [-2, -3, -4, -5, -6, -4, -3, -2],
                     [-1, -1, -1, -1, -1, -1, -1, -1],
@@ -14,7 +14,7 @@ define(["require", "exports"], function (require, exports) {
                     [2, 3, 4, 5, 6, 4, 3, 2]
                 ];
             }
-            ChessBoard.prototype.isLegalMove = function (fromRow, fromCol, toRow, toCol) {
+            Chessboard.prototype.isLegalMove = function (fromRow, fromCol, toRow, toCol) {
                 var piece = this.fields[fromRow][fromCol];
                 var targetPiece = this.fields[toRow][toCol];
                 if (targetPiece > 0 && piece > 0)
@@ -23,9 +23,15 @@ define(["require", "exports"], function (require, exports) {
                     return false;
                 return true;
             };
-            return ChessBoard;
+            Chessboard.prototype.move = function (fromRow, fromCol, toRow, toCol) {
+                var piece = this.fields[fromRow][fromCol];
+                var targetPiece = this.fields[toRow][toCol];
+                this.fields[fromRow][fromCol] = 0;
+                this.fields[toRow][toCol] = piece;
+            };
+            return Chessboard;
         })();
-        Engine.ChessBoard = ChessBoard;
+        Engine.Chessboard = Chessboard;
     })(Engine = exports.Engine || (exports.Engine = {}));
 });
 //# sourceMappingURL=chessboard.js.map

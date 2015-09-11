@@ -1,7 +1,5 @@
 /// <reference path="typings/angular2/angular2.d.ts" />
-/// <reference path="./chessboardcomponent.ts"/>
-import {Component, Inject, View, NgFor, bootstrap
-  } from 'angular2/angular2';
+import {Component, Inject, View, NgFor, bootstrap} from 'angular2/angular2';
 import {ChessBoardComponent} from './chessboardcomponent';
 
 // Annotation section
@@ -12,14 +10,13 @@ import {ChessBoardComponent} from './chessboardcomponent';
 })
 @View({
     directives: [NgFor],
-    templateUrl: 'field.html'
+    templateUrl: 'FieldComponent.html'
 })
 @Inject(ChessBoardComponent)
 export class FieldComponent {
 //    constructor(private chessboardComponent: ChessBoardComponent) {
 //      console.log(chessboardComponent);
 //    }
-
 
     _row: string;
     set row(val: string) { this._row = val; }
@@ -60,24 +57,20 @@ export class FieldComponent {
     }
 
     private ondragstart(row:number, col:number) {
-      console.log("drag start:" + row + "/" + col)
       ChessBoardComponent.singleton.setSelectedPiece(row, col);
     }
 
     private ondragover(row:number, col:number) {
-      console.log("drag over:" + row + "/" + col)
-
       if (ChessBoardComponent.singleton.isLegalMove(row, col))
         event.preventDefault();
     }
 
     private ondragdrop(row:number, col:number) {
-      console.log("drag drop:" + row + "/" + col)
+      ChessBoardComponent.singleton.onclick(row, col);
     }
 
-    private isLegalMove(row: number, col:number): boolean {
-      if (col<4) return false;
-      return true;
+    private onclick(row:number, col:number) {
+      ChessBoardComponent.singleton.onclick(row, col);
     }
 
 }

@@ -9,7 +9,7 @@ import {ChessBoardComponent} from "./chessboardcomponent";
     selector: 'application'
 })
 @View({
-    templateUrl: 'application.html',
+    templateUrl: 'ApplicationComponent.html',
     directives: [ChessBoardComponent]
 })
 // Component controller

@@ -18,7 +18,7 @@ define(["require", "exports", 'angular2/angular2', "./chessboardcomponent"], fun
                 selector: 'application'
             }),
             angular2_1.View({
-                templateUrl: 'application.html',
+                templateUrl: 'ApplicationComponent.html',
                 directives: [chessboardcomponent_1.ChessBoardComponent]
             }), 
             __metadata('design:paramtypes', [])

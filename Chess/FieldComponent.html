@@ -4,10 +4,10 @@
   </div>
   <div style="position: absolute; top: 0px; left: 0px;">
         <img style="width:68px;height:68px" src="{{fileName(piece)}}"
-            (dragstart)="ondragstart(row, col)"
-
+             (dragstart)="ondragstart(row, col)"
              (dragover)="ondragover(row, col)"
              (drop)="ondragdrop(row, col)"
+             (click)="onclick(row, col)"
          />
   </div>
 </div>
