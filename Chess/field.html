@@ -1,8 +1,13 @@
-<div style="position: relative; left: 0; top: 0; width: 68px; height: 68px; margin-right:-4px; display: inline-block" >
-  <div style="position: relative; top: 0; left: 0;">
-        <img style="width:70px;height:70px" src="{{backgroundFileName(row,col)}}" />
+<div style="position: relative; left: 0px; top: 0px; width: 70px; height: 70px;margin-right:-4px; display: inline-block" >
+  <div style="position: relative; top: 0px; left: 0px" >
+        <img class="{{borderClass(row,col)}}" src="{{backgroundFileName(row,col)}}" />
   </div>
   <div style="position: absolute; top: 0px; left: 0px;">
-        <img style="width:70px;height:70px" src="{{fileName(piece)}}" />
+        <img style="width:68px;height:68px" src="{{fileName(piece)}}"
+            (dragstart)="ondragstart(row, col)"
+
+             (dragover)="ondragover(row, col)"
+             (drop)="ondragdrop(row, col)"
+         />
   </div>
 </div>

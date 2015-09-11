@@ -1,0 +1,11 @@
+.field {
+  border: 1px solid black;
+  width:68px;height:68px;
+}
+
+.selectedField { border: 2px solid red;
+  width:66px;
+  height:64px;
+  top:-2px;
+  position:relative;
+}

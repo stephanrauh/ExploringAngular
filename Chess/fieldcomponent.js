@@ -9,7 +9,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2'], function (require, exports, angular2_1) {
+define(["require", "exports", 'angular2/angular2', './chessboardcomponent'], function (require, exports, angular2_1, chessboardcomponent_1) {
     var FieldComponent = (function () {
         function FieldComponent() {
         }
@@ -24,6 +24,13 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                 return "wikimediaimages/b_empty.png";
             else
                 return "wikimediaimages/w_empty.png";
+        };
+        FieldComponent.prototype.borderClass = function (row, col) {
+            if (chessboardcomponent_1.ChessBoardComponent.singleton.isPieceSelected)
+                if (row == chessboardcomponent_1.ChessBoardComponent.singleton.selectedPieceRow)
+                    if (col == chessboardcomponent_1.ChessBoardComponent.singleton.selectedPieceCol)
+                        return "selectedField";
+            return "field";
         };
         FieldComponent.prototype.fileName = function (piece) {
             if (0 == piece)
@@ -54,6 +61,23 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
             }
             return "wikimediaimages/" + prefix + pieceName + ".png";
         };
+        FieldComponent.prototype.ondragstart = function (row, col) {
+            console.log("drag start:" + row + "/" + col);
+            chessboardcomponent_1.ChessBoardComponent.singleton.setSelectedPiece(row, col);
+        };
+        FieldComponent.prototype.ondragover = function (row, col) {
+            console.log("drag over:" + row + "/" + col);
+            if (chessboardcomponent_1.ChessBoardComponent.singleton.isLegalMove(row, col))
+                event.preventDefault();
+        };
+        FieldComponent.prototype.ondragdrop = function (row, col) {
+            console.log("drag drop:" + row + "/" + col);
+        };
+        FieldComponent.prototype.isLegalMove = function (row, col) {
+            if (col < 4)
+                return false;
+            return true;
+        };
         FieldComponent = __decorate([
             angular2_1.Component({
                 selector: 'field',
@@ -62,11 +86,12 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
             angular2_1.View({
                 directives: [angular2_1.NgFor],
                 templateUrl: 'field.html'
-            }), 
+            }),
+            angular2_1.Inject(chessboardcomponent_1.ChessBoardComponent), 
             __metadata('design:paramtypes', [])
         ], FieldComponent);
         return FieldComponent;
     })();
     exports.FieldComponent = FieldComponent;
 });
-//# sourceMappingURL=field.js.map
+//# sourceMappingURL=fieldcomponent.js.map

@@ -1,16 +1,16 @@
 /// <reference path="typings/angular2/angular2.d.ts" />
 /// <reference path="chessboard.ts" />
 import {Component, View, bootstrap} from 'angular2/angular2';
-import {ChessUI} from "./chessboard";
+import {ChessBoardComponent} from "./chessboardcomponent";
 
 
 // Annotation section
 @Component({
-  selector: 'application'
+    selector: 'application'
 })
 @View({
-  templateUrl: 'application.html',
-  directives: [ChessUI.ChessBoardComponent]
+    templateUrl: 'application.html',
+    directives: [ChessBoardComponent]
 })
 // Component controller
 class ApplicationComponent {

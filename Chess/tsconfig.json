@@ -7,11 +7,13 @@
         "sourceMap": true
     },
     "files": [
-        "application.ts",
-        "board.ts",
-        "field.ts",
-        "typings/tsd.d.ts",
-        "parameter/game.ts",
-        "parameter/playground.ts"
+        "applicationcomponent.ts",
+        "chessboardcomponent.ts",
+        "fieldcomponent.ts",
+        "engine/chessboard.ts"
+    ],
+    "filesGlob": [
+        "*.ts",
+        "engine/*.ts"
     ]
 }

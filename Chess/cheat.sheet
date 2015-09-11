@@ -1,6 +1,9 @@
 
 npm install -g tsd@^0.6.0
 tsd install angular2 es6-promise rx rx-lite
+    puts the current Angular2 type definitions into the subfolder called "typing" of the current FormBuilder
+
+
 
 Compilation:
 - built-in with Visual Studio Code
@@ -21,6 +24,7 @@ Start server:
 
 tsconfig.json explained:
   https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md
+  http://blog.icanmakethiswork.io/2015/02/hey-tsconfigjson-where-have-you-been.html
   example tsconfig.json:
   {
       "compilerOptions": {
@@ -34,6 +38,10 @@ tsconfig.json explained:
           "app.ts",
           "board.ts",
           "typings/tsd.d.ts"
+      ],
+          "filesGlob": [
+              "*.ts",
+              "engine/*.ts"
       ]
   }
 
