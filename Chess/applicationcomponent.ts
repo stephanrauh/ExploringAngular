@@ -2,11 +2,12 @@
 /// <reference path="chessboard.ts" />
 import {Component, View, bootstrap} from 'angular2/angular2';
 import {ChessBoardComponent} from "./chessboardcomponent";
-
+import {Engine} from "./engine/chessboard";
 
 // Annotation section
 @Component({
-    selector: 'application'
+    selector: 'application',
+    bindings: [Engine.ChessboardUI]
 })
 @View({
     templateUrl: 'ApplicationComponent.html',

@@ -9,16 +9,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2', './chessboardcomponent'], function (require, exports, angular2_1, chessboardcomponent_1) {
+define(["require", "exports", 'angular2/angular2', "./engine/chessboard"], function (require, exports, angular2_1, chessboard_1) {
     var FieldComponent = (function () {
-        function FieldComponent() {
+        function FieldComponent(chessboard) {
+            this.chessboard = chessboard;
         }
-        Object.defineProperty(FieldComponent.prototype, "row", {
-            get: function () { return this._row; },
-            set: function (val) { this._row = val; },
-            enumerable: true,
-            configurable: true
-        });
         FieldComponent.prototype.backgroundFileName = function (rowindex, colindex) {
             if ((rowindex + colindex) % 2 == 1)
                 return "wikimediaimages/b_empty.png";
@@ -26,9 +21,9 @@ define(["require", "exports", 'angular2/angular2', './chessboardcomponent'], fun
                 return "wikimediaimages/w_empty.png";
         };
         FieldComponent.prototype.borderClass = function (row, col) {
-            if (chessboardcomponent_1.ChessBoardComponent.singleton.isPieceSelected)
-                if (row == chessboardcomponent_1.ChessBoardComponent.singleton.selectedPieceRow)
-                    if (col == chessboardcomponent_1.ChessBoardComponent.singleton.selectedPieceCol)
+            if (this.chessboard.isPieceSelected)
+                if (row == this.chessboard.selectedPieceRow)
+                    if (col == this.chessboard.selectedPieceCol)
                         return "selectedField";
             return "field";
         };
@@ -62,17 +57,17 @@ define(["require", "exports", 'angular2/angular2', './chessboardcomponent'], fun
             return "wikimediaimages/" + prefix + pieceName + ".png";
         };
         FieldComponent.prototype.ondragstart = function (row, col) {
-            chessboardcomponent_1.ChessBoardComponent.singleton.setSelectedPiece(row, col);
+            this.chessboard.setSelectedPiece(row, col);
         };
         FieldComponent.prototype.ondragover = function (row, col) {
-            if (chessboardcomponent_1.ChessBoardComponent.singleton.isLegalMove(row, col))
+            if (this.chessboard.isLegalMove2(row, col))
                 event.preventDefault();
         };
         FieldComponent.prototype.ondragdrop = function (row, col) {
-            chessboardcomponent_1.ChessBoardComponent.singleton.onclick(row, col);
+            this.chessboard.onclick(row, col);
         };
         FieldComponent.prototype.onclick = function (row, col) {
-            chessboardcomponent_1.ChessBoardComponent.singleton.onclick(row, col);
+            this.chessboard.onclick(row, col);
         };
         FieldComponent = __decorate([
             angular2_1.Component({
@@ -82,9 +77,8 @@ define(["require", "exports", 'angular2/angular2', './chessboardcomponent'], fun
             angular2_1.View({
                 directives: [angular2_1.NgFor],
                 templateUrl: 'FieldComponent.html'
-            }),
-            angular2_1.Inject(chessboardcomponent_1.ChessBoardComponent), 
-            __metadata('design:paramtypes', [])
+            }), 
+            __metadata('design:paramtypes', [chessboard_1.Engine.ChessboardUI])
         ], FieldComponent);
         return FieldComponent;
     })();

@@ -9,13 +9,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2', "./chessboardcomponent"], function (require, exports, angular2_1, chessboardcomponent_1) {
+define(["require", "exports", 'angular2/angular2', "./chessboardcomponent", "./engine/chessboard"], function (require, exports, angular2_1, chessboardcomponent_1, chessboard_1) {
     var ApplicationComponent = (function () {
         function ApplicationComponent() {
         }
         ApplicationComponent = __decorate([
             angular2_1.Component({
-                selector: 'application'
+                selector: 'application',
+                bindings: [chessboard_1.Engine.ChessboardUI]
             }),
             angular2_1.View({
                 templateUrl: 'ApplicationComponent.html',

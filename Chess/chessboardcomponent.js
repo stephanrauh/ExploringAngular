@@ -11,13 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 define(["require", "exports", 'angular2/angular2', './fieldcomponent', './engine/chessboard'], function (require, exports, angular2_1, fieldcomponent_1, chessboard_1) {
     var ChessBoardComponent = (function () {
-        function ChessBoardComponent() {
-            this.board_ = new chessboard_1.Engine.Chessboard();
-            this.isPieceSelected = false;
-            ChessBoardComponent.singleton = this;
+        function ChessBoardComponent(chessboard) {
+            this.chessboard = chessboard;
         }
         Object.defineProperty(ChessBoardComponent.prototype, "board", {
-            get: function () { return this.board_; },
+            get: function () { return this.chessboard; },
             enumerable: true,
             configurable: true
         });
@@ -26,26 +24,6 @@ define(["require", "exports", 'angular2/angular2', './fieldcomponent', './engine
             enumerable: true,
             configurable: true
         });
-        ChessBoardComponent.prototype.onclick = function (row, col) {
-            if (!this.isPieceSelected)
-                this.setSelectedPiece(row, col);
-            else {
-                this.isPieceSelected = false;
-                if (this.board.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, row, col)) {
-                    this.board.move(this.selectedPieceRow, this.selectedPieceCol, row, col);
-                }
-            }
-        };
-        ChessBoardComponent.prototype.setSelectedPiece = function (row, col) {
-            this.isPieceSelected = true;
-            this.selectedPieceRow = row;
-            this.selectedPieceCol = col;
-        };
-        ChessBoardComponent.prototype.isLegalMove = function (toRow, toCol) {
-            if (!this.isPieceSelected)
-                return false;
-            return this.board.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, toRow, toCol);
-        };
         ChessBoardComponent = __decorate([
             angular2_1.Component({
                 selector: 'chessboard',
@@ -55,7 +33,7 @@ define(["require", "exports", 'angular2/angular2', './fieldcomponent', './engine
                 directives: [angular2_1.NgFor, fieldcomponent_1.FieldComponent],
                 templateUrl: 'ChessboardComponent.html'
             }), 
-            __metadata('design:paramtypes', [])
+            __metadata('design:paramtypes', [chessboard_1.Engine.ChessboardUI])
         ], ChessBoardComponent);
         return ChessBoardComponent;
     })();
