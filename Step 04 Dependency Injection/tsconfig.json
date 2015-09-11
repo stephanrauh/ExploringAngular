@@ -1,0 +1,16 @@
+{
+    "buildOnSave": true,  
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "amd",
+        "target": "es5",
+        "sourceMap": true
+    },
+
+    "filesGlob": [
+        "*.ts",
+        "engine/*.ts",
+        "DI-Example/*.ts"
+    ]
+}
