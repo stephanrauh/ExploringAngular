@@ -14,6 +14,11 @@ Compilation:
   Note that tsc doesn't recognize files that have been added after starting. It needs to
   be stopped with CTRL+C and restarted.
 
+Debugging:
+- Configure the tsconfig.json so that sourcemaps are added automatically.
+- delete the *.ts file from manually from Google Chrome's cache: http://stackoverflow.com/questions/18658185/why-chrome-doesnt-update-typescript-source-files-on-change
+- alternatively start the program in incognito mode
+
 Start server:
   Navigate to the folder containing the index.html and type:
   http-server
@@ -64,7 +69,8 @@ EmberJS vs. Backbone.js vs. Angular:
 Atom:
   install package atomatigit for full GIT support (open the panel by hitting cmd-alt-g)
   install atom-typescript
-  install atom-beautify (optional)
+  install atom-beautify (optional) ALT+CMD+L
+  configure the autocomplete plugin to be less nervous
 
 Error messages:
   "The selector "chessboard" did not match any elements" means that the HTML file doesn't contain a widget corresponding to the

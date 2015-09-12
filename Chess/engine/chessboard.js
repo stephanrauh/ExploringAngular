@@ -10,7 +10,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2'], function (require, exports, angular2_1) {
+define(["require", "exports", 'angular2/angular2', './moves'], function (require, exports, angular2_1, moves_1) {
     var Engine;
     (function (Engine) {
         var ChessboardUI = (function () {
@@ -79,6 +79,14 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                     [2, 3, 4, 5, 6, 4, 3, 2]
                 ];
                 this._isWhitePlaying = true;
+                this.whiteKingHasMoved = false;
+                this.whiteLeftRookHasMoved = false;
+                this.whiteRightRookHasMoved = false;
+                this.blackKingHasMoved = false;
+                this.blackLeftRookHasMoved = false;
+                this.blackRightRookHasMoved = false;
+                this.enPassantCol = -1;
+                this._moves = new moves_1.Moves(this);
                 console.log("new Chessboard!");
             }
             Object.defineProperty(Chessboard.prototype, "isWhitePlaying", {
@@ -116,7 +124,7 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                     return false;
                 if (targetPiece < 0 && piece < 0)
                     return false;
-                return true;
+                return this._moves.isLegalMove(fromRow, fromCol, toRow, toCol);
             };
             Chessboard.prototype.move = function (fromRow, fromCol, toRow, toCol) {
                 var piece = this.fields[fromRow][fromCol];
@@ -124,6 +132,48 @@ define(["require", "exports", 'angular2/angular2'], function (require, exports, 
                 this.fields[fromRow][fromCol] = 0;
                 this.fields[toRow][toCol] = piece;
                 this._isWhitePlaying = !this._isWhitePlaying;
+                this._moves = new moves_1.Moves(this);
+                this.enPassantCol = -1;
+                if (piece == 1 && fromRow - toRow == 2) {
+                    this.enPassantCol = toCol;
+                }
+                if ((piece == 1 || piece == -1) && targetPiece == 0 && fromCol != toCol) {
+                    targetPiece = this.fields[fromRow][toCol];
+                    this.fields[fromRow][toCol] = 0;
+                }
+                if (piece == -1 && fromRow - toRow == -2) {
+                    this.enPassantCol = toCol;
+                }
+                if (piece == 6) {
+                    this.whiteKingHasMoved = true;
+                    if (fromCol - toCol == 2) {
+                        this.fields[fromRow][0] = 0;
+                        this.fields[fromRow][3] = 2;
+                    }
+                    else if (fromCol - toCol == -2) {
+                        this.fields[fromRow][7] = 0;
+                        this.fields[fromRow][5] = 2;
+                    }
+                }
+                if (piece == -6) {
+                    this.blackKingHasMoved = true;
+                    if (fromCol - toCol == 2) {
+                        this.fields[fromRow][0] = 0;
+                        this.fields[fromRow][3] = -2;
+                    }
+                    else if (fromCol - toCol == -2) {
+                        this.fields[fromRow][7] = 0;
+                        this.fields[fromRow][5] = -2;
+                    }
+                }
+                if (piece == 2 && fromRow == 7 && fromCol == 0)
+                    this.whiteLeftRookHasMoved = true;
+                if (piece == 2 && fromRow == 7 && fromCol == 7)
+                    this.whiteRightRookHasMoved = true;
+                if (piece == -2 && fromRow == 0 && fromCol == 0)
+                    this.blackLeftRookHasMoved = true;
+                if (piece == -2 && fromRow == 0 && fromCol == 7)
+                    this.blackRightRookHasMoved = true;
             };
             return Chessboard;
         })();

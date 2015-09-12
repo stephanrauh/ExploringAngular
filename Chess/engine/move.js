@@ -1,6 +1,12 @@
 define(["require", "exports"], function (require, exports) {
     var Move = (function () {
-        function Move(fromRow, fromCol, toRow, toCol, promotion) {
+        function Move(fromRow, fromCol, toRow, toCol, promotion, capture) {
+            this.fromRow = fromRow;
+            this.fromCol = fromCol;
+            this.toRow = toRow;
+            this.toCol = toCol;
+            this.promotion = promotion;
+            this.capture = capture;
         }
         return Move;
     })();

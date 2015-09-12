@@ -1,3 +1,4 @@
 export class Move {
-  constructor(fromRow:number, fromCol:number, toRow:number, toCol:number, promotion:number){}
+  constructor(public fromRow:number, public fromCol:number, public toRow:number, public toCol:number,
+              public promotion:number, public capture: number){}
 }

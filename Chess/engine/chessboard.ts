@@ -1,6 +1,7 @@
 /// <reference path="../typings/angular2/angular2.d.ts" />
 
 import {Injectable} from 'angular2/angular2';
+import {Moves} from './moves';
 
 export module Engine {
     @Injectable() export class ChessboardUI {
@@ -53,6 +54,7 @@ export module Engine {
         constructor() {
             console.log("new Chessboard!")
         }
+
         private _fields: number[][] = [
             [-2, -3, -4, -5, -6, -4, -3, -2],
             [-1, -1, -1, -1, -1, -1, -1, -1],
@@ -65,6 +67,16 @@ export module Engine {
         ];
 
         private _isWhitePlaying: boolean = true;
+
+        whiteKingHasMoved: boolean = false;
+        whiteLeftRookHasMoved: boolean = false;
+        whiteRightRookHasMoved: boolean = false;
+        blackKingHasMoved: boolean = false;
+        blackLeftRookHasMoved: boolean = false;
+        blackRightRookHasMoved: boolean = false;
+        enPassantCol=-1;
+
+        private _moves: Moves = new Moves(this);
 
         get isWhitePlaying(): boolean { return this._isWhitePlaying }
 
@@ -90,7 +102,8 @@ export module Engine {
                 return false;
             if (targetPiece < 0 && piece < 0)
                 return false;
-            return true;
+
+            return this._moves.isLegalMove(fromRow, fromCol, toRow, toCol);
         }
 
         move(fromRow, fromCol, toRow, toCol: number): void {
@@ -98,7 +111,45 @@ export module Engine {
             var targetPiece: number = this.fields[toRow][toCol]
             this.fields[fromRow][fromCol] = 0;
             this.fields[toRow][toCol] = piece;
-            this._isWhitePlaying = !this._isWhitePlaying;
+            this._isWhitePlaying = !this._isWhitePlaying
+            this._moves = new Moves(this)
+            this.enPassantCol=-1
+            if (piece == 1 && fromRow-toRow==2) {
+              this.enPassantCol=toCol;
+            }
+            // check for en passant capturing
+            if ((piece==1 || piece==-1) && targetPiece==0 && fromCol!=toCol) {
+              targetPiece = this.fields[fromRow][toCol]
+              this.fields[fromRow][toCol]=0
+            }
+
+            if (piece == -1 && fromRow-toRow==-2){
+              this.enPassantCol=toCol;
+            }
+            if (piece == 6) {
+              this.whiteKingHasMoved = true;
+              if (fromCol-toCol==2) {
+                this.fields[fromRow][0]=0;
+                this.fields[fromRow][3]=2;
+              } else if (fromCol-toCol==-2) {
+                this.fields[fromRow][7]=0;
+                this.fields[fromRow][5]=2;
+              }
+            }
+            if (piece == -6) {
+              this.blackKingHasMoved = true;
+              if (fromCol-toCol==2) {
+                this.fields[fromRow][0]=0;
+                this.fields[fromRow][3]=-2;
+              } else if (fromCol-toCol==-2) {
+                this.fields[fromRow][7]=0;
+                this.fields[fromRow][5]=-2;
+              }
+            }
+            if (piece == 2 && fromRow == 7 && fromCol == 0) this.whiteLeftRookHasMoved = true;
+            if (piece == 2 && fromRow == 7 && fromCol == 7) this.whiteRightRookHasMoved = true;
+            if (piece == -2 && fromRow == 0 && fromCol == 0) this.blackLeftRookHasMoved = true;
+            if (piece == -2 && fromRow == 0 && fromCol == 7) this.blackRightRookHasMoved = true;
         }
     }
-  }
+}
