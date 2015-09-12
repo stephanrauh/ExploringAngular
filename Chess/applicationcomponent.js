@@ -30,6 +30,18 @@ define(["require", "exports", 'angular2/angular2', "./chessboardcomponent", './c
             enumerable: true,
             configurable: true
         });
+        ApplicationComponent.prototype.suggestMove = function () {
+            alert("Suggest move hasn't been implemented yet");
+            return false;
+        };
+        ApplicationComponent.prototype.turnSides = function () {
+            alert("Turn sides hasn't been implemented yet");
+            return false;
+        };
+        ApplicationComponent.prototype.revertLastMove = function () {
+            this.chessboard.revertLastMove();
+            return false;
+        };
         ApplicationComponent = __decorate([
             angular2_1.Component({
                 selector: 'application',

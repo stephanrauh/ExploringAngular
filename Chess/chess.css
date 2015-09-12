@@ -18,3 +18,11 @@
   top:0px;
   position:relative;
 }
+
+.threatenedField {
+  border: 2px solid red;
+  width:52px;
+  height:52px;
+  top:0px;
+  position:relative;
+}

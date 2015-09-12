@@ -85,6 +85,10 @@ Dependency Injection:
 TypeScript modules:
   http://typescript.codeplex.com/wikipage?title=Modules%20in%20TypeScript&referringTitle=TypeScript%20Documentation
 
+TypeScript:
+  Never forget to add "this." to refer to instance methods and variables
+  interesting / intuitive approach to getters and setters
+
 Everything is a tree!
   * You always have to define the component you want to use as child components in the parent component. Otherwise,
     they simply won't be rendered. More precisely, their source code or pseudo tag will be rendered.

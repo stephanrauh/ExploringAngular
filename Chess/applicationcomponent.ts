@@ -31,6 +31,21 @@ class ApplicationComponent {
         result += " Player is in check!";
     return result
   }
+
+  public suggestMove(): boolean {
+    alert("Suggest move hasn't been implemented yet");
+    return false;
+  }
+
+  public turnSides(): boolean {
+    alert("Turn sides hasn't been implemented yet");
+    return false;
+  }
+
+  public revertLastMove(): boolean {
+    this.chessboard.revertLastMove();
+    return false;
+  }
 }
 
 bootstrap(ApplicationComponent);

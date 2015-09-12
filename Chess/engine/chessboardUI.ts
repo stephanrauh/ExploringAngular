@@ -69,5 +69,9 @@ export module ChessEngineAPI {
             return this.chessboard.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, toRow, toCol)
         }
 
+        public revertLastMove(): void {
+          this.chessboard.revertLastMove();
+        }
+
     }
 }

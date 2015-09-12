@@ -1,7 +1,17 @@
 export class Move {
     constructor(public fromRow: number, public fromCol: number, public toRow: number, public toCol: number,
         public promotion: number, public capture: number, public check: boolean = false,
-        public checkMate: boolean = false, public staleMate: boolean = false) { }
+        public checkMate: boolean = false, public staleMate: boolean = false,
+        public whiteKingHasMoved: boolean = false,
+        public whiteLeftRookHasMoved: boolean = false,
+        public whiteRightRookHasMoved: boolean = false,
+        public blackKingHasMoved: boolean = false,
+        public blackLeftRookHasMoved: boolean = false,
+        public blackRightRookHasMoved: boolean = false,
+        public enPassantCol = -1,
+        public captureRow=-1,
+        public secondColFrom=-1,
+        public secondColTo=-1) { }
 
     toString(): string {
         var colNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']

@@ -21,6 +21,12 @@ define(["require", "exports", 'angular2/angular2', "./engine/chessboardUI", './e
                 return "wikimediaimages/w_empty.png";
         };
         FieldComponent.prototype.borderClass = function (row, col) {
+            var piece = this.chessboard.fields[row][col];
+            var isOwnPiece = false;
+            if (this.chessboard.isWhitePlaying && piece > 0)
+                isOwnPiece = true;
+            if ((!this.chessboard.isWhitePlaying) && piece < 0)
+                isOwnPiece = true;
             if (this.chessboard.isPieceSelected) {
                 if (row == this.chessboard.selectedPieceRow)
                     if (col == this.chessboard.selectedPieceCol)
@@ -28,6 +34,9 @@ define(["require", "exports", 'angular2/angular2', "./engine/chessboardUI", './e
                 if (this.chessboard.isLegalMove2(row, col))
                     return "fieldInReach";
             }
+            if (isOwnPiece)
+                if (this.opponentThreats(row, col) > 0)
+                    return "threatenedField";
             return "field";
         };
         FieldComponent.prototype.ownThreats = function (row, col) {

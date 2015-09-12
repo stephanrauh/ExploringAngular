@@ -7,7 +7,7 @@ import {Moves} from './moves';
 export module Engine {
     export class Chessboard {
         constructor(public moveHistory: Array<Move>, executeMove: boolean = false) {
-            console.log("new Chessboard!")
+            //console.log("new Chessboard!")
         }
 
         private _fields: number[][] = [
@@ -35,11 +35,11 @@ export module Engine {
 
         private _moves: Moves = new Moves(this);
 
-        get check(): boolean  { return this._moves.check }
+        get check(): boolean { return this._moves.check }
         get checkMate(): boolean { return this._moves.checkMate }
         get staleMate(): boolean { return this._moves.staleMate }
-        get ownCheck(): boolean {  return this._moves.ownCheck  }
-        get ownCheckMate(): boolean{ return this._moves.ownCheckMate }
+        get ownCheck(): boolean { return this._moves.ownCheck }
+        get ownCheckMate(): boolean { return this._moves.ownCheckMate }
 
 
 
@@ -50,12 +50,12 @@ export module Engine {
             return this._fields;
         }
 
-        public ownThreats(row:number, col:number): number {
-          return this._moves.ownThreats[row][col];
+        public ownThreats(row: number, col: number): number {
+            return this._moves.ownThreats[row][col];
         }
 
-        public opponentThreats(row:number, col:number): number {
-          return this._moves.opponentThreats[row][col];
+        public opponentThreats(row: number, col: number): number {
+            return this._moves.opponentThreats[row][col];
         }
 
         isLegalMove(fromRow, fromCol, toRow, toCol: number): boolean {
@@ -81,8 +81,16 @@ export module Engine {
         }
 
         move(fromRow, fromCol, toRow, toCol: number, promotion: number): void {
+            var original_whiteKingHasMoved = this.whiteKingHasMoved;
+            var original_whiteLeftRookHasMoved = this.whiteLeftRookHasMoved;
+            var original_whiteRightRookHasMoved = this.whiteRightRookHasMoved;
+            var original_blackKingHasMoved = this.blackKingHasMoved;
+            var original_blackLeftRookHasMoved = this.blackLeftRookHasMoved;
+            var original_blackRightRookHasMoved = this.blackRightRookHasMoved;
+            var original_enPassantCol = this.enPassantCol;
             var piece: number = this.fields[fromRow][fromCol]
             var targetPiece: number = this.fields[toRow][toCol]
+            var captureRow = toRow
             this.fields[fromRow][fromCol] = 0;
             this.fields[toRow][toCol] = piece;
             this._isWhitePlaying = !this._isWhitePlaying
@@ -92,7 +100,8 @@ export module Engine {
             }
             else if (piece == -1 && fromRow == 6 && toRow == 7) {
                 this.fields[toRow][toCol] = promotion;
-            } else promotion = 0
+            } else
+                promotion = 0
 
             this.enPassantCol = -1
             if (piece == 1 && fromRow - toRow == 2) {
@@ -102,8 +111,11 @@ export module Engine {
             if ((piece == 1 || piece == -1) && targetPiece == 0 && fromCol != toCol) {
                 targetPiece = this.fields[fromRow][toCol]
                 this.fields[fromRow][toCol] = 0
+                captureRow = fromRow
             }
 
+            var secondColFrom = -1;
+            var secondColTo = -1;
             if (piece == -1 && fromRow - toRow == -2) {
                 this.enPassantCol = toCol;
             }
@@ -112,9 +124,13 @@ export module Engine {
                 if (fromCol - toCol == 2) {
                     this.fields[fromRow][0] = 0;
                     this.fields[fromRow][3] = 2;
+                    secondColFrom = 0;
+                    secondColTo = 3;
                 } else if (fromCol - toCol == -2) {
                     this.fields[fromRow][7] = 0;
                     this.fields[fromRow][5] = 2;
+                    secondColFrom = 7;
+                    secondColTo = 5;
                 }
             }
             if (piece == -6) {
@@ -122,9 +138,13 @@ export module Engine {
                 if (fromCol - toCol == 2) {
                     this.fields[fromRow][0] = 0;
                     this.fields[fromRow][3] = -2;
+                    secondColFrom = 0;
+                    secondColTo = 3;
                 } else if (fromCol - toCol == -2) {
                     this.fields[fromRow][7] = 0;
                     this.fields[fromRow][5] = -2;
+                    secondColFrom = 7;
+                    secondColTo = 5;
                 }
             }
             if (piece == 2 && fromRow == 7 && fromCol == 0) this.whiteLeftRookHasMoved = true;
@@ -134,9 +154,54 @@ export module Engine {
             if (0 != targetPiece) {
                 this.capturedPieces.push(targetPiece)
             }
-            this._moves = new Moves(this) // clear the list of legal moves
+            this.recalculateLegalMovesAndCheck();
             this.moveHistory.push(new Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece, this._moves.ownCheck,
-            this._moves.ownCheckMate, this._moves.staleMate))
+                this._moves.ownCheckMate, this._moves.staleMate,
+                original_whiteKingHasMoved,
+                original_whiteLeftRookHasMoved,
+                original_whiteRightRookHasMoved,
+                original_blackKingHasMoved,
+                original_blackLeftRookHasMoved,
+                original_blackRightRookHasMoved,
+                original_enPassantCol,
+                captureRow,
+                secondColFrom,
+                secondColTo))
+        }
+
+        private recalculateLegalMovesAndCheck() {
+            this._moves = new Moves(this) // clear the list of legal moves
+        }
+
+        public revertLastMove(): void {
+            if (this.moveHistory.length == 0) {
+                alert("Nothing to revert!")
+            } else {
+                var lastMove = this.moveHistory.pop()
+                var piece = this.fields[lastMove.toRow][lastMove.toCol]
+                if (lastMove.promotion > 1) {
+                    if (piece > 0)
+                        piece = 1;
+                    else
+                        piece = -1;
+                }
+                this.fields[lastMove.fromRow][lastMove.fromCol] = piece
+                this.fields[lastMove.toRow][lastMove.toCol] = 0 // looks a bit odd because of the e.p. moves
+                this.fields[lastMove.captureRow][lastMove.toCol] = lastMove.capture
+                this._isWhitePlaying = !this._isWhitePlaying
+                this.whiteKingHasMoved = lastMove.whiteKingHasMoved
+                this.whiteLeftRookHasMoved = lastMove.whiteLeftRookHasMoved
+                this.whiteRightRookHasMoved = lastMove.whiteRightRookHasMoved
+                this.blackKingHasMoved = lastMove.blackKingHasMoved
+                this.blackLeftRookHasMoved = lastMove.blackLeftRookHasMoved
+                this.blackRightRookHasMoved = lastMove.blackRightRookHasMoved
+                this.enPassantCol = lastMove.enPassantCol
+                if (lastMove.secondColTo > 0) {
+                    this.fields[lastMove.fromRow][lastMove.secondColFrom] = this.fields[lastMove.toRow][lastMove.secondColTo]
+                    this.fields[lastMove.toRow][lastMove.secondColTo] = 0
+                }
+                this.recalculateLegalMovesAndCheck();
+            }
         }
     }
 }

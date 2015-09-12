@@ -26,7 +26,6 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                 this.blackRightRookHasMoved = false;
                 this.enPassantCol = -1;
                 this._moves = new moves_1.Moves(this);
-                console.log("new Chessboard!");
             }
             Object.defineProperty(Chessboard.prototype, "check", {
                 get: function () { return this._moves.check; },
@@ -97,8 +96,16 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                 return this._moves.isLegalMove(fromRow, fromCol, toRow, toCol);
             };
             Chessboard.prototype.move = function (fromRow, fromCol, toRow, toCol, promotion) {
+                var original_whiteKingHasMoved = this.whiteKingHasMoved;
+                var original_whiteLeftRookHasMoved = this.whiteLeftRookHasMoved;
+                var original_whiteRightRookHasMoved = this.whiteRightRookHasMoved;
+                var original_blackKingHasMoved = this.blackKingHasMoved;
+                var original_blackLeftRookHasMoved = this.blackLeftRookHasMoved;
+                var original_blackRightRookHasMoved = this.blackRightRookHasMoved;
+                var original_enPassantCol = this.enPassantCol;
                 var piece = this.fields[fromRow][fromCol];
                 var targetPiece = this.fields[toRow][toCol];
+                var captureRow = toRow;
                 this.fields[fromRow][fromCol] = 0;
                 this.fields[toRow][toCol] = piece;
                 this._isWhitePlaying = !this._isWhitePlaying;
@@ -117,7 +124,10 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                 if ((piece == 1 || piece == -1) && targetPiece == 0 && fromCol != toCol) {
                     targetPiece = this.fields[fromRow][toCol];
                     this.fields[fromRow][toCol] = 0;
+                    captureRow = fromRow;
                 }
+                var secondColFrom = -1;
+                var secondColTo = -1;
                 if (piece == -1 && fromRow - toRow == -2) {
                     this.enPassantCol = toCol;
                 }
@@ -126,10 +136,14 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                     if (fromCol - toCol == 2) {
                         this.fields[fromRow][0] = 0;
                         this.fields[fromRow][3] = 2;
+                        secondColFrom = 0;
+                        secondColTo = 3;
                     }
                     else if (fromCol - toCol == -2) {
                         this.fields[fromRow][7] = 0;
                         this.fields[fromRow][5] = 2;
+                        secondColFrom = 7;
+                        secondColTo = 5;
                     }
                 }
                 if (piece == -6) {
@@ -137,10 +151,14 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                     if (fromCol - toCol == 2) {
                         this.fields[fromRow][0] = 0;
                         this.fields[fromRow][3] = -2;
+                        secondColFrom = 0;
+                        secondColTo = 3;
                     }
                     else if (fromCol - toCol == -2) {
                         this.fields[fromRow][7] = 0;
                         this.fields[fromRow][5] = -2;
+                        secondColFrom = 7;
+                        secondColTo = 5;
                     }
                 }
                 if (piece == 2 && fromRow == 7 && fromCol == 0)
@@ -154,8 +172,42 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                 if (0 != targetPiece) {
                     this.capturedPieces.push(targetPiece);
                 }
+                this.recalculateLegalMovesAndCheck();
+                this.moveHistory.push(new move_1.Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece, this._moves.ownCheck, this._moves.ownCheckMate, this._moves.staleMate, original_whiteKingHasMoved, original_whiteLeftRookHasMoved, original_whiteRightRookHasMoved, original_blackKingHasMoved, original_blackLeftRookHasMoved, original_blackRightRookHasMoved, original_enPassantCol, captureRow, secondColFrom, secondColTo));
+            };
+            Chessboard.prototype.recalculateLegalMovesAndCheck = function () {
                 this._moves = new moves_1.Moves(this);
-                this.moveHistory.push(new move_1.Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece, this._moves.ownCheck, this._moves.ownCheckMate, this._moves.staleMate));
+            };
+            Chessboard.prototype.revertLastMove = function () {
+                if (this.moveHistory.length == 0) {
+                    alert("Nothing to revert!");
+                }
+                else {
+                    var lastMove = this.moveHistory.pop();
+                    var piece = this.fields[lastMove.toRow][lastMove.toCol];
+                    if (lastMove.promotion > 1) {
+                        if (piece > 0)
+                            piece = 1;
+                        else
+                            piece = -1;
+                    }
+                    this.fields[lastMove.fromRow][lastMove.fromCol] = piece;
+                    this.fields[lastMove.toRow][lastMove.toCol] = 0;
+                    this.fields[lastMove.captureRow][lastMove.toCol] = lastMove.capture;
+                    this._isWhitePlaying = !this._isWhitePlaying;
+                    this.whiteKingHasMoved = lastMove.whiteKingHasMoved;
+                    this.whiteLeftRookHasMoved = lastMove.whiteLeftRookHasMoved;
+                    this.whiteRightRookHasMoved = lastMove.whiteRightRookHasMoved;
+                    this.blackKingHasMoved = lastMove.blackKingHasMoved;
+                    this.blackLeftRookHasMoved = lastMove.blackLeftRookHasMoved;
+                    this.blackRightRookHasMoved = lastMove.blackRightRookHasMoved;
+                    this.enPassantCol = lastMove.enPassantCol;
+                    if (lastMove.secondColTo > 0) {
+                        this.fields[lastMove.fromRow][lastMove.secondColFrom] = this.fields[lastMove.toRow][lastMove.secondColTo];
+                        this.fields[lastMove.toRow][lastMove.secondColTo] = 0;
+                    }
+                    this.recalculateLegalMovesAndCheck();
+                }
             };
             return Chessboard;
         })();

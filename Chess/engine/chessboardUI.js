@@ -100,6 +100,9 @@ define(["require", "exports", 'angular2/angular2', './chessboard'], function (re
                     return false;
                 return this.chessboard.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, toRow, toCol);
             };
+            ChessboardUI.prototype.revertLastMove = function () {
+                this.chessboard.revertLastMove();
+            };
             ChessboardUI = __decorate([
                 angular2_1.Injectable(), 
                 __metadata('design:paramtypes', [])
