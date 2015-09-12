@@ -10,13 +10,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2', './moves'], function (require, exports, angular2_1, moves_1) {
+define(["require", "exports", 'angular2/angular2', './move', './moves'], function (require, exports, angular2_1, move_1, moves_1) {
     var Engine;
     (function (Engine) {
         var ChessboardUI = (function () {
             function ChessboardUI() {
                 this.isPieceSelected = false;
-                this.chessboard = new Chessboard();
+                this.chessboard = new Chessboard(new Array());
             }
             Object.defineProperty(ChessboardUI.prototype, "fields", {
                 get: function () {
@@ -36,7 +36,7 @@ define(["require", "exports", 'angular2/angular2', './moves'], function (require
                 else {
                     this.isPieceSelected = false;
                     if (this.chessboard.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, row, col)) {
-                        this.chessboard.move(this.selectedPieceRow, this.selectedPieceCol, row, col);
+                        this.chessboard.move(this.selectedPieceRow, this.selectedPieceCol, row, col, this.isWhitePlaying ? 5 : -5);
                     }
                 }
             };
@@ -67,7 +67,9 @@ define(["require", "exports", 'angular2/angular2', './moves'], function (require
         })();
         Engine.ChessboardUI = ChessboardUI;
         var Chessboard = (function () {
-            function Chessboard() {
+            function Chessboard(moveHistory, executeMove) {
+                if (executeMove === void 0) { executeMove = false; }
+                this.moveHistory = moveHistory;
                 this._fields = [
                     [-2, -3, -4, -5, -6, -4, -3, -2],
                     [-1, -1, -1, -1, -1, -1, -1, -1],
@@ -78,6 +80,7 @@ define(["require", "exports", 'angular2/angular2', './moves'], function (require
                     [1, 1, 1, 1, 1, 1, 1, 1],
                     [2, 3, 4, 5, 6, 4, 3, 2]
                 ];
+                this.capturedPieces = new Array();
                 this._isWhitePlaying = true;
                 this.whiteKingHasMoved = false;
                 this.whiteLeftRookHasMoved = false;
@@ -126,13 +129,21 @@ define(["require", "exports", 'angular2/angular2', './moves'], function (require
                     return false;
                 return this._moves.isLegalMove(fromRow, fromCol, toRow, toCol);
             };
-            Chessboard.prototype.move = function (fromRow, fromCol, toRow, toCol) {
+            Chessboard.prototype.move = function (fromRow, fromCol, toRow, toCol, promotion) {
                 var piece = this.fields[fromRow][fromCol];
                 var targetPiece = this.fields[toRow][toCol];
                 this.fields[fromRow][fromCol] = 0;
                 this.fields[toRow][toCol] = piece;
                 this._isWhitePlaying = !this._isWhitePlaying;
                 this._moves = new moves_1.Moves(this);
+                if (piece == 1 && fromRow == 1 && toRow == 0) {
+                    this.fields[toRow][toCol] = promotion;
+                }
+                else if (piece == -1 && fromRow == 6 && toRow == 7) {
+                    this.fields[toRow][toCol] = promotion;
+                }
+                else
+                    promotion = 0;
                 this.enPassantCol = -1;
                 if (piece == 1 && fromRow - toRow == 2) {
                     this.enPassantCol = toCol;
@@ -174,6 +185,10 @@ define(["require", "exports", 'angular2/angular2', './moves'], function (require
                     this.blackLeftRookHasMoved = true;
                 if (piece == -2 && fromRow == 0 && fromCol == 7)
                     this.blackRightRookHasMoved = true;
+                if (0 != targetPiece) {
+                    this.capturedPieces.push(targetPiece);
+                    this.moveHistory.push(new move_1.Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece));
+                }
             };
             return Chessboard;
         })();
