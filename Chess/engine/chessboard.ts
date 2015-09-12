@@ -41,6 +41,14 @@ export module Engine {
             return this._fields;
         }
 
+        public ownThreats(row:number, col:number): number {
+          return this._moves.ownThreats[row][col];
+        }
+
+        public opponentThreats(row:number, col:number): number {
+          return this._moves.opponentThreats[row][col];
+        }
+
         isLegalMove(fromRow, fromCol, toRow, toCol: number): boolean {
             var piece: number = this.fields[fromRow][fromCol]
             if (this.isWhitePlaying) {

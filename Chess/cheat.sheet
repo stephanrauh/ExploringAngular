@@ -82,6 +82,9 @@ Dependency Injection:
       add the service implementation class to the app's list of component bindings,
       and add the service to the parameter list of the component that needs the service.
 
+TypeScript modules:
+  http://typescript.codeplex.com/wikipage?title=Modules%20in%20TypeScript&referringTitle=TypeScript%20Documentation
+
 Everything is a tree!
   * You always have to define the component you want to use as child components in the parent component. Otherwise,
     they simply won't be rendered. More precisely, their source code or pseudo tag will be rendered.

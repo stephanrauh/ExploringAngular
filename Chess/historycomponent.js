@@ -15,7 +15,6 @@ define(["require", "exports", 'angular2/angular2', './engine/chessboardUI'], fun
             this.chessboard = chessboard;
         }
         HistoryComponent.prototype.moveHistory = function () {
-            console.log("History: " + this.chessboard.moveHistory.length);
             var result = this.chessboard.moveHistory.map(function (m, index) { return ((index % 2 == 0 ? ((1 + index / 2) + ". ") : "") + m.toString()); });
             return result;
         };

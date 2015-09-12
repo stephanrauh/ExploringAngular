@@ -35,6 +35,12 @@ define(["require", "exports", 'angular2/angular2', './chessboard'], function (re
                 enumerable: true,
                 configurable: true
             });
+            ChessboardUI.prototype.ownThreats = function (row, col) {
+                return this.chessboard.ownThreats(row, col);
+            };
+            ChessboardUI.prototype.opponentThreats = function (row, col) {
+                return this.chessboard.opponentThreats(row, col);
+            };
             Object.defineProperty(ChessboardUI.prototype, "moveHistory", {
                 get: function () { return this.chessboard.moveHistory; },
                 enumerable: true,

@@ -14,7 +14,6 @@ export class HistoryComponent {
     constructor(private chessboard: ChessEngineAPI.ChessboardUI) { }
 
     public moveHistory(): Array<string> {
-      console.log("History: " +this.chessboard.moveHistory.length )
         var result: Array<string> =
             this.chessboard.moveHistory.map((m: Move, index:number) => ((index%2==0?((1+index/2)+". "):"") + m.toString()))
         return result;

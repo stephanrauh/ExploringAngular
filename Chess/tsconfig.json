@@ -20,6 +20,7 @@
         "historycomponent.ts",
         "engine/chessboard.ts",
         "engine/chessboardUI.ts",
+        "engine/evaluation.ts",
         "engine/move.ts",
         "engine/moves.ts",
         "engine/pieces.ts",

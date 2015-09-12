@@ -40,6 +40,12 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                 enumerable: true,
                 configurable: true
             });
+            Chessboard.prototype.ownThreats = function (row, col) {
+                return this._moves.ownThreats[row][col];
+            };
+            Chessboard.prototype.opponentThreats = function (row, col) {
+                return this._moves.opponentThreats[row][col];
+            };
             Chessboard.prototype.isLegalMove = function (fromRow, fromCol, toRow, toCol) {
                 var piece = this.fields[fromRow][fromCol];
                 if (this.isWhitePlaying) {

@@ -30,6 +30,12 @@ define(["require", "exports", 'angular2/angular2', "./engine/chessboardUI", './e
             }
             return "field";
         };
+        FieldComponent.prototype.ownThreats = function (row, col) {
+            return this.chessboard.ownThreats(row, col);
+        };
+        FieldComponent.prototype.opponentThreats = function (row, col) {
+            return this.chessboard.opponentThreats(row, col);
+        };
         FieldComponent.prototype.fileName = function (piece) {
             return pieces_1.PieceModule.PieceUtils.fileName(piece);
         };

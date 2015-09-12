@@ -38,6 +38,14 @@ export class FieldComponent {
       return "field"
     }
 
+    private ownThreats(row:number, col:number): number {
+      return this.chessboard.ownThreats(row, col);
+    }
+
+    private opponentThreats(row:number, col:number): number {
+      return this.chessboard.opponentThreats(row, col);
+    }
+
     private fileName(piece: number) {
       return PieceModule.PieceUtils.fileName(piece);
     }

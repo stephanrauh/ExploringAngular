@@ -21,6 +21,15 @@ export module ChessEngineAPI {
 
         get capturedPieces(): Array<number> { return this.chessboard.capturedPieces }
 
+        public ownThreats(row:number, col:number): number {
+          return this.chessboard.ownThreats(row, col);
+        }
+
+        public opponentThreats(row:number, col:number): number {
+          return this.chessboard.opponentThreats(row, col);
+        }
+
+
         get moveHistory() : Array<Move> { return this.chessboard.moveHistory}
 
         onclick(row: number, col: number): void {

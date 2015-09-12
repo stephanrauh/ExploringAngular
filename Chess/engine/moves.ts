@@ -3,11 +3,29 @@ import {Move} from './move';
 
 export class Moves {
     private _legalMoves: Array<Move> = null;
+    private _legalOpponentMoves: Array<Move> = null;
+    private _ownThreats: number[][] = null;
+    private _opponentThreats: number[][] = null;
+
     constructor(private chessboard: Engine.Chessboard) { }
 
     get legalMoves(): Array<Move> {
         this.calculateLegalMoves();
         return this._legalMoves;
+    }
+
+    get legalOpponentMoves(): Array<Move> {
+        this.calculateLegalMoves();
+        return this._legalOpponentMoves;
+    }
+
+    get ownThreats(): number[][] {
+        this.calculateLegalMoves();
+        return this._ownThreats;
+    }
+    get opponentThreats(): number[][] {
+        this.calculateLegalMoves();
+        return this._opponentThreats;
     }
 
     isLegalMove(fromRow: number, fromCol: number, toRow: number, toCol: number) {
@@ -23,42 +41,73 @@ export class Moves {
     calculateLegalMoves() {
         if (null == this._legalMoves) {
             var result: Array<Move> = new Array<Move>();
+            var opponentResult: Array<Move> = new Array<Move>();
+            var threats: number[][] = [
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0]
+            ];
+            var opponentThreats: number[][] = [
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0]
+            ];
+
             for (var row: number = 0; row < this.chessboard.fields.length; row++) {
                 var currentRow: number[] = this.chessboard.fields[row];
                 for (var col: number = 0; col < currentRow.length; col++) {
                     var piece: number = this.chessboard.fields[row][col];
                     if (this.chessboard.isWhitePlaying) {
                         if (piece > 0)
-                            this.addWhiteMoves(row, col, piece, this.chessboard.fields, result);
-                    } else if (piece < 0)
-                        this.addBlackMoves(row, col, piece, this.chessboard.fields, result);
+                            this.addWhiteMoves(row, col, piece, this.chessboard.fields, result, threats);
+                        else if (piece < 0)
+                            this.addBlackMoves(row, col, piece, this.chessboard.fields, opponentResult, opponentThreats);
+                    } else {
+                        if (piece < 0)
+                            this.addBlackMoves(row, col, piece, this.chessboard.fields, result, threats);
+                        else if (piece > 0)
+                            this.addWhiteMoves(row, col, piece, this.chessboard.fields, opponentResult, opponentThreats);
+                    }
                 }
             }
             this._legalMoves = result;
+            this._ownThreats = threats;
+            this._legalOpponentMoves = opponentResult;
+            this._opponentThreats = opponentThreats;
         }
     }
 
-    addWhiteMoves(row: number, col: number, piece: number, fields: number[][], result: Array<Move>) {
-        this.addCommonMoves(row, col, piece, fields, -1, result);
+    addWhiteMoves(row: number, col: number, piece: number, fields: number[][], result: Array<Move>, threats: number[][]) {
+        this.addCommonMoves(row, col, piece, fields, -1, result, threats);
     }
 
-    addBlackMoves(row: number, col: number, piece: number, fields: number[][], result: Array<Move>) {
-        this.addCommonMoves(row, col, piece, fields, 1, result);
+    addBlackMoves(row: number, col: number, piece: number, fields: number[][], result: Array<Move>, threats: number[][]) {
+        this.addCommonMoves(row, col, piece, fields, 1, result, threats);
     }
 
-    addCommonMoves(row: number, col: number, piece: number, fields: number[][], pawnMoveDirection: number, result: Array<Move>) {
+    addCommonMoves(row: number, col: number, piece: number, fields: number[][], pawnMoveDirection: number, result: Array<Move>, threats: number[][]) {
         if (piece == -1 || piece == 1)
-            this.addCommonMovesForAPawn(row, col, fields, pawnMoveDirection, result);
+            this.addCommonMovesForAPawn(row, col, fields, pawnMoveDirection, result, threats);
         else if (piece == -2 || piece == 2)
-            this.addCommonMovesForARook(row, col, fields, result);
+            this.addCommonMovesForARook(row, col, fields, result, threats);
         else if (piece == -3 || piece == 3)
-            this.addCommonMovesForAKnight(row, col, fields, result);
+            this.addCommonMovesForAKnight(row, col, fields, result, threats);
         else if (piece == -4 || piece == 4)
-            this.addCommonMovesForABishop(row, col, fields, result);
+            this.addCommonMovesForABishop(row, col, fields, result, threats);
         else if (piece == -5 || piece == 5)
-            this.addCommonMovesForAQueen(row, col, fields, result);
+            this.addCommonMovesForAQueen(row, col, fields, result, threats);
         else if (piece == -6 || piece == 6)
-            this.addCommonMovesForAKing(row, col, fields, result);
+            this.addCommonMovesForAKing(row, col, fields, result, threats);
     }
 
     isTargetEmptyOrCanBeCaptured(toRow: number, toCol: number, sourcePiece: number, fields: number[][]): boolean {
@@ -89,25 +138,30 @@ export class Moves {
 
 
     /** This method returns true if the move could be added to the list. */
-    addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow: number, fromCol: number, toRow: number, toCol: number, sourcePiece: number, fields: number[][], result: Array<Move>, promotion: number = 0) {
+    addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow: number, fromCol: number, toRow: number, toCol: number, sourcePiece: number, fields: number[][], result: Array<Move>, threats: number[][], promotion: number = 0) {
         if (fromRow < 0 || fromRow >= 8) return false;
         if (fromCol < 0 || fromCol >= 8) return false;
         if (toRow < 0 || toRow >= 8) return false;
         if (toCol < 0 || toCol >= 8) return false;
         if (this.isTargetEmptyOrCanBeCaptured(toRow, toCol, sourcePiece, fields)) {
             result.push(new Move(fromRow, fromCol, toRow, toCol, promotion, fields[toRow][toCol]))
+            threats[toRow][toCol]++;
             return true;
+        } else if (!this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+            threats[toRow][toCol]++; // increase the counter to indicate that the piece is protected
         }
         return false;
     }
 
     /** This method returns true if the move could be added to the list. */
-    addMoveIfTargetIsEmpty(fromRow: number, fromCol: number, toRow: number, toCol: number, sourcePiece: number, fields: number[][], result: Array<Move>, considerPromotion: boolean = false) {
+    addMoveIfTargetIsEmpty(fromRow: number, fromCol: number, toRow: number, toCol: number, sourcePiece: number, fields: number[][], result: Array<Move>, threats: number[][], considerPromotion: boolean = false) {
         if (fromRow < 0 || fromRow >= 8) return false;
         if (fromCol < 0 || fromCol >= 8) return false;
         if (toRow < 0 || toRow >= 8) return false;
         if (toCol < 0 || toCol >= 8) return false;
         if (this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+            if (sourcePiece != 1 && sourcePiece != -1)
+                threats[toRow][toCol]++; // pawn can't capture when they call this method, so they are no threat
             if (considerPromotion && (toRow == 0 || toRow == 7)) {
                 result.push(new Move(fromRow, fromCol, toRow, toCol, 2, fields[toRow][toCol]))
                 result.push(new Move(fromRow, fromCol, toRow, toCol, 3, fields[toRow][toCol]))
@@ -123,12 +177,13 @@ export class Moves {
     }
 
     /** This method returns true if the move could be added to the list. */
-    addMoveIfTargetCanBeCaptured(fromRow: number, fromCol: number, toRow: number, toCol: number, sourcePiece: number, fields: number[][], result: Array<Move>, considerPromotion: boolean = false) {
+    addMoveIfTargetCanBeCaptured(fromRow: number, fromCol: number, toRow: number, toCol: number, sourcePiece: number, fields: number[][], result: Array<Move>, threats: number[][], considerPromotion: boolean = false) {
         if (fromRow < 0 || fromRow >= 8) return false;
         if (fromCol < 0 || fromCol >= 8) return false;
         if (toRow < 0 || toRow >= 8) return false;
         if (toCol < 0 || toCol >= 8) return false;
         if (this.isTargetCanBeCaptured(toRow, toCol, sourcePiece, fields)) {
+            threats[toRow][toCol]++;
             if (considerPromotion && (toRow == 0 || toRow == 7)) {
                 result.push(new Move(fromRow, fromCol, toRow, toCol, 2, fields[toRow][toCol]))
                 result.push(new Move(fromRow, fromCol, toRow, toCol, 3, fields[toRow][toCol]))
@@ -137,44 +192,54 @@ export class Moves {
             } else
                 result.push(new Move(fromRow, fromCol, toRow, toCol, 0, fields[toRow][toCol]))
             return true;
+        } else if (!this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+            threats[toRow][toCol]++; // increase the counter to indicate that the piece is protected
         }
+
         return false;
     }
 
-    addCommonMovesForAPawn(fromRow: number, fromCol: number, fields: number[][], pawnMoveDirection: number, result: Array<Move>) {
+    addCommonMovesForAPawn(fromRow: number, fromCol: number, fields: number[][], pawnMoveDirection: number, result: Array<Move>, threats: number[][]) {
         var toCol = fromCol;
         var toRow = fromRow + pawnMoveDirection;
         var sourcePiece = fields[fromRow][fromCol]
-        if (this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, true)) {
+        if (this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats, true)) {
             if (sourcePiece > 0 && fromRow == 6) { //white initial pawn double move
                 toRow = toRow + pawnMoveDirection;
-                this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+                this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
             } else if (sourcePiece < 0 && fromRow == 1) { // black initial pawn double move
                 toRow = toRow + pawnMoveDirection;
-                this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+                this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
             }
         }
         toCol = fromCol + 1;
         toRow = fromRow + pawnMoveDirection;
-        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, true)
+        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats, true)
+        if (this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+          threats[toRow][toCol]++
+        }
+
         toCol = fromCol - 1;
         toRow = fromRow + pawnMoveDirection;
-        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, true)
+        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats, true)
+        if (this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+          threats[toRow][toCol]++
+        }
 
         if (this.chessboard.enPassantCol >= 0) {
             if (sourcePiece == 1) { // white
                 if (fromRow == 3) {
                     if (fromCol == this.chessboard.enPassantCol + 1)
-                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow - 1, this.chessboard.enPassantCol, sourcePiece, fields, result)
+                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow - 1, this.chessboard.enPassantCol, sourcePiece, fields, result, threats)
                     else if (fromCol == this.chessboard.enPassantCol - 1)
-                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow - 1, this.chessboard.enPassantCol, sourcePiece, fields, result)
+                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow - 1, this.chessboard.enPassantCol, sourcePiece, fields, result, threats)
                 }
             } else if (sourcePiece == -1) { // black
                 if (fromRow == 4) {
                     if (fromCol == this.chessboard.enPassantCol + 1)
-                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow + 1, this.chessboard.enPassantCol, sourcePiece, fields, result)
+                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow + 1, this.chessboard.enPassantCol, sourcePiece, fields, result, threats)
                     else if (fromCol == this.chessboard.enPassantCol - 1)
-                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow + 1, this.chessboard.enPassantCol, sourcePiece, fields, result)
+                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow + 1, this.chessboard.enPassantCol, sourcePiece, fields, result, threats)
                 }
             }
         }
@@ -182,132 +247,132 @@ export class Moves {
         // To do: casting when the pawn reaches the last line
     }
 
-    addCommonMovesForAKnight(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>) {
+    addCommonMovesForAKnight(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>, threats: number[][]) {
         var toCol = fromCol + 1;
         var toRow = fromRow + 2;
         var sourcePiece = fields[fromRow][fromCol]
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol + 2;
         toRow = fromRow + 1;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol - 1;
         toRow = fromRow + 2;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol - 2;
         toRow = fromRow + 1;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol + 1;
         toRow = fromRow - 2;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol + 2;
         toRow = fromRow - 1;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol - 1;
         toRow = fromRow - 2;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol - 2;
         toRow = fromRow - 1;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
 
     }
 
-    addCommonMovesForABishop(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>) {
+    addCommonMovesForABishop(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>, threats: number[][]) {
         var toCol = fromCol;
         var toRow = fromRow;
         var sourcePiece = fields[fromRow][fromCol]
-        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, ++toRow, ++toCol, sourcePiece, fields, result)) { }
-        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, ++toRow, ++toCol, sourcePiece, fields, result, threats)) { }
+        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
 
         toCol = fromCol;
         toRow = fromRow;
-        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, --toRow, ++toCol, sourcePiece, fields, result)) { }
-        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, --toRow, ++toCol, sourcePiece, fields, result, threats)) { }
+        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
 
         toCol = fromCol;
         toRow = fromRow;
-        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, ++toRow, --toCol, sourcePiece, fields, result)) { }
-        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, ++toRow, --toCol, sourcePiece, fields, result, threats)) { }
+        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
 
         toCol = fromCol;
         toRow = fromRow;
-        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, --toRow, --toCol, sourcePiece, fields, result)) { }
-        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, --toRow, --toCol, sourcePiece, fields, result, threats)) { }
+        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
     }
 
-    addCommonMovesForARook(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>) {
+    addCommonMovesForARook(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>, threats: number[][]) {
         var toCol = fromCol;
         var toRow = fromRow;
         var sourcePiece = fields[fromRow][fromCol]
-        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, ++toRow, toCol, sourcePiece, fields, result)) { }
-        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, ++toRow, toCol, sourcePiece, fields, result, threats)) { }
+        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
 
         toCol = fromCol;
         toRow = fromRow;
-        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, --toRow, toCol, sourcePiece, fields, result)) { }
-        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, --toRow, toCol, sourcePiece, fields, result, threats)) { }
+        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
 
         toCol = fromCol;
         toRow = fromRow;
-        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, ++toCol, sourcePiece, fields, result)) { }
-        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, ++toCol, sourcePiece, fields, result, threats)) { }
+        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
 
         toCol = fromCol;
         toRow = fromRow;
-        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, --toCol, sourcePiece, fields, result)) { }
-        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, --toCol, sourcePiece, fields, result, threats)) { }
+        this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
     }
 
-    addCommonMovesForAQueen(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>) {
-        this.addCommonMovesForABishop(fromRow, fromCol, fields, result);
-        this.addCommonMovesForARook(fromRow, fromCol, fields, result);
+    addCommonMovesForAQueen(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>, threats: number[][]) {
+        this.addCommonMovesForABishop(fromRow, fromCol, fields, result, threats);
+        this.addCommonMovesForARook(fromRow, fromCol, fields, result, threats);
     }
-    addCommonMovesForAKing(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>) {
+    addCommonMovesForAKing(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>, threats: number[][]) {
         var toCol = fromCol;
         var toRow = fromRow + 1;
         var sourcePiece = fields[fromRow][fromCol]
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol + 1;
         toRow = fromRow + 1;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol - 1;
         toRow = fromRow + 1;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol + 1;
         toRow = fromRow;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol - 1;
         toRow = fromRow;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol - 1;
         toRow = fromRow - 1;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol;
         toRow = fromRow - 1;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
         toCol = fromCol + 1;
         toRow = fromRow - 1;
-        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result)
+        this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats)
 
         // castling
         if (sourcePiece > 0) { // white is playing
             if ((!this.chessboard.whiteKingHasMoved) && (!this.chessboard.whiteLeftRookHasMoved)) {
                 if (this.isTargetEmpty(fromRow, fromCol - 1, sourcePiece, fields))
                     if (this.isTargetEmpty(fromRow, fromCol - 3, sourcePiece, fields))
-                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol - 2, sourcePiece, fields, result)
+                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol - 2, sourcePiece, fields, result, threats)
             }
             if ((!this.chessboard.whiteKingHasMoved) && (!this.chessboard.whiteRightRookHasMoved)) {
                 if (this.isTargetEmpty(fromRow, fromCol + 1, sourcePiece, fields))
-                    this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol + 2, sourcePiece, fields, result)
+                    this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol + 2, sourcePiece, fields, result, threats)
             }
         } else { // black is playing
             if ((!this.chessboard.blackKingHasMoved) && (!this.chessboard.blackLeftRookHasMoved)) {
                 if (this.isTargetEmpty(fromRow, fromCol - 1, sourcePiece, fields))
                     if (this.isTargetEmpty(fromRow, fromCol - 3, sourcePiece, fields))
-                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol - 2, sourcePiece, fields, result)
+                        this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol - 2, sourcePiece, fields, result, threats)
             }
             if ((!this.chessboard.blackKingHasMoved) && (!this.chessboard.blackRightRookHasMoved)) {
                 if (this.isTargetEmpty(fromRow, fromCol + 1, sourcePiece, fields))
-                    this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol + 2, sourcePiece, fields, result)
+                    this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol + 2, sourcePiece, fields, result, threats)
             }
         }
     }
