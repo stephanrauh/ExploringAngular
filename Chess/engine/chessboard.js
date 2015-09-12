@@ -28,6 +28,31 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                 this._moves = new moves_1.Moves(this);
                 console.log("new Chessboard!");
             }
+            Object.defineProperty(Chessboard.prototype, "check", {
+                get: function () { return this._moves.check; },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Chessboard.prototype, "checkMate", {
+                get: function () { return this._moves.checkMate; },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Chessboard.prototype, "staleMate", {
+                get: function () { return this._moves.staleMate; },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Chessboard.prototype, "ownCheck", {
+                get: function () { return this._moves.ownCheck; },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Chessboard.prototype, "ownCheckMate", {
+                get: function () { return this._moves.ownCheckMate; },
+                enumerable: true,
+                configurable: true
+            });
             Object.defineProperty(Chessboard.prototype, "isWhitePlaying", {
                 get: function () { return this._isWhitePlaying; },
                 enumerable: true,
@@ -77,7 +102,6 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                 this.fields[fromRow][fromCol] = 0;
                 this.fields[toRow][toCol] = piece;
                 this._isWhitePlaying = !this._isWhitePlaying;
-                this._moves = new moves_1.Moves(this);
                 if (piece == 1 && fromRow == 1 && toRow == 0) {
                     this.fields[toRow][toCol] = promotion;
                 }
@@ -130,7 +154,8 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                 if (0 != targetPiece) {
                     this.capturedPieces.push(targetPiece);
                 }
-                this.moveHistory.push(new move_1.Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece));
+                this._moves = new moves_1.Moves(this);
+                this.moveHistory.push(new move_1.Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece, this._moves.ownCheck, this._moves.ownCheckMate, this._moves.staleMate));
             };
             return Chessboard;
         })();

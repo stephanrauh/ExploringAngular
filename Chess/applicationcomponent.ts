@@ -19,7 +19,18 @@ import {HistoryComponent} from './historycomponent';
 class ApplicationComponent {
   constructor(private chessboard:ChessEngineAPI.ChessboardUI) {}
 
-  public get title(): String { return this.chessboard.isWhitePlaying?"White move":"Black move"}
+  public get title(): String {
+    var result = this.chessboard.isWhitePlaying?"White move ":"Black move "
+    if (this.chessboard.checkMate)
+      result += " Checkmate!";
+    else if (this.chessboard.check)
+      result += " Check!";
+    else if (this.chessboard.ownCheckMate)
+        result += " Player is checkmate!";
+      else if (this.chessboard.ownCheck)
+        result += " Player is in check!";
+    return result
+  }
 }
 
 bootstrap(ApplicationComponent);

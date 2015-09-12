@@ -35,6 +35,31 @@ define(["require", "exports", 'angular2/angular2', './chessboard'], function (re
                 enumerable: true,
                 configurable: true
             });
+            Object.defineProperty(ChessboardUI.prototype, "check", {
+                get: function () { return this.chessboard.check; },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(ChessboardUI.prototype, "checkMate", {
+                get: function () { return this.chessboard.checkMate; },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(ChessboardUI.prototype, "staleMate", {
+                get: function () { return this.chessboard.staleMate; },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(ChessboardUI.prototype, "ownCheck", {
+                get: function () { return this.chessboard.ownCheck; },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(ChessboardUI.prototype, "ownCheckMate", {
+                get: function () { return this.chessboard.ownCheckMate; },
+                enumerable: true,
+                configurable: true
+            });
             ChessboardUI.prototype.ownThreats = function (row, col) {
                 return this.chessboard.ownThreats(row, col);
             };

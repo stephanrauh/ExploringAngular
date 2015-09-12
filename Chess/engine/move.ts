@@ -1,6 +1,7 @@
 export class Move {
     constructor(public fromRow: number, public fromCol: number, public toRow: number, public toCol: number,
-        public promotion: number, public capture: number, public chess:boolean=false) { }
+        public promotion: number, public capture: number, public check: boolean = false,
+        public checkMate: boolean = false, public staleMate: boolean = false) { }
 
     toString(): string {
         var colNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
@@ -12,7 +13,10 @@ export class Move {
             result += "x";
         result += colNames[this.toCol];
         result += this.toRow;
-        if (this.chess) result += "+"
+
+        if (this.checkMate) result += "++"
+        else if (this.check) result += "+"
+        else if (this.staleMate) result += "stalemate"
         return result;
     }
 }

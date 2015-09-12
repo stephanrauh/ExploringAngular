@@ -15,7 +15,18 @@ define(["require", "exports", 'angular2/angular2', "./chessboardcomponent", './c
             this.chessboard = chessboard;
         }
         Object.defineProperty(ApplicationComponent.prototype, "title", {
-            get: function () { return this.chessboard.isWhitePlaying ? "White move" : "Black move"; },
+            get: function () {
+                var result = this.chessboard.isWhitePlaying ? "White move " : "Black move ";
+                if (this.chessboard.checkMate)
+                    result += " Checkmate!";
+                else if (this.chessboard.check)
+                    result += " Check!";
+                else if (this.chessboard.ownCheckMate)
+                    result += " Player is checkmate!";
+                else if (this.chessboard.ownCheck)
+                    result += " Player is in check!";
+                return result;
+            },
             enumerable: true,
             configurable: true
         });

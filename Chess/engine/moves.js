@@ -6,6 +6,12 @@ define(["require", "exports", './move'], function (require, exports, move_1) {
             this._legalOpponentMoves = null;
             this._ownThreats = null;
             this._opponentThreats = null;
+            this.check = false;
+            this.checkMate = false;
+            this.staleMate = false;
+            this.ownCheck = false;
+            this.ownCheckMate = false;
+            this.calculateLegalMoves();
         }
         Object.defineProperty(Moves.prototype, "legalMoves", {
             get: function () {
@@ -49,10 +55,11 @@ define(["require", "exports", './move'], function (require, exports, move_1) {
             return false;
         };
         Moves.prototype.calculateLegalMoves = function () {
+            var _this = this;
             if (null == this._legalMoves) {
                 var result = new Array();
                 var opponentResult = new Array();
-                var threats = [
+                var ownThreats = [
                     [0, 0, 0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0, 0, 0],
@@ -72,29 +79,85 @@ define(["require", "exports", './move'], function (require, exports, move_1) {
                     [0, 0, 0, 0, 0, 0, 0, 0],
                     [0, 0, 0, 0, 0, 0, 0, 0]
                 ];
+                var ownKingRow;
+                var ownKingCol;
+                var opponentKingRow;
+                var opponentKingCol;
                 for (var row = 0; row < this.chessboard.fields.length; row++) {
                     var currentRow = this.chessboard.fields[row];
                     for (var col = 0; col < currentRow.length; col++) {
                         var piece = this.chessboard.fields[row][col];
                         if (this.chessboard.isWhitePlaying) {
                             if (piece > 0)
-                                this.addWhiteMoves(row, col, piece, this.chessboard.fields, result, threats);
+                                this.addWhiteMoves(row, col, piece, this.chessboard.fields, result, ownThreats);
                             else if (piece < 0)
                                 this.addBlackMoves(row, col, piece, this.chessboard.fields, opponentResult, opponentThreats);
+                            if (piece == 6) {
+                                ownKingRow = row;
+                                ownKingCol = col;
+                            }
+                            else if (piece == -6) {
+                                opponentKingRow = row;
+                                opponentKingCol = col;
+                            }
                         }
                         else {
                             if (piece < 0)
-                                this.addBlackMoves(row, col, piece, this.chessboard.fields, result, threats);
+                                this.addBlackMoves(row, col, piece, this.chessboard.fields, result, ownThreats);
                             else if (piece > 0)
                                 this.addWhiteMoves(row, col, piece, this.chessboard.fields, opponentResult, opponentThreats);
+                            if (piece == -6) {
+                                ownKingRow = row;
+                                ownKingCol = col;
+                            }
+                            else if (piece == 6) {
+                                opponentKingRow = row;
+                                opponentKingCol = col;
+                            }
                         }
                     }
                 }
+                result = result.filter(function (move) { return !_this.kingInChessAfterMove(move, ownKingRow, ownKingCol, opponentThreats); });
+                opponentResult = opponentResult.filter(function (move) { return !_this.kingInChessAfterMove(move, opponentKingRow, opponentKingCol, ownThreats); });
                 this._legalMoves = result;
-                this._ownThreats = threats;
+                this._ownThreats = ownThreats;
                 this._legalOpponentMoves = opponentResult;
                 this._opponentThreats = opponentThreats;
+                this.ownCheckMate = false;
+                this.ownCheck = false;
+                this.checkMate = false;
+                this.check = false;
+                this.staleMate = false;
+                if (opponentThreats[ownKingRow][ownKingCol]) {
+                    if (this._legalMoves.length == 0)
+                        this.ownCheckMate = true;
+                    this.ownCheck = true;
+                }
+                if (ownThreats[opponentKingRow][opponentKingCol]) {
+                    if (this._legalOpponentMoves.length == 0)
+                        this.checkMate = true;
+                    this.check = true;
+                }
+                if (result.length == 0) {
+                    this.staleMate = true;
+                }
             }
+        };
+        Moves.prototype.kingInChessAfterMove = function (move, kingRow, kingCol, opponentThreats) {
+            if (move.fromRow == kingRow && move.fromCol == kingCol) {
+                if (opponentThreats[move.toRow][move.toCol] > 0)
+                    return true;
+                else
+                    return false;
+            }
+            if (opponentThreats[kingRow][kingCol] == 0)
+                return false;
+            if (opponentThreats[kingRow][kingCol] > 1)
+                return true;
+            if (move.capture == 0) {
+                return true;
+            }
+            return false;
         };
         Moves.prototype.addWhiteMoves = function (row, col, piece, fields, result, threats) {
             this.addCommonMoves(row, col, piece, fields, -1, result, threats);

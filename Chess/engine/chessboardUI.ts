@@ -21,6 +21,12 @@ export module ChessEngineAPI {
 
         get capturedPieces(): Array<number> { return this.chessboard.capturedPieces }
 
+        get check(): boolean  { return this.chessboard.check }
+        get checkMate(): boolean { return this.chessboard.checkMate }
+        get staleMate(): boolean { return this.chessboard.staleMate }
+        get ownCheck(): boolean {  return this.chessboard.ownCheck  }
+        get ownCheckMate(): boolean{ return this.chessboard.ownCheckMate }
+
         public ownThreats(row:number, col:number): number {
           return this.chessboard.ownThreats(row, col);
         }

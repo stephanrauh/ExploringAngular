@@ -35,6 +35,15 @@ export module Engine {
 
         private _moves: Moves = new Moves(this);
 
+        get check(): boolean  { return this._moves.check }
+        get checkMate(): boolean { return this._moves.checkMate }
+        get staleMate(): boolean { return this._moves.staleMate }
+        get ownCheck(): boolean {  return this._moves.ownCheck  }
+        get ownCheckMate(): boolean{ return this._moves.ownCheckMate }
+
+
+
+
         get isWhitePlaying(): boolean { return this._isWhitePlaying }
 
         get fields(): number[][] {
@@ -77,7 +86,6 @@ export module Engine {
             this.fields[fromRow][fromCol] = 0;
             this.fields[toRow][toCol] = piece;
             this._isWhitePlaying = !this._isWhitePlaying
-            this._moves = new Moves(this) // clear the list of legal moves
 
             if (piece == 1 && fromRow == 1 && toRow == 0) {
                 this.fields[toRow][toCol] = promotion;
@@ -95,8 +103,6 @@ export module Engine {
                 targetPiece = this.fields[fromRow][toCol]
                 this.fields[fromRow][toCol] = 0
             }
-
-
 
             if (piece == -1 && fromRow - toRow == -2) {
                 this.enPassantCol = toCol;
@@ -128,7 +134,9 @@ export module Engine {
             if (0 != targetPiece) {
                 this.capturedPieces.push(targetPiece)
             }
-            this.moveHistory.push(new Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece))
+            this._moves = new Moves(this) // clear the list of legal moves
+            this.moveHistory.push(new Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece, this._moves.ownCheck,
+            this._moves.ownCheckMate, this._moves.staleMate))
         }
     }
 }

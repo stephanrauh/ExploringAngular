@@ -7,7 +7,16 @@ export class Moves {
     private _ownThreats: number[][] = null;
     private _opponentThreats: number[][] = null;
 
-    constructor(private chessboard: Engine.Chessboard) { }
+    check: boolean = false;
+    checkMate: boolean = false;
+    staleMate: boolean = false;
+    ownCheck: boolean = false;
+    ownCheckMate: boolean=false;
+
+
+    constructor(private chessboard: Engine.Chessboard) {
+      this.calculateLegalMoves();
+    }
 
     get legalMoves(): Array<Move> {
         this.calculateLegalMoves();
@@ -38,11 +47,14 @@ export class Moves {
         return false;
     }
 
+    /** Note that this function has side effects. It is responsible for setting the
+        attributes check, ownCheck, checkMate, ownCheckMate and stalemate of the chessboard.
+    */
     calculateLegalMoves() {
         if (null == this._legalMoves) {
             var result: Array<Move> = new Array<Move>();
             var opponentResult: Array<Move> = new Array<Move>();
-            var threats: number[][] = [
+            var ownThreats: number[][] = [
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0, 0, 0],
@@ -63,28 +75,88 @@ export class Moves {
                 [0, 0, 0, 0, 0, 0, 0, 0]
             ];
 
+            var ownKingRow: number;
+            var ownKingCol: number;
+            var opponentKingRow: number;
+            var opponentKingCol: number;
+
             for (var row: number = 0; row < this.chessboard.fields.length; row++) {
                 var currentRow: number[] = this.chessboard.fields[row];
                 for (var col: number = 0; col < currentRow.length; col++) {
                     var piece: number = this.chessboard.fields[row][col];
                     if (this.chessboard.isWhitePlaying) {
                         if (piece > 0)
-                            this.addWhiteMoves(row, col, piece, this.chessboard.fields, result, threats);
+                            this.addWhiteMoves(row, col, piece, this.chessboard.fields, result, ownThreats);
                         else if (piece < 0)
                             this.addBlackMoves(row, col, piece, this.chessboard.fields, opponentResult, opponentThreats);
+                        if (piece == 6) {
+                            ownKingRow = row;
+                            ownKingCol = col;
+                        } else if (piece == -6) {
+                            opponentKingRow = row;
+                            opponentKingCol = col;
+                        }
                     } else {
                         if (piece < 0)
-                            this.addBlackMoves(row, col, piece, this.chessboard.fields, result, threats);
+                            this.addBlackMoves(row, col, piece, this.chessboard.fields, result, ownThreats);
                         else if (piece > 0)
                             this.addWhiteMoves(row, col, piece, this.chessboard.fields, opponentResult, opponentThreats);
+                        if (piece == -6) {
+                            ownKingRow = row;
+                            ownKingCol = col;
+                        } else if (piece == 6) {
+                            opponentKingRow = row;
+                            opponentKingCol = col;
+                        }
                     }
                 }
             }
+
+            result = result.filter((move) => !this.kingInChessAfterMove(move, ownKingRow, ownKingCol, opponentThreats))
+            opponentResult = opponentResult.filter((move) => !this.kingInChessAfterMove(move, opponentKingRow, opponentKingCol, ownThreats))
+
             this._legalMoves = result;
-            this._ownThreats = threats;
+            this._ownThreats = ownThreats;
             this._legalOpponentMoves = opponentResult;
             this._opponentThreats = opponentThreats;
+
+            this.ownCheckMate=false;
+            this.ownCheck=false;
+            this.checkMate=false;
+            this.check=false;
+            this.staleMate=false;
+            if (opponentThreats[ownKingRow][ownKingCol]) {
+                if (this._legalMoves.length == 0)
+                    this.ownCheckMate = true
+                this.ownCheck = true
+            }
+
+            if (ownThreats[opponentKingRow][opponentKingCol]) {
+                if (this._legalOpponentMoves.length == 0)
+                    this.checkMate = true
+                this.check = true
+            }
+            if (result.length == 0) {
+                this.staleMate = true
+            }
         }
+    }
+
+    kingInChessAfterMove(move: Move, kingRow: number, kingCol: number, opponentThreats: number[][]): boolean {
+        if (move.fromRow == kingRow && move.fromCol == kingCol) {
+            if (opponentThreats[move.toRow][move.toCol] > 0)
+                return true; // reliable
+            else return false; // reliable
+        }
+        if (opponentThreats[kingRow][kingCol] == 0)
+            return false; // reliable
+        if (opponentThreats[kingRow][kingCol] > 1)
+            return true; // reliable
+        if (move.capture == 0) {
+            return true; // the board has to be re-evaluated - maybe the moved piece protects the king
+        }
+        // To do: the board has to re-evaluated - maybe the offending piece has been captured
+        return false;
     }
 
     addWhiteMoves(row: number, col: number, piece: number, fields: number[][], result: Array<Move>, threats: number[][]) {
@@ -216,14 +288,14 @@ export class Moves {
         toRow = fromRow + pawnMoveDirection;
         this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats, true)
         if (this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
-          threats[toRow][toCol]++
+            threats[toRow][toCol]++
         }
 
         toCol = fromCol - 1;
         toRow = fromRow + pawnMoveDirection;
         this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats, true)
         if (this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
-          threats[toRow][toCol]++
+            threats[toRow][toCol]++
         }
 
         if (this.chessboard.enPassantCol >= 0) {
