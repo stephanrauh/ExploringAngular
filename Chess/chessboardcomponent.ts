@@ -1,7 +1,7 @@
 /// <reference path="typings/angular2/angular2.d.ts" />
 import {Component, View, NgFor, bootstrap, Query, QueryList} from 'angular2/angular2';
 import {FieldComponent} from './fieldcomponent';
-import {Engine} from './engine/chessboard';
+import {ChessEngineAPI} from './engine/chessboardUI';
 
 @Component({
     selector: 'chessboard'
@@ -12,9 +12,9 @@ import {Engine} from './engine/chessboard';
     templateUrl: 'ChessboardComponent.html'
 })
 export class ChessBoardComponent {
-    get board(): Engine.ChessboardUI { return this.chessboard }
+    get board(): ChessEngineAPI.ChessboardUI { return this.chessboard }
 
     get fields() { return this.board.fields }
 
-    constructor(private chessboard:Engine.ChessboardUI) {}
+    constructor(private chessboard:ChessEngineAPI.ChessboardUI) {}
 }

@@ -9,7 +9,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2', './fieldcomponent', './engine/chessboard'], function (require, exports, angular2_1, fieldcomponent_1, chessboard_1) {
+define(["require", "exports", 'angular2/angular2', './fieldcomponent', './engine/chessboardUI'], function (require, exports, angular2_1, fieldcomponent_1, chessboardUI_1) {
     var ChessBoardComponent = (function () {
         function ChessBoardComponent(chessboard) {
             this.chessboard = chessboard;
@@ -33,7 +33,7 @@ define(["require", "exports", 'angular2/angular2', './fieldcomponent', './engine
                 directives: [angular2_1.NgFor, fieldcomponent_1.FieldComponent],
                 templateUrl: 'ChessboardComponent.html'
             }), 
-            __metadata('design:paramtypes', [chessboard_1.Engine.ChessboardUI])
+            __metadata('design:paramtypes', [chessboardUI_1.ChessEngineAPI.ChessboardUI])
         ], ChessBoardComponent);
         return ChessBoardComponent;
     })();

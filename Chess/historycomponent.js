@@ -9,11 +9,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2', './engine/chessboard'], function (require, exports, angular2_1, chessboard_1) {
+define(["require", "exports", 'angular2/angular2', './engine/chessboardUI'], function (require, exports, angular2_1, chessboardUI_1) {
     var HistoryComponent = (function () {
         function HistoryComponent(chessboard) {
             this.chessboard = chessboard;
         }
+        HistoryComponent.prototype.moveHistory = function () {
+            console.log("History: " + this.chessboard.moveHistory.length);
+            var result = this.chessboard.moveHistory.map(function (m, index) { return ((index % 2 == 0 ? ((1 + index / 2) + ". ") : "") + m.toString()); });
+            return result;
+        };
         HistoryComponent = __decorate([
             angular2_1.Component({
                 selector: 'history'
@@ -22,7 +27,7 @@ define(["require", "exports", 'angular2/angular2', './engine/chessboard'], funct
                 directives: [angular2_1.NgFor],
                 templateUrl: 'HistoryComponent.html'
             }), 
-            __metadata('design:paramtypes', [chessboard_1.Engine.ChessboardUI])
+            __metadata('design:paramtypes', [chessboardUI_1.ChessEngineAPI.ChessboardUI])
         ], HistoryComponent);
         return HistoryComponent;
     })();

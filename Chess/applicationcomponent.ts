@@ -3,13 +3,13 @@
 import {Component, View, bootstrap} from 'angular2/angular2';
 import {ChessBoardComponent} from "./chessboardcomponent";
 import {CapturedPiecesComponent} from './capturedpiecescomponent';
-import {Engine} from "./engine/chessboard";
+import {ChessEngineAPI} from "./engine/chessboardUI";
 import {HistoryComponent} from './historycomponent';
 
 // Annotation section
 @Component({
     selector: 'application',
-    bindings: [Engine.ChessboardUI]
+    bindings: [ChessEngineAPI.ChessboardUI]
 })
 @View({
     templateUrl: 'ApplicationComponent.html',
@@ -17,7 +17,7 @@ import {HistoryComponent} from './historycomponent';
 })
 // Component controller
 class ApplicationComponent {
-  constructor(private chessboard:Engine.ChessboardUI) {}
+  constructor(private chessboard:ChessEngineAPI.ChessboardUI) {}
 
   public get title(): String { return this.chessboard.isWhitePlaying?"White move":"Black move"}
 }

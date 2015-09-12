@@ -1,6 +1,7 @@
 /// <reference path="typings/angular2/angular2.d.ts" />
 import {Component, View, NgFor, bootstrap, Query, QueryList} from 'angular2/angular2';
-import {Engine} from './engine/chessboard';
+import {ChessEngineAPI} from './engine/chessboardUI';
+import {Move} from './engine/move';
 
 @Component({
     selector: 'history'
@@ -10,5 +11,12 @@ import {Engine} from './engine/chessboard';
     templateUrl: 'HistoryComponent.html'
 })
 export class HistoryComponent {
-    constructor(private chessboard:Engine.ChessboardUI) {}
+    constructor(private chessboard: ChessEngineAPI.ChessboardUI) { }
+
+    public moveHistory(): Array<string> {
+      console.log("History: " +this.chessboard.moveHistory.length )
+        var result: Array<string> =
+            this.chessboard.moveHistory.map((m: Move, index:number) => ((index%2==0?((1+index/2)+". "):"") + m.toString()))
+        return result;
+    }
 }

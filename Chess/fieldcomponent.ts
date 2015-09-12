@@ -1,7 +1,7 @@
 /// <reference path="typings/angular2/angular2.d.ts" />
 import {Component, Inject, View, NgFor, bootstrap} from 'angular2/angular2';
 import {ChessBoardComponent} from './chessboardcomponent';
-import {Engine} from "./engine/chessboard";
+import {ChessEngineAPI} from "./engine/chessboardUI";
 import {PieceModule} from './engine/pieces'
 
 @Component({
@@ -13,7 +13,7 @@ import {PieceModule} from './engine/pieces'
     templateUrl: 'FieldComponent.html'
 })
 export class FieldComponent {
-    constructor(private chessboard:Engine.ChessboardUI) {}
+    constructor(private chessboard:ChessEngineAPI.ChessboardUI) {}
 
     private row: number;
     private piece: number;

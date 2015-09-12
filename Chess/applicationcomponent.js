@@ -9,7 +9,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2', "./chessboardcomponent", './capturedpiecescomponent', "./engine/chessboard", './historycomponent'], function (require, exports, angular2_1, chessboardcomponent_1, capturedpiecescomponent_1, chessboard_1, historycomponent_1) {
+define(["require", "exports", 'angular2/angular2', "./chessboardcomponent", './capturedpiecescomponent', "./engine/chessboardUI", './historycomponent'], function (require, exports, angular2_1, chessboardcomponent_1, capturedpiecescomponent_1, chessboardUI_1, historycomponent_1) {
     var ApplicationComponent = (function () {
         function ApplicationComponent(chessboard) {
             this.chessboard = chessboard;
@@ -22,13 +22,13 @@ define(["require", "exports", 'angular2/angular2', "./chessboardcomponent", './c
         ApplicationComponent = __decorate([
             angular2_1.Component({
                 selector: 'application',
-                bindings: [chessboard_1.Engine.ChessboardUI]
+                bindings: [chessboardUI_1.ChessEngineAPI.ChessboardUI]
             }),
             angular2_1.View({
                 templateUrl: 'ApplicationComponent.html',
                 directives: [chessboardcomponent_1.ChessBoardComponent, historycomponent_1.HistoryComponent, capturedpiecescomponent_1.CapturedPiecesComponent]
             }), 
-            __metadata('design:paramtypes', [chessboard_1.Engine.ChessboardUI])
+            __metadata('design:paramtypes', [chessboardUI_1.ChessEngineAPI.ChessboardUI])
         ], ApplicationComponent);
         return ApplicationComponent;
     })();

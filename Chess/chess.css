@@ -1,20 +1,20 @@
 .field {
   border: 1px solid black;
-  width:63px;height:63px;
+  width:53px;height:53px;
 }
 
 .selectedField {
   border: 2px solid blue;
-  width:62px;
-  height:62px;
+  width:52px;
+  height:52px;
   top:0px;
   position:relative;
 }
 
 .fieldInReach {
   border: 2px solid #64CE64;
-  width:62px;
-  height:62px;
+  width:52px;
+  height:52px;
   top:0px;
   position:relative;
 }

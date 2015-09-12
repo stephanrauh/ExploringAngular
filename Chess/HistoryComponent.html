@@ -1,1 +1,5 @@
-In a future version, this will show the move history.
+<div style="height:520px;overflow-y:auto;width:180px" class="row">
+  <div *ng-for="#move of moveHistory();" class="col-md-6">
+    {{move}}
+  </div>
+</div>

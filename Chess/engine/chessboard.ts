@@ -5,54 +5,6 @@ import {Move} from './move';
 import {Moves} from './moves';
 
 export module Engine {
-    @Injectable() export class ChessboardUI {
-        selectedPieceRow: number;
-        selectedPieceCol: number;
-        isPieceSelected: boolean = false;
-
-        private chessboard: Chessboard = new Chessboard(new Array<Move>());
-
-        get fields(): number[][] {
-            return this.chessboard.fields;
-        }
-
-        get isWhitePlaying(): boolean { return this.chessboard.isWhitePlaying }
-
-        get capturedPieces(): Array<number> { return this.chessboard.capturedPieces }
-
-        onclick(row: number, col: number): void {
-            if (!this.isPieceSelected)
-                this.setSelectedPiece(row, col);
-            else {
-                this.isPieceSelected = false;
-                if (this.chessboard.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, row, col)) {
-                    this.chessboard.move(this.selectedPieceRow, this.selectedPieceCol, row, col, this.isWhitePlaying?5:-5);
-                }
-            }
-        }
-
-        setSelectedPiece(row: number, col: number): void {
-            var piece = this.chessboard.fields[row][col];
-            if (this.isWhitePlaying) {
-                if (piece <= 0) return;
-            } else {
-                if (piece >= 0) return;
-            }
-
-            this.isPieceSelected = true
-            this.selectedPieceRow = row
-            this.selectedPieceCol = col
-        }
-
-
-        isLegalMove2(toRow: number, toCol: number): boolean {
-            if (!this.isPieceSelected)
-                return false;
-            return this.chessboard.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, toRow, toCol)
-        }
-
-    }
-
     export class Chessboard {
         constructor(public moveHistory: Array<Move>, executeMove: boolean = false) {
             console.log("new Chessboard!")
@@ -119,12 +71,12 @@ export module Engine {
             this._isWhitePlaying = !this._isWhitePlaying
             this._moves = new Moves(this) // clear the list of legal moves
 
-            if (piece==1 && fromRow==1 && toRow==0) {
-              this.fields[toRow][toCol] = promotion;
+            if (piece == 1 && fromRow == 1 && toRow == 0) {
+                this.fields[toRow][toCol] = promotion;
             }
-            else if (piece==-1 && fromRow==6 && toRow==7) {
-              this.fields[toRow][toCol] = promotion;
-            } else promotion=0
+            else if (piece == -1 && fromRow == 6 && toRow == 7) {
+                this.fields[toRow][toCol] = promotion;
+            } else promotion = 0
 
             this.enPassantCol = -1
             if (piece == 1 && fromRow - toRow == 2) {
@@ -166,9 +118,9 @@ export module Engine {
             if (piece == -2 && fromRow == 0 && fromCol == 0) this.blackLeftRookHasMoved = true;
             if (piece == -2 && fromRow == 0 && fromCol == 7) this.blackRightRookHasMoved = true;
             if (0 != targetPiece) {
-              this.capturedPieces.push(targetPiece)
-              this.moveHistory.push(new Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece))
+                this.capturedPieces.push(targetPiece)
             }
+            this.moveHistory.push(new Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece))
         }
     }
 }
