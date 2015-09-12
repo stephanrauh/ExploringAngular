@@ -18,6 +18,8 @@ export module Engine {
 
         get isWhitePlaying(): boolean { return this.chessboard.isWhitePlaying }
 
+        get capturedPieces(): Array<number> { return this.chessboard.capturedPieces }
+
         onclick(row: number, col: number): void {
             if (!this.isPieceSelected)
                 this.setSelectedPiece(row, col);

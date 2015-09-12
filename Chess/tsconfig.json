@@ -21,6 +21,7 @@
         "engine/chessboard.ts",
         "engine/move.ts",
         "engine/moves.ts",
+        "engine/pieces.ts",
         "DI-Example/tab0.ts"
     ]
 }

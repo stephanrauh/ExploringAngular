@@ -30,6 +30,11 @@ define(["require", "exports", 'angular2/angular2', './move', './moves'], functio
                 enumerable: true,
                 configurable: true
             });
+            Object.defineProperty(ChessboardUI.prototype, "capturedPieces", {
+                get: function () { return this.chessboard.capturedPieces; },
+                enumerable: true,
+                configurable: true
+            });
             ChessboardUI.prototype.onclick = function (row, col) {
                 if (!this.isPieceSelected)
                     this.setSelectedPiece(row, col);

@@ -9,7 +9,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2', "./engine/chessboard"], function (require, exports, angular2_1, chessboard_1) {
+define(["require", "exports", 'angular2/angular2', "./engine/chessboard", './engine/pieces'], function (require, exports, angular2_1, chessboard_1, pieces_1) {
     var FieldComponent = (function () {
         function FieldComponent(chessboard) {
             this.chessboard = chessboard;
@@ -21,40 +21,17 @@ define(["require", "exports", 'angular2/angular2', "./engine/chessboard"], funct
                 return "wikimediaimages/w_empty.png";
         };
         FieldComponent.prototype.borderClass = function (row, col) {
-            if (this.chessboard.isPieceSelected)
+            if (this.chessboard.isPieceSelected) {
                 if (row == this.chessboard.selectedPieceRow)
                     if (col == this.chessboard.selectedPieceCol)
                         return "selectedField";
+                if (this.chessboard.isLegalMove2(row, col))
+                    return "fieldInReach";
+            }
             return "field";
         };
         FieldComponent.prototype.fileName = function (piece) {
-            if (0 == piece)
-                return "wikimediaimages/empty.png";
-            var prefix = piece < 0 ? "b_" : "w_";
-            if (piece < 0)
-                piece = -piece;
-            var pieceName;
-            switch (piece) {
-                case 1:
-                    pieceName = "pawn";
-                    break;
-                case 2:
-                    pieceName = "rook";
-                    break;
-                case 3:
-                    pieceName = "knight";
-                    break;
-                case 4:
-                    pieceName = "bishop";
-                    break;
-                case 5:
-                    pieceName = "queen";
-                    break;
-                case 6:
-                    pieceName = "king";
-                    break;
-            }
-            return "wikimediaimages/" + prefix + pieceName + ".png";
+            return pieces_1.PieceModule.PieceUtils.fileName(piece);
         };
         FieldComponent.prototype.ondragstart = function (row, col) {
             this.chessboard.setSelectedPiece(row, col);
