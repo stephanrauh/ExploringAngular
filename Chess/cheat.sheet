@@ -71,6 +71,7 @@ Atom:
   install atom-typescript
   install atom-beautify (optional) ALT+CMD+L
   configure the autocomplete plugin to be less nervous
+  http://blog.dripstat.com/state-of-typescript-1-6-support/
 
 Error messages:
   "The selector "chessboard" did not match any elements" means that the HTML file doesn't contain a widget corresponding to the

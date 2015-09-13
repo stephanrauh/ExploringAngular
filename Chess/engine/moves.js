@@ -1,4 +1,4 @@
-define(["require", "exports", './move'], function (require, exports, move_1) {
+define(["require", "exports", './move', './evaluator'], function (require, exports, move_1, evaluator_1) {
     var Moves = (function () {
         function Moves(chessboard) {
             this.chessboard = chessboard;
@@ -119,6 +119,13 @@ define(["require", "exports", './move'], function (require, exports, move_1) {
                 }
                 result = result.filter(function (move) { return !_this.kingInChessAfterMove(move, ownKingRow, ownKingCol, opponentThreats); });
                 opponentResult = opponentResult.filter(function (move) { return !_this.kingInChessAfterMove(move, opponentKingRow, opponentKingCol, ownThreats); });
+                var whiteThreats = this.chessboard.isWhitePlaying ? ownThreats : opponentThreats;
+                var blackThreats = this.chessboard.isWhitePlaying ? opponentThreats : ownThreats;
+                result.forEach(function (move) {
+                    _this.chessboard.moveInternally(move.fromRow, move.fromCol, move.toRow, move.toCol, move.promotion);
+                    move.value = evaluator_1.Evaluator.evaluatePosition(_this.chessboard.fields, whiteThreats, blackThreats, _this.chessboard.isWhitePlaying);
+                    _this.chessboard.revertLastMoveInternally();
+                });
                 this._legalMoves = result;
                 this._ownThreats = ownThreats;
                 this._legalOpponentMoves = opponentResult;

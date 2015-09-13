@@ -3,7 +3,8 @@
 import {Injectable} from 'angular2/angular2';
 import {Move} from './move';
 import {Moves} from './moves';
-import {Engine} from './chessboard';
+import {Chessboard} from './chessboard';
+import {Evaluator} from './evaluator';
 
 export module ChessEngineAPI {
     @Injectable() export class ChessboardUI {
@@ -11,7 +12,7 @@ export module ChessEngineAPI {
         selectedPieceCol: number;
         isPieceSelected: boolean = false;
 
-        private chessboard: Engine.Chessboard = new Engine.Chessboard(new Array<Move>());
+        private chessboard: Chessboard = new Chessboard(new Array<Move>());
 
         get fields(): number[][] {
             return this.chessboard.fields;
@@ -45,6 +46,7 @@ export module ChessEngineAPI {
                 this.isPieceSelected = false;
                 if (this.chessboard.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, row, col)) {
                     this.chessboard.move(this.selectedPieceRow, this.selectedPieceCol, row, col, this.isWhitePlaying?5:-5);
+                    Evaluator.showPerformanceStats()
                 }
             }
         }

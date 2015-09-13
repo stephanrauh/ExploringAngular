@@ -20,10 +20,11 @@
         "historycomponent.ts",
         "engine/chessboard.ts",
         "engine/chessboardUI.ts",
-        "engine/evaluation.ts",
+        "engine/evaluator.ts",
         "engine/move.ts",
         "engine/moves.ts",
         "engine/pieces.ts",
+        "engine/suggestor.ts",
         "DI-Example/tab0.ts"
     ]
 }

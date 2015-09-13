@@ -1,0 +1,1 @@
+{"version":3,"file":"suggestor.js","sourceRoot":"","sources":["suggestor.ts"],"names":["Suggestor","Suggestor.constructor","Suggestor.suggestMove"],"mappings":";IAGA;QACIA,mBAAmBA,UAAsBA;YAAtBC,eAAUA,GAAVA,UAAUA,CAAYA;QAAIA,CAACA;QAE9CD,+BAAWA,GAAXA;YACEE,MAAMA,CAACA,IAAIA,CAACA;QACdA,CAACA;QACLF,gBAACA;IAADA,CAACA,AAND,IAMC;IANY,iBAAS,YAMrB,CAAA"}

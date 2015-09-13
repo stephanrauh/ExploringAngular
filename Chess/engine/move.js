@@ -1,9 +1,6 @@
 define(["require", "exports"], function (require, exports) {
     var Move = (function () {
-        function Move(fromRow, fromCol, toRow, toCol, promotion, capture, check, checkMate, staleMate, whiteKingHasMoved, whiteLeftRookHasMoved, whiteRightRookHasMoved, blackKingHasMoved, blackLeftRookHasMoved, blackRightRookHasMoved, enPassantCol, captureRow, secondColFrom, secondColTo) {
-            if (check === void 0) { check = false; }
-            if (checkMate === void 0) { checkMate = false; }
-            if (staleMate === void 0) { staleMate = false; }
+        function Move(fromRow, fromCol, toRow, toCol, promotion, capture, whiteKingHasMoved, whiteLeftRookHasMoved, whiteRightRookHasMoved, blackKingHasMoved, blackLeftRookHasMoved, blackRightRookHasMoved, enPassantCol, captureRow, secondColFrom, secondColTo) {
             if (whiteKingHasMoved === void 0) { whiteKingHasMoved = false; }
             if (whiteLeftRookHasMoved === void 0) { whiteLeftRookHasMoved = false; }
             if (whiteRightRookHasMoved === void 0) { whiteRightRookHasMoved = false; }
@@ -20,9 +17,6 @@ define(["require", "exports"], function (require, exports) {
             this.toCol = toCol;
             this.promotion = promotion;
             this.capture = capture;
-            this.check = check;
-            this.checkMate = checkMate;
-            this.staleMate = staleMate;
             this.whiteKingHasMoved = whiteKingHasMoved;
             this.whiteLeftRookHasMoved = whiteLeftRookHasMoved;
             this.whiteRightRookHasMoved = whiteRightRookHasMoved;
@@ -33,6 +27,9 @@ define(["require", "exports"], function (require, exports) {
             this.captureRow = captureRow;
             this.secondColFrom = secondColFrom;
             this.secondColTo = secondColTo;
+            this.check = false;
+            this.checkMate = false;
+            this.staleMate = false;
         }
         Move.prototype.toString = function () {
             var colNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];

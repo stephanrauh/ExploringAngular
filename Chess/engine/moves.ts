@@ -1,5 +1,6 @@
-import {Engine} from "./chessboard";
+import {Chessboard} from "./chessboard";
 import {Move} from './move';
+import {Evaluator} from './evaluator'
 
 export class Moves {
     private _legalMoves: Array<Move> = null;
@@ -11,11 +12,11 @@ export class Moves {
     checkMate: boolean = false;
     staleMate: boolean = false;
     ownCheck: boolean = false;
-    ownCheckMate: boolean=false;
+    ownCheckMate: boolean = false;
 
 
-    constructor(private chessboard: Engine.Chessboard) {
-      this.calculateLegalMoves();
+    constructor(private chessboard: Chessboard) {
+        this.calculateLegalMoves();
     }
 
     get legalMoves(): Array<Move> {
@@ -115,16 +116,24 @@ export class Moves {
             result = result.filter((move) => !this.kingInChessAfterMove(move, ownKingRow, ownKingCol, opponentThreats))
             opponentResult = opponentResult.filter((move) => !this.kingInChessAfterMove(move, opponentKingRow, opponentKingCol, ownThreats))
 
+            var whiteThreats: number[][] = this.chessboard.isWhitePlaying ? ownThreats : opponentThreats
+            var blackThreats: number[][] = this.chessboard.isWhitePlaying ? opponentThreats : ownThreats
+            result.forEach((move) =>
+             {
+                this.chessboard.moveInternally(move.fromRow, move.fromCol, move.toRow, move.toCol, move.promotion)
+                move.value =Evaluator.evaluatePosition(this.chessboard.fields, whiteThreats, blackThreats, this.chessboard.isWhitePlaying)
+                this.chessboard.revertLastMoveInternally()
+            })
             this._legalMoves = result;
             this._ownThreats = ownThreats;
             this._legalOpponentMoves = opponentResult;
             this._opponentThreats = opponentThreats;
 
-            this.ownCheckMate=false;
-            this.ownCheck=false;
-            this.checkMate=false;
-            this.check=false;
-            this.staleMate=false;
+            this.ownCheckMate = false;
+            this.ownCheck = false;
+            this.checkMate = false;
+            this.check = false;
+            this.staleMate = false;
             if (opponentThreats[ownKingRow][ownKingCol]) {
                 if (this._legalMoves.length == 0)
                     this.ownCheckMate = true
