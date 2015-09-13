@@ -4,7 +4,11 @@ define(["require", "exports"], function (require, exports) {
             this.chessboard = chessboard;
         }
         Suggestor.prototype.suggestMove = function () {
-            return null;
+            var moves = this.chessboard.moves.legalMoves;
+            var sortedMoves = moves.sort(function (m1, m2) { return m2.value - m1.value; });
+            console.log("Suggested moves:");
+            sortedMoves.forEach(function (move) { return console.log(move.toString() + " " + move.value); });
+            return sortedMoves[0];
         };
         return Suggestor;
     })();

@@ -123,7 +123,7 @@ define(["require", "exports", './move', './evaluator'], function (require, expor
                 var blackThreats = this.chessboard.isWhitePlaying ? opponentThreats : ownThreats;
                 result.forEach(function (move) {
                     _this.chessboard.moveInternally(move.fromRow, move.fromCol, move.toRow, move.toCol, move.promotion);
-                    move.value = evaluator_1.Evaluator.evaluatePosition(_this.chessboard.fields, whiteThreats, blackThreats, _this.chessboard.isWhitePlaying);
+                    move.value = evaluator_1.Evaluator.evaluatePosition(_this.chessboard, whiteThreats, blackThreats, _this.chessboard.isWhitePlaying);
                     _this.chessboard.revertLastMoveInternally();
                 });
                 this._legalMoves = result;

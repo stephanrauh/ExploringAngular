@@ -25,6 +25,11 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
             this.enPassantCol = -1;
             this._moves = new moves_1.Moves(this);
         }
+        Object.defineProperty(Chessboard.prototype, "moves", {
+            get: function () { return this._moves; },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(Chessboard.prototype, "check", {
             get: function () { return this._moves.check; },
             enumerable: true,

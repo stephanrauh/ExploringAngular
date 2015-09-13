@@ -40,7 +40,7 @@ export module PieceModule {
             if (piece == Piece.WHITE_KNIGHT) return 3000
             if (piece == Piece.WHITE_BISHOP) return 3000
             if (piece == Piece.WHITE_QUEEN) return 10000
-            if (piece == Piece.WHITE_KING) return 1000000
+            if (piece == Piece.WHITE_KING) return 100000
             return 0;
         }
     }

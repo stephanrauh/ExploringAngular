@@ -15,18 +15,20 @@ export class Move {
         public enPassantCol = -1,
         public captureRow = -1,
         public secondColFrom = -1,
-        public secondColTo = -1) { }
+        public secondColTo = -1) {
+        
+    }
 
     toString(): string {
         var colNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
         var result = colNames[this.fromCol];
-        result += this.fromRow;
+        result += (8 - this.fromRow);
         if (0 == this.capture)
             result += "-"
         else
             result += "x";
         result += colNames[this.toCol];
-        result += this.toRow;
+        result += (8 - this.toRow);
 
         if (this.checkMate) result += "++"
         else if (this.check) result += "+"

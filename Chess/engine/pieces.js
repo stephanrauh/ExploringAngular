@@ -63,7 +63,7 @@ define(["require", "exports"], function (require, exports) {
                 if (piece == Piece.WHITE_QUEEN)
                     return 10000;
                 if (piece == Piece.WHITE_KING)
-                    return 1000000;
+                    return 100000;
                 return 0;
             };
             return PieceUtils;

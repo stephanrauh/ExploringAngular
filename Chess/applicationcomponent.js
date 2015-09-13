@@ -13,7 +13,18 @@ define(["require", "exports", 'angular2/angular2', "./chessboardcomponent", './c
     var ApplicationComponent = (function () {
         function ApplicationComponent(chessboard) {
             this.chessboard = chessboard;
+            this.suggestedMove = null;
         }
+        Object.defineProperty(ApplicationComponent.prototype, "suggestedMoveText", {
+            get: function () {
+                if (null == this.suggestedMove)
+                    return "";
+                else
+                    return this.suggestedMove.toString();
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(ApplicationComponent.prototype, "title", {
             get: function () {
                 var result = this.chessboard.isWhitePlaying ? "White move " : "Black move ";
@@ -31,14 +42,17 @@ define(["require", "exports", 'angular2/angular2', "./chessboardcomponent", './c
             configurable: true
         });
         ApplicationComponent.prototype.suggestMove = function () {
-            alert("Suggest move hasn't been implemented yet");
+            this.suggestedMove = this.chessboard.suggestMove();
             return false;
         };
         ApplicationComponent.prototype.turnSides = function () {
-            alert("Turn sides hasn't been implemented yet");
+            this.suggestedMove = null;
+            var move = this.chessboard.suggestMove();
+            this.chessboard.move(move);
             return false;
         };
         ApplicationComponent.prototype.revertLastMove = function () {
+            this.suggestedMove = null;
             this.chessboard.revertLastMove();
             return false;
         };
@@ -49,7 +63,7 @@ define(["require", "exports", 'angular2/angular2', "./chessboardcomponent", './c
             }),
             angular2_1.View({
                 templateUrl: 'ApplicationComponent.html',
-                directives: [chessboardcomponent_1.ChessBoardComponent, historycomponent_1.HistoryComponent, capturedpiecescomponent_1.CapturedPiecesComponent]
+                directives: [chessboardcomponent_1.ChessBoardComponent, historycomponent_1.HistoryComponent, capturedpiecescomponent_1.CapturedPiecesComponent, angular2_1.NgIf]
             }), 
             __metadata('design:paramtypes', [chessboardUI_1.ChessEngineAPI.ChessboardUI])
         ], ApplicationComponent);

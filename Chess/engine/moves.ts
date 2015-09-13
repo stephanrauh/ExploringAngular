@@ -121,7 +121,7 @@ export class Moves {
             result.forEach((move) =>
              {
                 this.chessboard.moveInternally(move.fromRow, move.fromCol, move.toRow, move.toCol, move.promotion)
-                move.value =Evaluator.evaluatePosition(this.chessboard.fields, whiteThreats, blackThreats, this.chessboard.isWhitePlaying)
+                move.value =Evaluator.evaluatePosition(this.chessboard, whiteThreats, blackThreats, this.chessboard.isWhitePlaying)
                 this.chessboard.revertLastMoveInternally()
             })
             this._legalMoves = result;

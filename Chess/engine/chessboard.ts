@@ -35,6 +35,7 @@ export class Chessboard {
 
     private _moves: Moves = new Moves(this);
 
+    get moves(): Moves { return this._moves }
     get check(): boolean { return this._moves.check }
     get checkMate(): boolean { return this._moves.checkMate }
     get staleMate(): boolean { return this._moves.staleMate }
