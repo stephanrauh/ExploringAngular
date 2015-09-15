@@ -1,6 +1,6 @@
 define(["require", "exports"], function (require, exports) {
     var Move = (function () {
-        function Move(fromRow, fromCol, toRow, toCol, promotion, capture, whiteKingHasMoved, whiteLeftRookHasMoved, whiteRightRookHasMoved, blackKingHasMoved, blackLeftRookHasMoved, blackRightRookHasMoved, enPassantCol, captureRow, secondColFrom, secondColTo) {
+        function Move(fromRow, fromCol, toRow, toCol, promotion, capture, whiteKingHasMoved, whiteLeftRookHasMoved, whiteRightRookHasMoved, blackKingHasMoved, blackLeftRookHasMoved, blackRightRookHasMoved, enPassantCol, captureRow, secondColFrom, secondColTo, legalMoves) {
             if (whiteKingHasMoved === void 0) { whiteKingHasMoved = false; }
             if (whiteLeftRookHasMoved === void 0) { whiteLeftRookHasMoved = false; }
             if (whiteRightRookHasMoved === void 0) { whiteRightRookHasMoved = false; }
@@ -11,6 +11,7 @@ define(["require", "exports"], function (require, exports) {
             if (captureRow === void 0) { captureRow = -1; }
             if (secondColFrom === void 0) { secondColFrom = -1; }
             if (secondColTo === void 0) { secondColTo = -1; }
+            if (legalMoves === void 0) { legalMoves = null; }
             this.fromRow = fromRow;
             this.fromCol = fromCol;
             this.toRow = toRow;
@@ -27,6 +28,7 @@ define(["require", "exports"], function (require, exports) {
             this.captureRow = captureRow;
             this.secondColFrom = secondColFrom;
             this.secondColTo = secondColTo;
+            this.legalMoves = legalMoves;
             this.check = false;
             this.checkMate = false;
             this.staleMate = false;

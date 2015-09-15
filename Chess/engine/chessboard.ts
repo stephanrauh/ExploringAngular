@@ -163,7 +163,8 @@ export class Chessboard {
             original_enPassantCol,
             captureRow,
             secondColFrom,
-            secondColTo))
+            secondColTo,
+            this._moves))
         return targetPiece;
     }
     move(fromRow, fromCol, toRow, toCol: number, promotion: number): void {
@@ -206,6 +207,7 @@ export class Chessboard {
             this.blackLeftRookHasMoved = lastMove.blackLeftRookHasMoved
             this.blackRightRookHasMoved = lastMove.blackRightRookHasMoved
             this.enPassantCol = lastMove.enPassantCol
+            this._moves=lastMove.legalMoves
             if (lastMove.secondColTo > 0) {
                 this.fields[lastMove.fromRow][lastMove.secondColFrom] = this.fields[lastMove.toRow][lastMove.secondColTo]
                 this.fields[lastMove.toRow][lastMove.secondColTo] = 0
@@ -215,8 +217,8 @@ export class Chessboard {
     }
     public revertLastMove(): void {
         var capturedPiece = this.revertLastMoveInternally()
-        if (null != capturedPiece)
+        if (0 != capturedPiece)
             this.capturedPieces.pop()
-        this.recalculateLegalMovesAndCheck()
+        //this.recalculateLegalMovesAndCheck()
     }
 }

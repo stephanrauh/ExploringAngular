@@ -4,7 +4,6 @@ import {Injectable} from 'angular2/angular2';
 import {Move} from './move';
 import {Moves} from './moves';
 import {Chessboard} from './chessboard';
-import {Evaluator} from './evaluator';
 import {Suggestor} from './suggestor';
 
 export module ChessEngineAPI {
@@ -51,7 +50,6 @@ export module ChessEngineAPI {
                 this.isPieceSelected = false;
                 if (this.chessboard.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, row, col)) {
                     this.chessboard.move(this.selectedPieceRow, this.selectedPieceCol, row, col, this.isWhitePlaying ? 5 : -5);
-                    Evaluator.showPerformanceStats()
                     var answer = new Suggestor(this.chessboard).suggestMove()
                     if (null != answer)
                       this.move(answer)

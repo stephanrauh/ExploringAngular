@@ -172,7 +172,7 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                 this.blackLeftRookHasMoved = true;
             if (piece == -2 && fromRow == 0 && fromCol == 7)
                 this.blackRightRookHasMoved = true;
-            this.moveHistory.push(new move_1.Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece, original_whiteKingHasMoved, original_whiteLeftRookHasMoved, original_whiteRightRookHasMoved, original_blackKingHasMoved, original_blackLeftRookHasMoved, original_blackRightRookHasMoved, original_enPassantCol, captureRow, secondColFrom, secondColTo));
+            this.moveHistory.push(new move_1.Move(fromRow, fromCol, toRow, toCol, promotion, targetPiece, original_whiteKingHasMoved, original_whiteLeftRookHasMoved, original_whiteRightRookHasMoved, original_blackKingHasMoved, original_blackLeftRookHasMoved, original_blackRightRookHasMoved, original_enPassantCol, captureRow, secondColFrom, secondColTo, this._moves));
             return targetPiece;
         };
         Chessboard.prototype.move = function (fromRow, fromCol, toRow, toCol, promotion) {
@@ -214,6 +214,7 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
                 this.blackLeftRookHasMoved = lastMove.blackLeftRookHasMoved;
                 this.blackRightRookHasMoved = lastMove.blackRightRookHasMoved;
                 this.enPassantCol = lastMove.enPassantCol;
+                this._moves = lastMove.legalMoves;
                 if (lastMove.secondColTo > 0) {
                     this.fields[lastMove.fromRow][lastMove.secondColFrom] = this.fields[lastMove.toRow][lastMove.secondColTo];
                     this.fields[lastMove.toRow][lastMove.secondColTo] = 0;
@@ -223,9 +224,8 @@ define(["require", "exports", './move', './moves'], function (require, exports, 
         };
         Chessboard.prototype.revertLastMove = function () {
             var capturedPiece = this.revertLastMoveInternally();
-            if (null != capturedPiece)
+            if (0 != capturedPiece)
                 this.capturedPieces.pop();
-            this.recalculateLegalMovesAndCheck();
         };
         return Chessboard;
     })();

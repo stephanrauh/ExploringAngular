@@ -49,7 +49,8 @@ class ApplicationComponent {
 
     public turnSides(): boolean {
         this.suggestedMove = null
-        alert("Turn sides hasn't been implemented yet");
+        var move = this.chessboard.suggestMove()
+        this.chessboard.move(move)
         return false;
     }
 

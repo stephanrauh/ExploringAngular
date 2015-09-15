@@ -10,7 +10,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2', './chessboard', './evaluator', './suggestor'], function (require, exports, angular2_1, chessboard_1, evaluator_1, suggestor_1) {
+define(["require", "exports", 'angular2/angular2', './chessboard', './suggestor'], function (require, exports, angular2_1, chessboard_1, suggestor_1) {
     var ChessEngineAPI;
     (function (ChessEngineAPI) {
         var ChessboardUI = (function () {
@@ -81,7 +81,6 @@ define(["require", "exports", 'angular2/angular2', './chessboard', './evaluator'
                     this.isPieceSelected = false;
                     if (this.chessboard.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, row, col)) {
                         this.chessboard.move(this.selectedPieceRow, this.selectedPieceCol, row, col, this.isWhitePlaying ? 5 : -5);
-                        evaluator_1.Evaluator.showPerformanceStats();
                         var answer = new suggestor_1.Suggestor(this.chessboard).suggestMove();
                         if (null != answer)
                             this.move(answer);

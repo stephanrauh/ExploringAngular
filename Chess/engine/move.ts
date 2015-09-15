@@ -1,3 +1,5 @@
+import {Moves} from './moves'
+
 export class Move {
     public value: number; // result of the evaluation of the position. Not part of the constructor because it is added later.
     public check: boolean = false;
@@ -15,8 +17,9 @@ export class Move {
         public enPassantCol = -1,
         public captureRow = -1,
         public secondColFrom = -1,
-        public secondColTo = -1) {
-        
+        public secondColTo = -1,
+        public legalMoves: Moves = null) {
+
     }
 
     toString(): string {
