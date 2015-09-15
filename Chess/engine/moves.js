@@ -1,4 +1,4 @@
-define(["require", "exports", './move', './evaluator'], function (require, exports, move_1, evaluator_1) {
+define(["require", "exports", './move', './evaluator', './pieces'], function (require, exports, move_1, evaluator_1, pieces_1) {
     var Moves = (function () {
         function Moves(chessboard) {
             this.chessboard = chessboard;
@@ -117,8 +117,8 @@ define(["require", "exports", './move', './evaluator'], function (require, expor
                         }
                     }
                 }
-                result = result.filter(function (move) { return !_this.kingInChessAfterMove(move, ownKingRow, ownKingCol, opponentThreats); });
-                opponentResult = opponentResult.filter(function (move) { return !_this.kingInChessAfterMove(move, opponentKingRow, opponentKingCol, ownThreats); });
+                result = result.filter(function (move) { return !_this.kingInChessAfterMove(_this.chessboard, move, ownKingRow, ownKingCol, opponentThreats); });
+                opponentResult = opponentResult.filter(function (move) { return !_this.kingInChessAfterMove(_this.chessboard, move, opponentKingRow, opponentKingCol, ownThreats); });
                 var whiteThreats = this.chessboard.isWhitePlaying ? ownThreats : opponentThreats;
                 var blackThreats = this.chessboard.isWhitePlaying ? opponentThreats : ownThreats;
                 result.forEach(function (move) {
@@ -150,20 +150,127 @@ define(["require", "exports", './move', './evaluator'], function (require, expor
                 }
             }
         };
-        Moves.prototype.kingInChessAfterMove = function (move, kingRow, kingCol, opponentThreats) {
-            if (move.fromRow == kingRow && move.fromCol == kingCol) {
-                if (opponentThreats[move.toRow][move.toCol] > 0)
-                    return true;
-                else
+        Moves.prototype.kingInChessAfterMove = function (chessboard, move, kingRow, kingCol, opponentThreats) {
+            var moveCount = this.chessboard.moveHistory.length;
+            try {
+                if (move.fromRow == kingRow && move.fromCol == kingCol) {
+                    if (opponentThreats[move.toRow][move.toCol] > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                if (opponentThreats[kingRow][kingCol] == 0)
                     return false;
+                if (opponentThreats[kingRow][kingCol] > 1)
+                    return true;
+                if (move.capture == 0) {
+                    return this.kingInChess(chessboard, move, kingRow, kingCol);
+                }
+                return this.kingInChess(chessboard, move, kingRow, kingCol);
+                ;
             }
-            if (opponentThreats[kingRow][kingCol] == 0)
+            finally {
+                if (moveCount != this.chessboard.moveHistory.length) {
+                    console.log("moves? kingInChessAfterMove " + " " + move.toString());
+                }
+            }
+        };
+        Moves.prototype.kingInChess = function (chessboard, move, kingRow, kingCol) {
+            this.chessboard.moveInternally(move.fromRow, move.fromCol, move.toRow, move.toCol, move.promotion);
+            if (move.fromRow == kingRow && move.fromCol == kingCol) {
+                kingRow = move.toRow;
+                kingCol = move.toCol;
+            }
+            var fields = chessboard.fields;
+            var king = fields[kingRow][kingCol];
+            var row = kingRow;
+            var col = kingCol;
+            var check = false;
+            var reachedLastLine = false;
+            try {
+                check = check || this.fieldContainsPiece(fields, row + 2, col + 1, (king > 0) ? pieces_1.Piece.BLACK_KNIGHT : pieces_1.Piece.WHITE_KNIGHT);
+                check = check || this.fieldContainsPiece(fields, row + 1, col + 2, (king > 0) ? pieces_1.Piece.BLACK_KNIGHT : pieces_1.Piece.WHITE_KNIGHT);
+                check = check || this.fieldContainsPiece(fields, row + 2, col - 1, (king > 0) ? pieces_1.Piece.BLACK_KNIGHT : pieces_1.Piece.WHITE_KNIGHT);
+                check = check || this.fieldContainsPiece(fields, row + 1, col - 2, (king > 0) ? pieces_1.Piece.BLACK_KNIGHT : pieces_1.Piece.WHITE_KNIGHT);
+                check = check || this.fieldContainsPiece(fields, row - 2, col + 1, (king > 0) ? pieces_1.Piece.BLACK_KNIGHT : pieces_1.Piece.WHITE_KNIGHT);
+                check = check || this.fieldContainsPiece(fields, row - 1, col + 2, (king > 0) ? pieces_1.Piece.BLACK_KNIGHT : pieces_1.Piece.WHITE_KNIGHT);
+                check = check || this.fieldContainsPiece(fields, row - 2, col - 1, (king > 0) ? pieces_1.Piece.BLACK_KNIGHT : pieces_1.Piece.WHITE_KNIGHT);
+                check = check || this.fieldContainsPiece(fields, row - 1, col - 2, (king > 0) ? pieces_1.Piece.BLACK_KNIGHT : pieces_1.Piece.WHITE_KNIGHT);
+                var opponentPawnDir = (king > 0) ? -1 : 1;
+                check = check || this.fieldContainsPiece(fields, row + opponentPawnDir, col - 1, (king > 0) ? pieces_1.Piece.BLACK_PAWN : pieces_1.Piece.WHITE_PAWN);
+                check = check || this.fieldContainsPiece(fields, row + opponentPawnDir, col + 1, (king > 0) ? pieces_1.Piece.BLACK_PAWN : pieces_1.Piece.WHITE_PAWN);
+                check = check || this.fieldContainsPiece(fields, row, col + 1, (king > 0) ? pieces_1.Piece.BLACK_KING : pieces_1.Piece.WHITE_KING);
+                check = check || this.fieldContainsPiece(fields, row + 1, col + 1, (king > 0) ? pieces_1.Piece.BLACK_KING : pieces_1.Piece.WHITE_KING);
+                check = check || this.fieldContainsPiece(fields, row + 1, col, (king > 0) ? pieces_1.Piece.BLACK_KING : pieces_1.Piece.WHITE_KING);
+                check = check || this.fieldContainsPiece(fields, row + 1, col - 1, (king > 0) ? pieces_1.Piece.BLACK_KING : pieces_1.Piece.WHITE_KING);
+                check = check || this.fieldContainsPiece(fields, row, col - 1, (king > 0) ? pieces_1.Piece.BLACK_KING : pieces_1.Piece.WHITE_KING);
+                check = check || this.fieldContainsPiece(fields, row - 1, col - 1, (king > 0) ? pieces_1.Piece.BLACK_KING : pieces_1.Piece.WHITE_KING);
+                check = check || this.fieldContainsPiece(fields, row - 1, col, (king > 0) ? pieces_1.Piece.BLACK_KING : pieces_1.Piece.WHITE_KING);
+                check = check || this.fieldContainsPiece(fields, row - 1, col + 1, (king > 0) ? pieces_1.Piece.BLACK_KING : pieces_1.Piece.WHITE_KING);
+                while (row < 7 && this.isTargetEmpty(++row, col, fields))
+                    ;
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_QUEEN : pieces_1.Piece.WHITE_QUEEN);
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_ROOK : pieces_1.Piece.WHITE_ROOK);
+                row = kingRow;
+                col = kingCol;
+                while (row > 0 && this.isTargetEmpty(--row, col, fields))
+                    ;
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_QUEEN : pieces_1.Piece.WHITE_QUEEN);
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_ROOK : pieces_1.Piece.WHITE_ROOK);
+                row = kingRow;
+                col = kingCol;
+                while (col < 7 && this.isTargetEmpty(row, ++col, fields))
+                    ;
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_QUEEN : pieces_1.Piece.WHITE_QUEEN);
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_ROOK : pieces_1.Piece.WHITE_ROOK);
+                row = kingRow;
+                col = kingCol;
+                while (col > 0 && this.isTargetEmpty(row, --col, fields))
+                    ;
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_QUEEN : pieces_1.Piece.WHITE_QUEEN);
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_ROOK : pieces_1.Piece.WHITE_ROOK);
+                row = kingRow;
+                col = kingCol;
+                while (row < 7 && col < 7 && this.isTargetEmpty(++row, ++col, fields))
+                    ;
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_QUEEN : pieces_1.Piece.WHITE_QUEEN);
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_BISHOP : pieces_1.Piece.WHITE_BISHOP);
+                row = kingRow;
+                col = kingCol;
+                while (row < 7 && col > 0 && this.isTargetEmpty(++row, --col, fields))
+                    ;
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_QUEEN : pieces_1.Piece.WHITE_QUEEN);
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_BISHOP : pieces_1.Piece.WHITE_BISHOP);
+                row = kingRow;
+                col = kingCol;
+                while (row > 0 && col < 7 && this.isTargetEmpty(--row, ++col, fields))
+                    ;
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_QUEEN : pieces_1.Piece.WHITE_QUEEN);
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_BISHOP : pieces_1.Piece.WHITE_BISHOP);
+                row = kingRow;
+                col = kingCol;
+                while (row > 0 && col > 0 && this.isTargetEmpty(--row, --col, fields))
+                    ;
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_QUEEN : pieces_1.Piece.WHITE_QUEEN);
+                check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? pieces_1.Piece.BLACK_BISHOP : pieces_1.Piece.WHITE_BISHOP);
+                reachedLastLine = true;
+            }
+            finally {
+                this.chessboard.revertLastMoveInternally();
+            }
+            return check;
+        };
+        Moves.prototype.fieldContainsPiece = function (fields, row, col, piece) {
+            if (row < 0)
                 return false;
-            if (opponentThreats[kingRow][kingCol] > 1)
+            if (row >= 8)
+                return false;
+            if (col < 0)
+                return false;
+            if (col >= 8)
+                return false;
+            if (fields[row][col] == piece)
                 return true;
-            if (move.capture == 0) {
-                return true;
-            }
             return false;
         };
         Moves.prototype.addWhiteMoves = function (row, col, piece, fields, result, threats) {
@@ -202,7 +309,7 @@ define(["require", "exports", './move', './evaluator'], function (require, expor
                 return true;
             return false;
         };
-        Moves.prototype.isTargetEmpty = function (toRow, toCol, sourcePiece, fields) {
+        Moves.prototype.isTargetEmpty = function (toRow, toCol, fields) {
             var targetPiece = fields[toRow][toCol];
             if (targetPiece == 0)
                 return true;
@@ -223,7 +330,7 @@ define(["require", "exports", './move', './evaluator'], function (require, expor
                 threats[toRow][toCol]++;
                 return true;
             }
-            else if (!this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+            else if (!this.isTargetEmpty(toRow, toCol, fields)) {
                 threats[toRow][toCol]++;
             }
             return false;
@@ -238,7 +345,7 @@ define(["require", "exports", './move', './evaluator'], function (require, expor
                 return false;
             if (toCol < 0 || toCol >= 8)
                 return false;
-            if (this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+            if (this.isTargetEmpty(toRow, toCol, fields)) {
                 if (sourcePiece != 1 && sourcePiece != -1)
                     threats[toRow][toCol]++;
                 if (considerPromotion && (toRow == 0 || toRow == 7)) {
@@ -275,7 +382,7 @@ define(["require", "exports", './move', './evaluator'], function (require, expor
                     result.push(new move_1.Move(fromRow, fromCol, toRow, toCol, 0, fields[toRow][toCol]));
                 return true;
             }
-            else if (!this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+            else if (!this.isTargetEmpty(toRow, toCol, fields)) {
                 threats[toRow][toCol]++;
             }
             return false;
@@ -297,13 +404,13 @@ define(["require", "exports", './move', './evaluator'], function (require, expor
             toCol = fromCol + 1;
             toRow = fromRow + pawnMoveDirection;
             this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats, true);
-            if (this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+            if (this.isTargetEmpty(toRow, toCol, fields)) {
                 threats[toRow][toCol]++;
             }
             toCol = fromCol - 1;
             toRow = fromRow + pawnMoveDirection;
             this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats, true);
-            if (this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+            if (this.isTargetEmpty(toRow, toCol, fields)) {
                 threats[toRow][toCol]++;
             }
             if (this.chessboard.enPassantCol >= 0) {
@@ -422,23 +529,23 @@ define(["require", "exports", './move', './evaluator'], function (require, expor
             this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats);
             if (sourcePiece > 0) {
                 if ((!this.chessboard.whiteKingHasMoved) && (!this.chessboard.whiteLeftRookHasMoved)) {
-                    if (this.isTargetEmpty(fromRow, fromCol - 1, sourcePiece, fields))
-                        if (this.isTargetEmpty(fromRow, fromCol - 3, sourcePiece, fields))
+                    if (this.isTargetEmpty(fromRow, fromCol - 1, fields))
+                        if (this.isTargetEmpty(fromRow, fromCol - 3, fields))
                             this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol - 2, sourcePiece, fields, result, threats);
                 }
                 if ((!this.chessboard.whiteKingHasMoved) && (!this.chessboard.whiteRightRookHasMoved)) {
-                    if (this.isTargetEmpty(fromRow, fromCol + 1, sourcePiece, fields))
+                    if (this.isTargetEmpty(fromRow, fromCol + 1, fields))
                         this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol + 2, sourcePiece, fields, result, threats);
                 }
             }
             else {
                 if ((!this.chessboard.blackKingHasMoved) && (!this.chessboard.blackLeftRookHasMoved)) {
-                    if (this.isTargetEmpty(fromRow, fromCol - 1, sourcePiece, fields))
-                        if (this.isTargetEmpty(fromRow, fromCol - 3, sourcePiece, fields))
+                    if (this.isTargetEmpty(fromRow, fromCol - 1, fields))
+                        if (this.isTargetEmpty(fromRow, fromCol - 3, fields))
                             this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol - 2, sourcePiece, fields, result, threats);
                 }
                 if ((!this.chessboard.blackKingHasMoved) && (!this.chessboard.blackRightRookHasMoved)) {
-                    if (this.isTargetEmpty(fromRow, fromCol + 1, sourcePiece, fields))
+                    if (this.isTargetEmpty(fromRow, fromCol + 1, fields))
                         this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol + 2, sourcePiece, fields, result, threats);
                 }
             }

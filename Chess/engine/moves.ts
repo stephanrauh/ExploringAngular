@@ -1,6 +1,7 @@
 import {Chessboard} from "./chessboard";
 import {Move} from './move';
 import {Evaluator} from './evaluator'
+import {Piece} from './pieces'
 
 export class Moves {
     private _legalMoves: Array<Move> = null;
@@ -113,15 +114,14 @@ export class Moves {
                 }
             }
 
-            result = result.filter((move) => !this.kingInChessAfterMove(move, ownKingRow, ownKingCol, opponentThreats))
-            opponentResult = opponentResult.filter((move) => !this.kingInChessAfterMove(move, opponentKingRow, opponentKingCol, ownThreats))
+            result = result.filter((move) => !this.kingInChessAfterMove(this.chessboard, move, ownKingRow, ownKingCol, opponentThreats))
+            opponentResult = opponentResult.filter((move) => !this.kingInChessAfterMove(this.chessboard, move, opponentKingRow, opponentKingCol, ownThreats))
 
             var whiteThreats: number[][] = this.chessboard.isWhitePlaying ? ownThreats : opponentThreats
             var blackThreats: number[][] = this.chessboard.isWhitePlaying ? opponentThreats : ownThreats
-            result.forEach((move) =>
-             {
+            result.forEach((move) => {
                 this.chessboard.moveInternally(move.fromRow, move.fromCol, move.toRow, move.toCol, move.promotion)
-                move.value =Evaluator.evaluatePosition(this.chessboard, whiteThreats, blackThreats, this.chessboard.isWhitePlaying)
+                move.value = Evaluator.evaluatePosition(this.chessboard, whiteThreats, blackThreats, this.chessboard.isWhitePlaying)
                 this.chessboard.revertLastMoveInternally()
             })
             this._legalMoves = result;
@@ -151,20 +151,135 @@ export class Moves {
         }
     }
 
-    kingInChessAfterMove(move: Move, kingRow: number, kingCol: number, opponentThreats: number[][]): boolean {
-        if (move.fromRow == kingRow && move.fromCol == kingCol) {
-            if (opponentThreats[move.toRow][move.toCol] > 0)
+    /** Quick check is the king is in check. */
+    kingInChessAfterMove(chessboard: Chessboard, move: Move, kingRow: number, kingCol: number, opponentThreats: number[][]): boolean {
+        var moveCount = this.chessboard.moveHistory.length
+        try {
+            if (move.fromRow == kingRow && move.fromCol == kingCol) {
+                if (opponentThreats[move.toRow][move.toCol] > 0)
+                    return true; // reliable
+                else return false; // reliable
+            }
+            if (opponentThreats[kingRow][kingCol] == 0)
+                return false; // reliable
+            if (opponentThreats[kingRow][kingCol] > 1)
                 return true; // reliable
-            else return false; // reliable
+            if (move.capture == 0) {
+                // the board has to be re-evaluated - maybe the moved piece protects the king
+                return this.kingInChess(chessboard, move, kingRow, kingCol);
+            }
+            // the board has to re-evaluated - maybe the offending piece has been captured
+            return this.kingInChess(chessboard, move, kingRow, kingCol);;
         }
-        if (opponentThreats[kingRow][kingCol] == 0)
-            return false; // reliable
-        if (opponentThreats[kingRow][kingCol] > 1)
-            return true; // reliable
-        if (move.capture == 0) {
-            return true; // the board has to be re-evaluated - maybe the moved piece protects the king
+        finally {
+            if (moveCount != this.chessboard.moveHistory.length) {
+                console.log("moves? kingInChessAfterMove " + " " + move.toString())
+            }
         }
-        // To do: the board has to re-evaluated - maybe the offending piece has been captured
+    }
+
+    /** Thourough check if king is in check */
+    kingInChess(chessboard: Chessboard, move: Move, kingRow: number, kingCol: number) {
+        this.chessboard.moveInternally(move.fromRow, move.fromCol, move.toRow, move.toCol, move.promotion)
+        if (move.fromRow == kingRow && move.fromCol == kingCol) {
+            kingRow = move.toRow
+            kingCol = move.toCol
+        }
+        var fields = chessboard.fields
+        var king = fields[kingRow][kingCol]
+        var row = kingRow
+        var col = kingCol
+        var check = false;
+        var reachedLastLine=false;
+
+        try {
+            check = check || this.fieldContainsPiece(fields, row + 2, col + 1, (king > 0) ? Piece.BLACK_KNIGHT : Piece.WHITE_KNIGHT);
+            check = check || this.fieldContainsPiece(fields, row + 1, col + 2, (king > 0) ? Piece.BLACK_KNIGHT : Piece.WHITE_KNIGHT)
+            check = check || this.fieldContainsPiece(fields, row + 2, col - 1, (king > 0) ? Piece.BLACK_KNIGHT : Piece.WHITE_KNIGHT)
+            check = check || this.fieldContainsPiece(fields, row + 1, col - 2, (king > 0) ? Piece.BLACK_KNIGHT : Piece.WHITE_KNIGHT)
+            check = check || this.fieldContainsPiece(fields, row - 2, col + 1, (king > 0) ? Piece.BLACK_KNIGHT : Piece.WHITE_KNIGHT)
+            check = check || this.fieldContainsPiece(fields, row - 1, col + 2, (king > 0) ? Piece.BLACK_KNIGHT : Piece.WHITE_KNIGHT)
+            check = check || this.fieldContainsPiece(fields, row - 2, col - 1, (king > 0) ? Piece.BLACK_KNIGHT : Piece.WHITE_KNIGHT)
+            check = check || this.fieldContainsPiece(fields, row - 1, col - 2, (king > 0) ? Piece.BLACK_KNIGHT : Piece.WHITE_KNIGHT)
+            var opponentPawnDir = (king > 0) ? -1 : 1
+            check = check || this.fieldContainsPiece(fields, row + opponentPawnDir, col - 1, (king > 0) ? Piece.BLACK_PAWN : Piece.WHITE_PAWN)
+            check = check || this.fieldContainsPiece(fields, row + opponentPawnDir, col + 1, (king > 0) ? Piece.BLACK_PAWN : Piece.WHITE_PAWN)
+            check = check || this.fieldContainsPiece(fields, row, col + 1, (king > 0) ? Piece.BLACK_KING : Piece.WHITE_KING)
+            check = check || this.fieldContainsPiece(fields, row + 1, col + 1, (king > 0) ? Piece.BLACK_KING : Piece.WHITE_KING)
+            check = check || this.fieldContainsPiece(fields, row + 1, col, (king > 0) ? Piece.BLACK_KING : Piece.WHITE_KING)
+            check = check || this.fieldContainsPiece(fields, row + 1, col - 1, (king > 0) ? Piece.BLACK_KING : Piece.WHITE_KING)
+            check = check || this.fieldContainsPiece(fields, row, col - 1, (king > 0) ? Piece.BLACK_KING : Piece.WHITE_KING)
+            check = check || this.fieldContainsPiece(fields, row - 1, col - 1, (king > 0) ? Piece.BLACK_KING : Piece.WHITE_KING)
+            check = check || this.fieldContainsPiece(fields, row - 1, col, (king > 0) ? Piece.BLACK_KING : Piece.WHITE_KING)
+            check = check || this.fieldContainsPiece(fields, row - 1, col + 1, (king > 0) ? Piece.BLACK_KING : Piece.WHITE_KING)
+
+            while (row < 7 && this.isTargetEmpty(++row, col, fields));
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_QUEEN : Piece.WHITE_QUEEN)
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_ROOK : Piece.WHITE_ROOK)
+
+            row = kingRow
+            col = kingCol
+            while (row > 0 && this.isTargetEmpty(--row, col, fields));
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_QUEEN : Piece.WHITE_QUEEN)
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_ROOK : Piece.WHITE_ROOK)
+
+            row = kingRow
+            col = kingCol
+            while (col < 7 && this.isTargetEmpty(row, ++col, fields));
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_QUEEN : Piece.WHITE_QUEEN)
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_ROOK : Piece.WHITE_ROOK)
+
+            row = kingRow
+            col = kingCol
+            while (col>0 && this.isTargetEmpty(row, --col, fields));
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_QUEEN : Piece.WHITE_QUEEN)
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_ROOK : Piece.WHITE_ROOK)
+
+            row = kingRow
+            col = kingCol
+            while (row<7 && col<7 && this.isTargetEmpty(++row, ++col, fields));
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_QUEEN : Piece.WHITE_QUEEN)
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_BISHOP : Piece.WHITE_BISHOP)
+
+            row = kingRow
+            col = kingCol
+            while (row<7 && col>0 && this.isTargetEmpty(++row, --col, fields));
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_QUEEN : Piece.WHITE_QUEEN)
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_BISHOP : Piece.WHITE_BISHOP)
+
+            row = kingRow
+            col = kingCol
+            while (row>0 && col<7 && this.isTargetEmpty(--row, ++col, fields));
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_QUEEN : Piece.WHITE_QUEEN)
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_BISHOP : Piece.WHITE_BISHOP)
+
+            row = kingRow
+            col = kingCol
+            while (row>0 && col>0 && this.isTargetEmpty(--row, --col, fields));
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_QUEEN : Piece.WHITE_QUEEN)
+            check = check || this.fieldContainsPiece(fields, row, col, (king > 0) ? Piece.BLACK_BISHOP : Piece.WHITE_BISHOP)
+reachedLastLine=true;
+
+        } finally {
+          this.chessboard.revertLastMoveInternally()
+//            console.log("Thourough check analysis: check = " + check + " for " + (king > 0 ? "white" : "black") + " last move: " + move.toString())
+//            this.chessboard.fields.forEach((row) => {
+//                var line: String = ""
+//                row.forEach((piece) => { if (piece < 0) line += " " + piece; else line += "  " + piece })
+//                console.log(line)
+//            })
+//            console.log("------------------------" + reachedLastLine)
+
+        }
+        return check
+    }
+
+    fieldContainsPiece(fields: number[][], row: number, col: number, piece: number): boolean {
+        if (row < 0) return false;
+        if (row >= 8) return false;
+        if (col < 0) return false;
+        if (col >= 8) return false;
+        if (fields[row][col] == piece) return true;
         return false;
     }
 
@@ -209,7 +324,7 @@ export class Moves {
         return false
     }
 
-    isTargetEmpty(toRow: number, toCol: number, sourcePiece: number, fields: number[][]): boolean {
+    isTargetEmpty(toRow: number, toCol: number, fields: number[][]): boolean {
         var targetPiece: number = fields[toRow][toCol]
         if (targetPiece == 0)
             return true;
@@ -228,7 +343,7 @@ export class Moves {
             result.push(new Move(fromRow, fromCol, toRow, toCol, promotion, fields[toRow][toCol]))
             threats[toRow][toCol]++;
             return true;
-        } else if (!this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+        } else if (!this.isTargetEmpty(toRow, toCol, fields)) {
             threats[toRow][toCol]++; // increase the counter to indicate that the piece is protected
         }
         return false;
@@ -240,7 +355,7 @@ export class Moves {
         if (fromCol < 0 || fromCol >= 8) return false;
         if (toRow < 0 || toRow >= 8) return false;
         if (toCol < 0 || toCol >= 8) return false;
-        if (this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+        if (this.isTargetEmpty(toRow, toCol, fields)) {
             if (sourcePiece != 1 && sourcePiece != -1)
                 threats[toRow][toCol]++; // pawn can't capture when they call this method, so they are no threat
             if (considerPromotion && (toRow == 0 || toRow == 7)) {
@@ -273,7 +388,7 @@ export class Moves {
             } else
                 result.push(new Move(fromRow, fromCol, toRow, toCol, 0, fields[toRow][toCol]))
             return true;
-        } else if (!this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+        } else if (!this.isTargetEmpty(toRow, toCol, fields)) {
             threats[toRow][toCol]++; // increase the counter to indicate that the piece is protected
         }
 
@@ -296,14 +411,14 @@ export class Moves {
         toCol = fromCol + 1;
         toRow = fromRow + pawnMoveDirection;
         this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats, true)
-        if (this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+        if (this.isTargetEmpty(toRow, toCol, fields)) {
             threats[toRow][toCol]++
         }
 
         toCol = fromCol - 1;
         toRow = fromRow + pawnMoveDirection;
         this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats, true)
-        if (this.isTargetEmpty(toRow, toCol, sourcePiece, fields)) {
+        if (this.isTargetEmpty(toRow, toCol, fields)) {
             threats[toRow][toCol]++
         }
 
@@ -437,22 +552,22 @@ export class Moves {
         // castling
         if (sourcePiece > 0) { // white is playing
             if ((!this.chessboard.whiteKingHasMoved) && (!this.chessboard.whiteLeftRookHasMoved)) {
-                if (this.isTargetEmpty(fromRow, fromCol - 1, sourcePiece, fields))
-                    if (this.isTargetEmpty(fromRow, fromCol - 3, sourcePiece, fields))
+                if (this.isTargetEmpty(fromRow, fromCol - 1, fields))
+                    if (this.isTargetEmpty(fromRow, fromCol - 3, fields))
                         this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol - 2, sourcePiece, fields, result, threats)
             }
             if ((!this.chessboard.whiteKingHasMoved) && (!this.chessboard.whiteRightRookHasMoved)) {
-                if (this.isTargetEmpty(fromRow, fromCol + 1, sourcePiece, fields))
+                if (this.isTargetEmpty(fromRow, fromCol + 1, fields))
                     this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol + 2, sourcePiece, fields, result, threats)
             }
         } else { // black is playing
             if ((!this.chessboard.blackKingHasMoved) && (!this.chessboard.blackLeftRookHasMoved)) {
-                if (this.isTargetEmpty(fromRow, fromCol - 1, sourcePiece, fields))
-                    if (this.isTargetEmpty(fromRow, fromCol - 3, sourcePiece, fields))
+                if (this.isTargetEmpty(fromRow, fromCol - 1, fields))
+                    if (this.isTargetEmpty(fromRow, fromCol - 3, fields))
                         this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol - 2, sourcePiece, fields, result, threats)
             }
             if ((!this.chessboard.blackKingHasMoved) && (!this.chessboard.blackRightRookHasMoved)) {
-                if (this.isTargetEmpty(fromRow, fromCol + 1, sourcePiece, fields))
+                if (this.isTargetEmpty(fromRow, fromCol + 1, fields))
                     this.addMoveIfTargetIsEmpty(fromRow, fromCol, fromRow, fromCol + 2, sourcePiece, fields, result, threats)
             }
         }

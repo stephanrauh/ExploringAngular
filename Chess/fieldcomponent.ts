@@ -2,7 +2,7 @@
 import {Component, Inject, View, NgFor, bootstrap} from 'angular2/angular2';
 import {ChessBoardComponent} from './chessboardcomponent';
 import {ChessEngineAPI} from "./engine/chessboardUI";
-import {PieceModule} from './engine/pieces'
+import {Piece, PieceUtils} from './engine/pieces'
 
 @Component({
     selector: 'field',
@@ -55,7 +55,7 @@ export class FieldComponent {
     }
 
     private fileName(piece: number) {
-        return PieceModule.PieceUtils.fileName(piece);
+        return PieceUtils.fileName(piece);
     }
 
     private ondragstart(row: number, col: number) {

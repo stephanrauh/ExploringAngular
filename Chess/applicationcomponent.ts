@@ -50,7 +50,8 @@ class ApplicationComponent {
     public turnSides(): boolean {
         this.suggestedMove = null
         var move = this.chessboard.suggestMove()
-        this.chessboard.move(move)
+        if (move != null)
+          this.chessboard.move(move)
         return false;
     }
 

@@ -9,15 +9,19 @@ export class Suggestor {
     suggestMove(): Move {
         var PERFORMANCE_MEASURE_start = window.performance.now()
         var moves: Move[] = this.chessboard.moves.legalMoves;
-        this.findBestAnswerTo(3, 7);
-        var sortedMoves = moves.sort((m1, m2) => m2.value - m1.value)
-//                console.log("Suggested moves:")
-//                sortedMoves.forEach(move => console.log(move.toString() + " " + move.value))
-        var PERFORMANCE_MEASURE_stop = window.performance.now()
-        var PERFORMANCE_MEASURE_SUM = PERFORMANCE_MEASURE_stop - PERFORMANCE_MEASURE_start
-//        console.log("Total calculation took " + PERFORMANCE_MEASURE_SUM + " ms");
-//        Evaluator.showPerformanceStats()
-        return sortedMoves[0];
+        try {
+            this.findBestAnswerTo(3, 7);
+            var sortedMoves = moves.sort((m1, m2) => m2.value - m1.value)
+            //                console.log("Suggested moves:")
+            //                sortedMoves.forEach(move => console.log(move.toString() + " " + move.value))
+            var PERFORMANCE_MEASURE_stop = window.performance.now()
+            var PERFORMANCE_MEASURE_SUM = PERFORMANCE_MEASURE_stop - PERFORMANCE_MEASURE_start
+            //        console.log("Total calculation took " + PERFORMANCE_MEASURE_SUM + " ms");
+            //        Evaluator.showPerformanceStats()
+            return sortedMoves[0];
+        } catch (ex) {
+            return null; // checkmate or stalemate
+        }
     }
 
     findBestAnswerTo(level: number, breadth: number): Move {
@@ -27,25 +31,24 @@ export class Suggestor {
         if (this.chessboard.moves.ownCheckMate) {
             if (sortedMoves.length > 0) {
                 console.log("no move should be available! white playing:" + this.chessboard.isWhitePlaying)
-                sortedMoves.forEach((mv) => {console.log(mv.toString())})
+                sortedMoves.forEach((mv) => { console.log(mv.toString()) })
                 var histoire = "";
-                this.chessboard.moveHistory.forEach((mv) => {histoire += " " + mv.toString();})
+                this.chessboard.moveHistory.forEach((mv) => { histoire += " " + mv.toString(); })
                 console.log(histoire)
-                this.chessboard.fields.forEach((row) =>
-              {
-                var line: String=""
-                row.forEach((piece) => {if (piece < 0) line += " " + piece; else line += "  "+piece})
-                console.log(line)
-              })
+                this.chessboard.fields.forEach((row) => {
+                    var line: String = ""
+                    row.forEach((piece) => { if (piece < 0) line += " " + piece; else line += "  " + piece })
+                    console.log(line)
+                })
             }
             throw new CheckMateException()
         }
         if (sortedMoves.length == 0) {
             console.log("No move")
             if (this.chessboard.moves.ownCheck)
-              throw new CheckMateException()
+                throw new CheckMateException()
             else
-              throw new StaleMateException()
+                throw new StaleMateException()
         }
 
         if (level > 1) {
@@ -67,15 +70,18 @@ export class Suggestor {
                     index++
                 }
                 catch (ex) {
-                    answer.value = 100000;
-                    break;
+                    debugger;
+                    if (typeof (ex) == "CheckMateException") {
+                        answer.value = 100000;
+                        break;
+                    } else answer.value = 0;
                 } finally {
                     this.chessboard.revertLastMove()
                     if (captured != this.chessboard.capturedPieces.length) {
-                      console.log("Nanu?" +level + " "+ answer.toString())
+                        console.log("Nanu?" + level + " " + answer.toString())
                     }
-                    if ( moveCount != this.chessboard.moveHistory.length) {
-                      console.log("moves?" +level + " "+ answer.toString())
+                    if (moveCount != this.chessboard.moveHistory.length) {
+                        console.log("moves?" + level + " " + answer.toString())
                     }
                 }
             }

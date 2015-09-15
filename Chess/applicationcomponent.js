@@ -48,7 +48,8 @@ define(["require", "exports", 'angular2/angular2', "./chessboardcomponent", './c
         ApplicationComponent.prototype.turnSides = function () {
             this.suggestedMove = null;
             var move = this.chessboard.suggestMove();
-            this.chessboard.move(move);
+            if (move != null)
+                this.chessboard.move(move);
             return false;
         };
         ApplicationComponent.prototype.revertLastMove = function () {

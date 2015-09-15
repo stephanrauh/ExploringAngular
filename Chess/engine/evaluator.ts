@@ -1,4 +1,4 @@
-import {PieceModule} from "./pieces"
+import {PieceUtils} from "./pieces"
 import {Chessboard} from "./chessboard"
 
 export class Evaluator {
@@ -55,7 +55,7 @@ export class Evaluator {
             for (var col = 0; col < 8; col++) {
                 var piece = fields[row][col]
                 if (piece > 0) { // white
-                    materialSumWhite += PieceModule.PieceUtils.materialValue(piece)
+                    materialSumWhite += PieceUtils.materialValue(piece)
                     if (piece == 1) {
                         positionalSumWhite += Evaluator.WHITE_PAWN_POSITION_VALUES[row][col];
                         if (col>0 && row > 0 && row<5) {
@@ -71,7 +71,7 @@ export class Evaluator {
                     threatSumWhite += threatLevel * Evaluator.WHITE_PAWN_POSITION_VALUES[row][col]
                 }
                 else if (piece < 0) { // black
-                    materialSumBlack += PieceModule.PieceUtils.materialValue(piece);
+                    materialSumBlack += PieceUtils.materialValue(piece);
                     if (piece == -1) {
                         positionalSumBlack += Evaluator.WHITE_PAWN_POSITION_VALUES[row][col];
                         if (col>0 && row > 2 && row<7) {
@@ -98,7 +98,7 @@ export class Evaluator {
                 }
             }
         }
-        var valueOfPawn = PieceModule.PieceUtils.materialValue(1);
+        var valueOfPawn = PieceUtils.materialValue(1);
         var result = (materialSumWhite + positionalSumWhite + (threatSumWhite/5) + (coverageSumWhite*valueOfPawn/10))
               - (materialSumBlack + positionalSumBlack + (threatSumBlack/5) + (coverageSumBlack*valueOfPawn/10))
         // calculate the value of castling

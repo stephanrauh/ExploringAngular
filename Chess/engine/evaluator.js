@@ -17,7 +17,7 @@ define(["require", "exports", "./pieces"], function (require, exports, pieces_1)
                 for (var col = 0; col < 8; col++) {
                     var piece = fields[row][col];
                     if (piece > 0) {
-                        materialSumWhite += pieces_1.PieceModule.PieceUtils.materialValue(piece);
+                        materialSumWhite += pieces_1.PieceUtils.materialValue(piece);
                         if (piece == 1) {
                             positionalSumWhite += Evaluator.WHITE_PAWN_POSITION_VALUES[row][col];
                             if (col > 0 && row > 0 && row < 5) {
@@ -33,7 +33,7 @@ define(["require", "exports", "./pieces"], function (require, exports, pieces_1)
                         threatSumWhite += threatLevel * Evaluator.WHITE_PAWN_POSITION_VALUES[row][col];
                     }
                     else if (piece < 0) {
-                        materialSumBlack += pieces_1.PieceModule.PieceUtils.materialValue(piece);
+                        materialSumBlack += pieces_1.PieceUtils.materialValue(piece);
                         if (piece == -1) {
                             positionalSumBlack += Evaluator.WHITE_PAWN_POSITION_VALUES[row][col];
                             if (col > 0 && row > 2 && row < 7) {
@@ -60,7 +60,7 @@ define(["require", "exports", "./pieces"], function (require, exports, pieces_1)
                     }
                 }
             }
-            var valueOfPawn = pieces_1.PieceModule.PieceUtils.materialValue(1);
+            var valueOfPawn = pieces_1.PieceUtils.materialValue(1);
             var result = (materialSumWhite + positionalSumWhite + (threatSumWhite / 5) + (coverageSumWhite * valueOfPawn / 10))
                 - (materialSumBlack + positionalSumBlack + (threatSumBlack / 5) + (coverageSumBlack * valueOfPawn / 10));
             if (!chessboard.whiteKingHasMoved) {

@@ -11,11 +11,16 @@ define(["require", "exports"], function (require, exports) {
         Suggestor.prototype.suggestMove = function () {
             var PERFORMANCE_MEASURE_start = window.performance.now();
             var moves = this.chessboard.moves.legalMoves;
-            this.findBestAnswerTo(3, 7);
-            var sortedMoves = moves.sort(function (m1, m2) { return m2.value - m1.value; });
-            var PERFORMANCE_MEASURE_stop = window.performance.now();
-            var PERFORMANCE_MEASURE_SUM = PERFORMANCE_MEASURE_stop - PERFORMANCE_MEASURE_start;
-            return sortedMoves[0];
+            try {
+                this.findBestAnswerTo(3, 7);
+                var sortedMoves = moves.sort(function (m1, m2) { return m2.value - m1.value; });
+                var PERFORMANCE_MEASURE_stop = window.performance.now();
+                var PERFORMANCE_MEASURE_SUM = PERFORMANCE_MEASURE_stop - PERFORMANCE_MEASURE_start;
+                return sortedMoves[0];
+            }
+            catch (ex) {
+                return null;
+            }
         };
         Suggestor.prototype.findBestAnswerTo = function (level, breadth) {
             var moves = this.chessboard.moves.legalMoves;
@@ -62,8 +67,13 @@ define(["require", "exports"], function (require, exports) {
                         index++;
                     }
                     catch (ex) {
-                        answer.value = 100000;
-                        break;
+                        debugger;
+                        if (typeof (ex) == "CheckMateException") {
+                            answer.value = 100000;
+                            break;
+                        }
+                        else
+                            answer.value = 0;
                     }
                     finally {
                         this.chessboard.revertLastMove();

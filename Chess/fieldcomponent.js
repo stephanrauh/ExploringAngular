@@ -46,7 +46,7 @@ define(["require", "exports", 'angular2/angular2', "./engine/chessboardUI", './e
             return this.chessboard.opponentThreats(row, col);
         };
         FieldComponent.prototype.fileName = function (piece) {
-            return pieces_1.PieceModule.PieceUtils.fileName(piece);
+            return pieces_1.PieceUtils.fileName(piece);
         };
         FieldComponent.prototype.ondragstart = function (row, col) {
             this.chessboard.setSelectedPiece(row, col);
