@@ -2,3 +2,4 @@
 *.xcodeproj
 .settings
 typings/
+node_modules/

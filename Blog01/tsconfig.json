@@ -1,0 +1,26 @@
+{
+    "buildOnSave": true,
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "amd",
+        "target": "es5",
+        "sourceMap": true
+    },
+    "filesGlob": [
+        "*.ts",
+        "engine/*.ts"
+    ],
+    "files": [
+        "applicationcomponent.ts",
+        "chessboard.ts",
+        "chessboardcomponent.ts",
+        "chessboardui.ts",
+        "evaluator.ts",
+        "fieldcomponent.ts",
+        "move.ts",
+        "moves.ts",
+        "pieces.ts",
+        "suggestor.ts"
+    ]
+}
