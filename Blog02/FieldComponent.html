@@ -1,0 +1,18 @@
+<div style="position: relative; left: 0px; top: 0px; width: 54px; height: 54px;margin-right:-6px; margin-bottom:-6px; display: inline-block" >
+  <div style="position: relative; top: 0px; left: 0px" >
+        <img class="{{borderClass(row,col)}}" src="{{backgroundFileName(row,col)}}" />
+  </div>
+  <div style="position: absolute; top: 0px; left: 0px;">
+        <img style="width:52px;height:52px" src="{{fileName(piece)}}"
+             (dragstart)="ondragstart(row, col)"
+             (dragover)="ondragover(row, col)"
+             (drop)="ondragdrop(row, col)"
+             (click)="onclick(row, col)"
+         />
+  </div>
+  <!--
+  <div style="position: absolute; top: 0px; left: 0px" >
+    {{ownThreats(row, col)}} / {{opponentThreats(row, col)}}
+  </div>
+-->
+</div>

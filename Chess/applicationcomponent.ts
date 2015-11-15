@@ -1,8 +1,7 @@
-/// <reference path="typings/angular2/angular2.d.ts" />
-/// <reference path="chessboard.ts" />
 import {Component, View, bootstrap, NgIf} from 'angular2/angular2';
 import {ChessBoardComponent} from "./chessboardcomponent";
 import {CapturedPiecesComponent} from './capturedpiecescomponent';
+import {SettingsComponent} from './settingscomponent';
 import {ChessEngineAPI} from "./engine/chessboardUI";
 import {Move} from "./engine/move";
 import {HistoryComponent} from './historycomponent';
@@ -14,7 +13,7 @@ import {HistoryComponent} from './historycomponent';
 })
 @View({
     templateUrl: 'ApplicationComponent.html',
-    directives: [ChessBoardComponent, HistoryComponent, CapturedPiecesComponent, NgIf]
+    directives: [ChessBoardComponent, HistoryComponent, SettingsComponent, CapturedPiecesComponent, NgIf]
 })
 // Component controller
 class ApplicationComponent {
@@ -58,7 +57,7 @@ class ApplicationComponent {
     public revertLastMove(): boolean {
         this.suggestedMove = null
         this.chessboard.revertLastMove();
-        return false;
+        return false; 
     }
 }
 

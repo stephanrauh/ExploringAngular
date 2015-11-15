@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-6">
+    <label>Look ahead</label>
+  </div>
+  <div class="col-md-6">
+    <input value="{{chessboard.lookahead}}" type="number" placeholder="1..7" size="1" />
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <label>Current value: {{chessboard.lookahead}}</label>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <label>breadth of calculation</label>
+  </div>
+  <div class="col-md-6">
+    <input [(ng-model)]="chessboard.breadth" type="number" placeholder="1..20" size="2" />
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <label>Current value: {{chessboard.breadth}}</label>
+  </div>
+</div>

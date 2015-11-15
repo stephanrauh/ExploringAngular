@@ -29,7 +29,7 @@ define(["require", "exports", 'angular2/angular2', './fieldcomponent', './chessb
             }),
             angular2_1.View({
                 directives: [angular2_1.NgFor, fieldcomponent_1.FieldComponent],
-                templateUrl: 'ChessboardComponent_.html'
+                templateUrl: 'ChessboardComponent.html'
             }), 
             __metadata('design:paramtypes', [chessboardui_1.ChessEngineAPI.ChessboardUI])
         ], ChessBoardComponent);

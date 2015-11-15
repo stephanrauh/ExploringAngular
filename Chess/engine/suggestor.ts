@@ -6,7 +6,7 @@ import {Evaluator} from './evaluator'
 export class Suggestor {
     constructor(public chessboard: Chessboard) { }
 
-    suggestMove(): Move {
+    suggestMove(lookahead: number, breadth: number): Move {
         var PERFORMANCE_MEASURE_start = window.performance.now()
         var moves: Move[] = this.chessboard.moves.legalMoves;
         try {

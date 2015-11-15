@@ -1,0 +1,3 @@
+<div *ng-for="#row of fields; var rowindex=index" style="width: 416px; height: 52px; overflow: hidden;" >
+      <field *ng-for="#col of row; var colindex=index" [row]=rowindex [col]=colindex [piece]=col />
+</div>

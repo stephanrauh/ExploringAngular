@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", 'angular2/angular2', "./chessboardui", './pieces'], function (require, exports, angular2_1, chessboardui_1, pieces_1) {
+define(["require", "exports", 'angular2/angular2', "./engine/chessboardui", './engine/pieces'], function (require, exports, angular2_1, chessboardui_1, pieces_1) {
     var FieldComponent = (function () {
         function FieldComponent(chessboard) {
             this.chessboard = chessboard;
@@ -68,7 +68,7 @@ define(["require", "exports", 'angular2/angular2', "./chessboardui", './pieces']
                 directives: [angular2_1.NgFor],
                 templateUrl: 'FieldComponent.html'
             }), 
-            __metadata('design:paramtypes', [chessboardui_1.ChessEngineAPI.ChessboardUI])
+            __metadata('design:paramtypes', [Object])
         ], FieldComponent);
         return FieldComponent;
     })();

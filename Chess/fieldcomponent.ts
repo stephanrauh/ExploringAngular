@@ -1,4 +1,3 @@
-/// <reference path="typings/angular2/angular2.d.ts" />
 import {Component, Inject, View, NgFor, bootstrap} from 'angular2/angular2';
 import {ChessBoardComponent} from './chessboardcomponent';
 import {ChessEngineAPI} from "./engine/chessboardUI";

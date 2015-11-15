@@ -8,7 +8,7 @@ import {ChessEngineAPI} from './chessboardui';
 })
 @View({
     directives: [NgFor, FieldComponent],
-    templateUrl: 'ChessboardComponent_.html'
+    templateUrl: 'ChessboardComponent.html'
 })
 export class ChessBoardComponent {
     get board(): ChessEngineAPI.ChessboardUI { return this.chessboard }

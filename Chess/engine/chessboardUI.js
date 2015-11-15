@@ -1,11 +1,8 @@
-/// <reference path="../typings/angular2/angular2.d.ts" />
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-        case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
-        case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
-        case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
-    }
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
@@ -16,6 +13,8 @@ define(["require", "exports", 'angular2/angular2', './chessboard', './suggestor'
         var ChessboardUI = (function () {
             function ChessboardUI() {
                 this.isPieceSelected = false;
+                this.lookahead = 3;
+                this.breadth = 7;
                 this.chessboard = new chessboard_1.Chessboard(new Array());
             }
             Object.defineProperty(ChessboardUI.prototype, "fields", {
@@ -67,7 +66,7 @@ define(["require", "exports", 'angular2/angular2', './chessboard', './suggestor'
                 return this.chessboard.opponentThreats(row, col);
             };
             ChessboardUI.prototype.suggestMove = function () {
-                return new suggestor_1.Suggestor(this.chessboard).suggestMove();
+                return new suggestor_1.Suggestor(this.chessboard).suggestMove(this.lookahead, this.breadth);
             };
             Object.defineProperty(ChessboardUI.prototype, "moveHistory", {
                 get: function () { return this.chessboard.moveHistory; },
@@ -81,7 +80,7 @@ define(["require", "exports", 'angular2/angular2', './chessboard', './suggestor'
                     this.isPieceSelected = false;
                     if (this.chessboard.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, row, col)) {
                         this.chessboard.move(this.selectedPieceRow, this.selectedPieceCol, row, col, this.isWhitePlaying ? 5 : -5);
-                        var answer = new suggestor_1.Suggestor(this.chessboard).suggestMove();
+                        var answer = new suggestor_1.Suggestor(this.chessboard).suggestMove(this.lookahead, this.breadth);
                         if (null != answer)
                             this.move(answer);
                     }

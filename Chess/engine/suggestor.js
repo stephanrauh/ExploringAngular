@@ -8,7 +8,7 @@ define(["require", "exports"], function (require, exports) {
         function Suggestor(chessboard) {
             this.chessboard = chessboard;
         }
-        Suggestor.prototype.suggestMove = function () {
+        Suggestor.prototype.suggestMove = function (lookahead, breadth) {
             var PERFORMANCE_MEASURE_start = window.performance.now();
             var moves = this.chessboard.moves.legalMoves;
             try {
