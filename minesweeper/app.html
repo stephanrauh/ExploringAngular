@@ -1,0 +1,10 @@
+<h1>Angular2 spielt Minesweeper!</h1>
+
+<form (ng-submit)="zaehle()">
+<p>Eingabe</p>
+	<textarea [(ng-model)]="eingabe" rows="10" cols="10"></textarea>
+	<br />
+	<button>Zaehle Bomben</button>
+</form>
+<p>Ausgabe</p>
+<textarea [(ng-model)]="ausgabe" rows="10" cols="10"></textarea>
