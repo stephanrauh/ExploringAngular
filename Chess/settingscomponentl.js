@@ -16,7 +16,7 @@ var SettingsComponent = (function () {
     }
     SettingsComponent.prototype.onSubmit = function () {
         this.submitted = true;
-        alert('Hello ' + this.chessboard.breadth + ' / ' + this.chessboard.lookahead);
+        alert("Hello {{chessboard.breadth}} + / {{chessboard.depth}}");
     };
     SettingsComponent = __decorate([
         angular2_1.Component({
@@ -31,4 +31,4 @@ var SettingsComponent = (function () {
     return SettingsComponent;
 })();
 exports.SettingsComponent = SettingsComponent;
-//# sourceMappingURL=settingscomponent.js.map
+//# sourceMappingURL=settingscomponentl.js.map

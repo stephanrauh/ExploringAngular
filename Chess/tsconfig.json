@@ -20,7 +20,7 @@
         "chessboardcomponent.ts",
         "fieldcomponent.ts",
         "historycomponent.ts",
-        "settingsComponent.ts",
+        "settingscomponent.ts",
         "engine/chessboard.ts",
         "engine/chessboardUI.ts",
         "engine/evaluator.ts",
@@ -29,5 +29,8 @@
         "engine/pieces.ts",
         "engine/suggestor.ts",
         "DI-Example/tab0.ts"
-    ]
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
 }

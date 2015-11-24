@@ -10,7 +10,7 @@ export class Suggestor {
         var PERFORMANCE_MEASURE_start = window.performance.now()
         var moves: Move[] = this.chessboard.moves.legalMoves;
         try {
-            this.findBestAnswerTo(3, 7);
+            this.findBestAnswerTo(lookahead, breadth);
             var sortedMoves = moves.sort((m1, m2) => m2.value - m1.value)
             //                console.log("Suggested moves:")
             //                sortedMoves.forEach(move => console.log(move.toString() + " " + move.value))
@@ -70,7 +70,6 @@ export class Suggestor {
                     index++
                 }
                 catch (ex) {
-                    debugger;
                     if (typeof (ex) == "CheckMateException") {
                         answer.value = 100000;
                         break;
