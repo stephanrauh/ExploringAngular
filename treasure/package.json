@@ -1,0 +1,21 @@
+{
+  "name": "Chess",
+  "version": "1.0.0",
+  "description": "This is a treasure hunt game using AngularJS 2.0",
+  "main": "applicationcomponent.js",
+  "scripts": {
+    "tsc": "tsc -p src -w",
+    "start": "live-server --open="
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular2": "2.0.0-alpha.46",
+    "systemjs": "0.19.2"
+  },
+  "devDependencies": {
+    "live-server": "^0.8.2",
+    "typescript": "^1.6.2"
+  }
+}

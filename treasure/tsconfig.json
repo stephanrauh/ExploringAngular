@@ -1,0 +1,22 @@
+{
+    "buildOnSave": true,
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "module": "commonjs",
+        "target": "es5",
+        "sourceMap": true,
+        "removeComments": false,
+        "noImplicitAny": true
+    },
+    "filesGlob": [
+        "*.ts"
+    ],
+    "files": [
+        "applicationcomponent.ts",
+        "mapcomponent.ts"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}

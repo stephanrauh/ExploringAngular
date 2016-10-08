@@ -1,0 +1,12 @@
+<div style="position: relative; left: 0; top: 0; width: 68px; height: 68px; margin-right:-4px; display: inline-block" >
+  <div style="position: relative; top: 0; left: 0;">
+        <img style="width:70px;height:70px" src="{{backgroundFileName(row,col)}}" />
+  </div>
+  <div style="position: absolute; top: 0px; left: 0px;">
+        <img style="width:70px;height:70px" src="{{fileName(piece)}}"
+             ondragstart="{{ondragstart(row, col)}}"
+             ondragover="if ({{isLegalMove(row, col)}}) event.preventDefault();"
+             ondrop="{{ondragdrop(row, col)}}"
+         />
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<form (ng-submit)="onSubmit()">
+  <div class="row">
+    <div class="col-md-6">
+      <label>Look ahead</label>
+    </div>
+    <div class="col-md-6">
+      <input [(ng-model)]="chessboard.lookahead" type="number" placeholder="1..5" size="1" required/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label>Current value: {{chessboard.lookahead}}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label>breadth of calculation</label>
+    </div>
+    <div class="col-md-6">
+      <input [(ng-model)]="chessboard.breadth"
+             ng-control="breadth" type="number"
+             placeholder="1..20" size="2" required/>
+      <div [hidden]="breadth.valid" class="alert alert-danger">
+          Breadth is required
+    </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label>Current value: {{chessboard.breadth}}</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+  </div>
+</form>

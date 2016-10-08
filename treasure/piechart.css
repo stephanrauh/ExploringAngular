@@ -1,0 +1,67 @@
+
+.pie {
+     z-index:0;
+     position: absolute;
+     width: 200px;
+     height: 200px;
+     -moz-border-radius: 100px;
+     -webkit-border-radius: 100px;
+     -o-border-radius: 100px;
+     border-radius: 100px;
+     clip: rect(0px, 100px, 200px, 0px);
+}
+.hold {
+     z-index:0;
+     position: absolute;
+     width: 200px;
+     height: 200px;
+     -moz-border-radius: 100px;
+     -webkit-border-radius: 100px;
+     -o-border-radius: 100px;
+     border-radius: 100px;
+     clip: rect(0px, 200px, 200px, 100px);
+}
+#pieSlice1-east .pie {
+     background-color: #000000;
+     opacity:1;
+     transform:rotate(45deg);
+}
+#pieSlice2-east .pie {
+     opacity:0.1;
+     background-color: #00ff00;
+     transform:rotate(105deg);
+}
+
+#pieSlice1-west .pie {
+     background-color: #0000ff;
+     opacity:1.0;
+     transform:rotate(45deg);
+     z-index:5;
+}
+#pieSlice2-west .pie {
+     opacity:0.5;
+     background-color: #00ff00;
+     transform:rotate(135deg);
+     z-index:1;
+}
+
+.circle {
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+  z-index:10;
+	/* width and height can be anything, as long as they're equal */
+  background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
+	background-image: -webkit-radial-gradient(45px 45px, circle cover, yellow, orange);
+	background-image: radial-gradient(45px 45px 45deg, circle cover, yellow 0%, orange 100%, red 95%);
+}
+
+.destination {
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	/* width and height can be anything, as long as they're equal */
+  background-image: -moz-radial-gradient(45px 45px 45deg, circle cover, black 0%, gray 100%, red 0%);
+	background-image: -webkit-radial-gradient(45px 45px, circle cover, black, gray);
+	background-image: radial-gradient(45px 45px 45deg, circle cover, black 0%, gray 100%, red 0%);
+}

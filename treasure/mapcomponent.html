@@ -1,0 +1,24 @@
+
+<div style="position:absolute;top:200px;left:200px;z-index:1">
+<svg>
+  <circle cx="115" cy="115" r="110"></circle>
+  <path d="M115,115 L115,5 A110,110 1 0,1 190,35 z"></path>
+</svg>
+</div>
+<div id="pieSlice1-east" class="hold"  [style.top]="piex" [style.left]="piey" [style.position]="pieposition()"  [hidden]="pieHidden"
+    >
+  <div class="pie"></div>
+</div>
+
+<div id="pieSlice2-east" class="hold" [style.top]="piex" [style.left]="piey" [style.position]="pieposition()"  [hidden]="pieHidden">
+  <div class="pie"></div>
+</div>
+<div style="display:table;z-index:10">
+<div *ng-for="#row of fields; var rowindex=index" style="display:table-row;width: 630px; height: 32px; overflow: hidden;">
+  <div *ng-for="#piece of row; var colindex=index"  style="display:table-cell;width:52px;height:32px;z-index:100">
+    <div [class]="fieldClass(colindex,rowindex)" style="width:15px; height:15px;padding-left:5px;z-index:100" (click)="click(rowindex,colindex)"
+       [hidden]="!fieldVisible(colindex,rowindex)">
+  </div>
+  </div>
+</div>
+</div>
