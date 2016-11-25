@@ -1,0 +1,7 @@
+*.log
+/coverage
+/node_modules
+/typings
+/dist
+/dist-app
+/.idea

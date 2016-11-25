@@ -1,10 +1,6 @@
-import {Component} from '@angular/core';
-import {ChessBoardComponent} from "../chessboard/chessboardcomponent";
-import {CapturedPiecesComponent} from '../captured-pieces/capturedpiecescomponent';
-import {SettingsComponent} from '../settings/settingscomponent';
+import {Component} from "@angular/core";
 import {ChessEngineAPI} from "../engine/chessboardUI";
 import {Move} from "../engine/move";
-import {HistoryComponent} from '../history/historycomponent';
 
 @Component({
   moduleId: module.id,
