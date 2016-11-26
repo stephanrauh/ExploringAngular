@@ -1,10 +1,10 @@
 {
   "name": "ng2chess",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "Apache License V2",
   "angular-cli": {},
   "scripts": {
-    "start": "ng serve",
+    "start": "ng serve --browser",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",

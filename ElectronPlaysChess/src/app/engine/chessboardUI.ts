@@ -50,9 +50,11 @@ export module ChessEngineAPI {
                 this.isPieceSelected = false;
                 if (this.chessboard.isLegalMove(this.selectedPieceRow, this.selectedPieceCol, row, col)) {
                     this.chessboard.move(this.selectedPieceRow, this.selectedPieceCol, row, col, this.isWhitePlaying ? 5 : -5);
-                    var answer = new Suggestor(this.chessboard).suggestMove(this.lookahead, this.breadth)
-                    if (null != answer)
-                      this.move(answer)
+                    setTimeout(() => {
+                        var answer = new Suggestor(this.chessboard).suggestMove(this.lookahead, this.breadth)
+                        if (null != answer)
+                            this.move(answer)
+                    }, 10)
                 }
             }
         }
