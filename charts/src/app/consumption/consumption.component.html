@@ -1,0 +1,21 @@
+<ngx-charts-line-chart
+  [view]="view"
+  class="chart-container"
+  [scheme]="colorScheme"
+  [schemeType]="schemeType"
+  [results]="dateData"
+  [legend]="showLegend"
+  (legendLabelClick)="onLegendLabelClick($event)"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [autoScale]="autoScale"
+  [timeline]="timeline"
+  [showGridLines]="showGridLines"
+  [curve]="curve"
+  (select)="select($event)">
+</ngx-charts-line-chart>
