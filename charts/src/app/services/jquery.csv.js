@@ -1,3 +1,4 @@
+/** https://github.com/evanplaice/jquery-csv */
 /**
  * jQuery-csv (jQuery Plugin)
  *
@@ -26,14 +27,12 @@
  * Copyrighted 2012 by Evan Plaice.
  */
 
-console.log("Hallo CSV Welt");
 RegExp.escape= function(s) {
   return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 };
 
 (function (undefined) {
   'use strict';
-
   var $;
 
   // to keep backwards compatibility
@@ -972,5 +971,8 @@ RegExp.escape= function(s) {
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = $.csv;
   }
+  window.csvToArray = $.csv.toArray;
+  window.csvToArrays = $.csv.toArrays;
+  window.csvToObjects = $.csv.toObjects;
 
 }).call( this );
