@@ -11,36 +11,18 @@ import { colorSets as ngxChartsColorsets } from '@swimlane/ngx-charts/release/ut
   styleUrls: ['./consumption.component.css']
 })
 export class ConsumptionComponent implements OnInit {
-  countries: any[];
-  single: any[];
-  multi: any[];
   dateData: any[];
 
   view = [700, 300];
-
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Country';
-  showYAxisLabel = true;
-  yAxisLabel = 'GDP Per Capita';
-  showGridLines = true;
 
   // line interpolation
   curveType: string = 'Linear';
   curve = d3.curveLinear;
 
-  colorSets: any;
   colorScheme: any;
   schemeType: string = 'ordinal';
   selectedColorScheme: string;
 
-  // line, area
-  autoScale = true;
-  timeline = false;
 
   constructor() {
     this.dateData = generateData(5);
