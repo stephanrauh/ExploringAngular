@@ -3,6 +3,8 @@ import {Http} from "@angular/http";
 import * as d3 from 'd3';
 import {generateData} from '../common/data';
 import { colorSets as ngxChartsColorsets } from '@swimlane/ngx-charts/release/utils/color-sets';
+import {ConsumptionDataService} from "../services/consumption-data-service";
+import {Series} from "../common/Series";
 
 
 @Component({
@@ -11,9 +13,13 @@ import { colorSets as ngxChartsColorsets } from '@swimlane/ngx-charts/release/ut
   styleUrls: ['./consumption.component.css']
 })
 export class ConsumptionComponent implements OnInit {
-  dateData: any[];
+  dateData: Series[];
 
-  view = [700, 300];
+  consumptionBySpeed: Series[];
+
+  view = [1000, 500];
+
+  public visible = false;
 
   // line interpolation
   curveType: string = 'Linear';
@@ -24,8 +30,13 @@ export class ConsumptionComponent implements OnInit {
   selectedColorScheme: string;
 
 
-  constructor() {
-    this.dateData = generateData(5);
+  constructor(private consumptionDataService: ConsumptionDataService) {
+    consumptionDataService.observable.subscribe(event => {
+      console.log(event);
+      this.dateData = consumptionDataService.getConsumptionByDate();
+      this.consumptionBySpeed=consumptionDataService.getConsumptionBySpeed();
+      this.visible=true;
+    });
     this.setColorScheme('cool');
   }
 

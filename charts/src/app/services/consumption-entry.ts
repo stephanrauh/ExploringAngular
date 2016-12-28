@@ -15,6 +15,7 @@ export class ConsumptionEntry {
   public consumption: number;
   public consumptionAccordingToBC: number;
   public fuelAmountAccordingToBC: number;
+  public averageSpeed: number;
 
   constructor(c: ConsumptionJsonEntry) {
     let us_date = c.date.split('.').reverse().join('-');
@@ -30,5 +31,6 @@ export class ConsumptionEntry {
     this.consumption = +c.consumption;
     this.consumptionAccordingToBC = +c.consumptionAccordingToBC;
     this.fuelAmountAccordingToBC = +c.fuelAmountAccordingToBC;
+    this.averageSpeed = +c.averageSpeed;
   }
 }

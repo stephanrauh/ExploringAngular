@@ -5,6 +5,7 @@ import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
 import {AppComponent} from "./app.component";
 import {ConsumptionComponent} from "./consumption/consumption.component";
+import {ConsumptionDataService} from "./services/consumption-data-service";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import {ConsumptionComponent} from "./consumption/consumption.component";
     NgxChartsModule
   ],
   exports: [],
-  providers: [],
+  providers: [ConsumptionDataService],
   bootstrap: [AppComponent]
  })
 export class AppModule {

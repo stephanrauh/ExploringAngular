@@ -1,3 +1,4 @@
-/**
- * Created by stephan on 28.12.16.
- */
+export class SeriesEntry {
+  constructor(public name: string | Date, public value: number) {}
+}
+

@@ -14,6 +14,7 @@ export class ConsumptionJsonEntry {
   consumption: string;
   consumptionAccordingToBC: string;
   fuelAmountAccordingToBC: string;
+  averageSpeed: string;
   fuelStation: string;
   country: string;
   region: string;

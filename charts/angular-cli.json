@@ -22,7 +22,6 @@
         "../node_modules/@swimlane/ngx-charts/release/ngx-charts.css"
       ],
       "scripts": [
-        "assets/js/jquery.csv.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
