@@ -148,8 +148,8 @@ export let countries = [
 ];
 
 export function generateGraph(nodeCount: number) {
-  let nodes = [];
-  let links = [];
+  let nodes: any[] = [];
+  let links: any[] = [];
   for (let i = 0; i < nodeCount; i++) {
     let country = countries[Math.floor(Math.random() * countries.length)];
     nodes.push({
@@ -168,9 +168,9 @@ export function generateGraph(nodeCount: number) {
 }
 
 export function generateData(seriesLength) {
-  let results = [];
+  let results: any[] = [];
 
-  let domain = [];
+  let domain: number[] = [];
 
   for (let j = 0; j < 5; j++) {
     domain.push(Math.floor(1473700105009 + Math.random() * 1000000000));
@@ -180,7 +180,7 @@ export function generateData(seriesLength) {
     let country = countries[Math.floor(Math.random() * countries.length)];
     let series = {
       name: country,
-      series: []
+      series: <any[]> []
     };
 
     for (let j = 0; j < domain.length; j++) {
