@@ -1,0 +1,95 @@
+<form action="">
+
+  <input type="radio" name="co2" value="fuel" (click)="onClickCO2(false)" checked="true">
+  fuel
+  <input type="radio" name="co2" value="co2" (click)="onClickCO2(true)" >
+  CO2
+  <table>
+    <thead>
+    <tr>
+      <th>both</th>
+      <th>Civic FK3</th>
+      <th>León</th>
+    </tr>
+    </thead>
+    <tr>
+
+      <td><input type="radio" name="chartType" value="consumption" (click)="onClickConsumptionOverTime()" checked="true">
+        consumption over time
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="radio" name="chartType" value="consumptionBySpeed" (click)="onClickConsumptionBySpeed()">
+        consumption by speed
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
+                 (click)="onClickAverageConsumptionBySpeed(10, 'both', false)"> average consumption by speed
+        (coarse-grained)
+      </td>
+      <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
+                 (click)="onClickAverageConsumptionBySpeed(10, 'civic', true)"> average consumption by speed
+        (coarse-grained)
+      </td>
+      <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
+                 (click)="onClickAverageConsumptionBySpeed(10, 'leon', true)"> average consumption by speed
+        (coarse-grained)
+      </td>
+    </tr>
+    <tr>
+      <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
+                 (click)="onClickAverageConsumptionBySpeed(5, 'both', false)"> average consumption by speed (medium)
+      </td>
+      <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
+                 (click)="onClickAverageConsumptionBySpeed(5, 'civic', true)"> average consumption by speed (medium)
+      </td>
+      <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
+                 (click)="onClickAverageConsumptionBySpeed(5, 'leon', true)"> average consumption by speed (medium)
+      </td>
+    </tr>
+    <tr>
+      <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
+                 (click)="onClickAverageConsumptionBySpeed(2, 'both', false)"> average consumption by speed
+        (fine-grained)
+      </td>
+      <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
+                 (click)="onClickAverageConsumptionBySpeed(2, 'civic', true)"> average consumption by speed
+        (fine-grained)
+      </td>
+      <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
+                 (click)="onClickAverageConsumptionBySpeed(2, 'leon', true)"> average consumption by speed
+        (fine-grained)
+      </td>
+    </tr>
+  </table>
+</form>
+
+
+<ngx-charts-line-chart
+  *ngIf="visible"
+  [view]="view"
+  class="chart-container"
+  [scheme]="colorScheme"
+  schemeType="ordinal"
+  [results]="dateData"
+  legend="true"
+  (legendLabelClick)="onLegendLabelClick($event)"
+  gradient="false"
+  xAxis="true"
+  yAxis="true"
+  showXAxisLabel="true"
+  showYAxisLabel="true"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  autoScale="true"
+  timeline="true"
+  showGridLines="true"
+  [curve]="curve"
+  (select)="select($event)">
+</ngx-charts-line-chart>
+
