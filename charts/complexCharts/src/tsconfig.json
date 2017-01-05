@@ -9,7 +9,7 @@
     "module": "es6",
     "moduleResolution": "node",
     "outDir": "../dist/out-tsc",
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "skipDefaultLibCheck": false,
     "skipLibCheck": true,
     "sourceMap": true,

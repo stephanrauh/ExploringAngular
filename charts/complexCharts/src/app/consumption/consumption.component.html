@@ -29,7 +29,7 @@
     </tr>
     <tr>
       <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
-                 (click)="onClickAverageConsumptionBySpeed(10, 'both', false)"> average consumption by speed
+                 (click)="onClickAverageConsumptionBySpeed(10, 'both', true)"> average consumption by speed
         (coarse-grained)
       </td>
       <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
@@ -43,7 +43,7 @@
     </tr>
     <tr>
       <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
-                 (click)="onClickAverageConsumptionBySpeed(5, 'both', false)"> average consumption by speed (medium)
+                 (click)="onClickAverageConsumptionBySpeed(5, 'both', true)"> average consumption by speed (medium)
       </td>
       <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
                  (click)="onClickAverageConsumptionBySpeed(5, 'civic', true)"> average consumption by speed (medium)
@@ -54,7 +54,7 @@
     </tr>
     <tr>
       <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
-                 (click)="onClickAverageConsumptionBySpeed(2, 'both', false)"> average consumption by speed
+                 (click)="onClickAverageConsumptionBySpeed(2, 'both', true)"> average consumption by speed
         (fine-grained)
       </td>
       <td><input type="radio" name="chartType" value="averageConsumptionBySpeed"
@@ -70,7 +70,7 @@
 </form>
 
 
-<ngx-charts-line-chart
+<ngx-charts-line-range-chart
   *ngIf="visible"
   [view]="view"
   class="chart-container"
@@ -88,8 +88,8 @@
   [yAxisLabel]="yAxisLabel"
   autoScale="true"
   timeline="true"
-  showGridLines="true"
+  showGridLines="false  "
   [curve]="curve"
   (select)="select($event)">
-</ngx-charts-line-chart>
+</ngx-charts-line-range-chart>
 

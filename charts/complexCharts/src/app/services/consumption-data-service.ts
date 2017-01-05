@@ -119,13 +119,9 @@ export class ConsumptionDataService {
   private getAverageConsumptionBySpeedOfACar(currentCar: ConsumptionEntry[], chunkSize: number, currentCarName: string, result: Series[], minMax: boolean, co2: boolean): void {
     if (currentCar.length > 0) {
       let values: SeriesEntry[] = new Array<SeriesEntry>();
-      let maxValues: SeriesEntry[] = new Array<SeriesEntry>();
-      let minValues: SeriesEntry[] = new Array<SeriesEntry>();
-      let hits: number[] = new Array<number>();
+       let hits: number[] = new Array<number>();
       for (let i = 0, start = 45; start < 120; i++, start += chunkSize) {
         values.push(new SeriesEntry(`${start} - ${start - 1 + chunkSize}`, 0));
-        minValues.push(new SeriesEntry(`${start} - ${start - 1 + chunkSize}`, 0));
-        maxValues.push(new SeriesEntry(`${start} - ${start - 1 + chunkSize}`, 0));
         hits.push(0);
       }
 
@@ -136,22 +132,22 @@ export class ConsumptionDataService {
           let chunk = values[index];
           if (hits[index] == 0) {
             chunk.value = consumption;
-            minValues[index].value = consumption;
-            maxValues[index].value = consumption;
+            if (minMax) {
+              chunk.min = consumption;
+              chunk.max = consumption;
+            }
           } else {
             chunk.value = ((hits[index] * chunk.value) + consumption) / (1 + hits[index]);
-            minValues[index].value = Math.min(consumption, minValues[index].value);
-            maxValues[index].value = Math.max(consumption, maxValues[index].value);
+            if (minMax) {
+              chunk.min = Math.min(consumption, chunk.min);
+              chunk.max = Math.max(consumption, chunk.max);
+            }
           }
           hits[index]++;
         }
       }
 
       result.push(new Series(currentCarName, values.filter(chunk => chunk.value > 0)));
-      if (minMax) {
-        result.push(new Series(currentCarName + " (max)", maxValues.filter(chunk => chunk.value > 0)));
-        result.push(new Series(currentCarName + " (min)", minValues.filter(chunk => chunk.value > 0)));
-      }
-    }
+     }
   }
 }

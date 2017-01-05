@@ -1,4 +1,4 @@
 export class SeriesEntry {
-  constructor(public name: string | Date | number, public value: number) {}
+  constructor(public name: string | Date | number, public value: number, public min ?:number, public max ?: number) {}
 }
 
