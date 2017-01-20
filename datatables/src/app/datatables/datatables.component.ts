@@ -25,21 +25,33 @@ export class DatatablesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    let that=this;
-    $(document).ready(function() {
-      let exampleId: any = $('#example');
-      that.tableWidget = exampleId.DataTable({
-        select: true
-      } );
-      $('#example')
-        .removeClass( 'display' )
-        .addClass('table table-striped table-bordered');
+  }
 
-    } );
+  ngAfterViewInit() {
+    this.initDatatable()
+  }
+
+  private initDatatable(): void {
+    let exampleId: any = $('#example');
+    this.tableWidget = exampleId.DataTable({
+      select: true
+    });
+ //   $('#example')
+ //     .removeClass('display')
+ //     .addClass('table table-striped table-bordered')
+  }
+
+  private reInitDatatable(): void {
+    if (this.tableWidget) {
+      this.tableWidget.destroy()
+      this.tableWidget=null
+    }
+    setTimeout(() => this.initDatatable(),0)
   }
 
   public deleteRow(): void {
     this.data.pop();
+    this.reInitDatatable()
   }
 
   public addRow(): void {
@@ -54,6 +66,7 @@ export class DatatablesComponent implements OnInit {
     } else {
       this.data.push({"name": "Mo", "lastName": "Zarella"})
     }
+    this.reInitDatatable()
   }
 
   public selectRow(index: number, row:any) {
