@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
+import 'datatables.net'
 
 @Component({
   selector: 'app-datatables',
@@ -32,6 +34,7 @@ export class DatatablesComponent implements OnInit {
   }
 
   private initDatatable(): void {
+    debugger
     let exampleId: any = $('#example');
     this.tableWidget = exampleId.DataTable({
       select: true
