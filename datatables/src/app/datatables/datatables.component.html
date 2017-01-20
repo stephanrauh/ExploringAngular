@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-12" style="padding-bottom:15px">
+    <button class="btn-danger" (click)="deleteRow()">delete row</button>
+    <button class="btn-primary" (click)="addRow()">add row</button>
+
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <table id="example" class="display" cellspacing="0" width="100%">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+      </tr>
+      </thead>
+      <tfoot>
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+      </tr>
+      </tfoot>
+      <tbody>
+      <tr *ngFor="let row of data">
+        <td>{{row.name}}</td>
+        <td><input [(ngModel)]="row.lastName" style="color:black"></td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
