@@ -19,6 +19,8 @@ export class DatatablesComponent implements OnInit {
 
   public tableWidget: any;
 
+  public selectedName: string=""
+
 
   constructor() { }
 
@@ -32,6 +34,7 @@ export class DatatablesComponent implements OnInit {
       $('#example')
         .removeClass( 'display' )
         .addClass('table table-striped table-bordered');
+
     } );
   }
 
@@ -53,4 +56,7 @@ export class DatatablesComponent implements OnInit {
     }
   }
 
+  public selectRow(index: number, row:any) {
+    this.selectedName = "row#" + index + " " + row.name
+  }
 }

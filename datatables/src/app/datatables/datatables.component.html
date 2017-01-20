@@ -2,7 +2,7 @@
   <div class="col-sm-12" style="padding-bottom:15px">
     <button class="btn-danger" (click)="deleteRow()">delete row</button>
     <button class="btn-primary" (click)="addRow()">add row</button>
-
+    Selected: {{selectedName}}
   </div>
 </div>
 
@@ -23,7 +23,7 @@
       </tr>
       </tfoot>
       <tbody>
-      <tr *ngFor="let row of data">
+      <tr *ngFor="let row of data; let i = index" (click)="selectRow(i, row)">
         <td>{{row.name}}</td>
         <td><input [(ngModel)]="row.lastName" style="color:black"></td>
       </tr>
