@@ -1,0 +1,22 @@
+
+<md-card>
+<md-card-header color="primary">
+<md-chip-list>
+  <md-chip color="primary" selected="true">X {{description('X')}} {{victories(description('X'))}}</md-chip>
+  <md-chip color="accent" selected="true">{{description('-')}} {{victories('-')}}</md-chip>
+  <md-chip color="warn" selected="true">O {{description('O')}} {{victories(description('O'))}}</md-chip>
+</md-chip-list>
+
+</md-card-header>
+  <md-card-content>
+<grid></grid>
+
+<br/>
+  </md-card-content>
+  <md-card-actions>
+
+<button md-raised-button (click)="startNewGame()">new game</button>
+<button md-raised-button (click)="changeSides()" [disabled]="engineService.gameOver">change sides</button>
+  </md-card-actions>
+
+</md-card>

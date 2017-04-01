@@ -1,0 +1,11 @@
+<table>
+  <tr *ngFor="let row of engineService.grid.row;let y = index">
+    <td *ngFor="let cell of row.cell; let x = index"
+        (click)="toggleCell(x, y)">
+      <i *ngIf="!empty(cell)" class="material-icons">
+        {{content(cell)}}
+      </i>
+    </td>
+  </tr>
+</table>
+

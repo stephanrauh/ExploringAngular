@@ -1,0 +1,13 @@
+<md-card>
+  <md-card-header color="primary">
+    <h1>Hall of fame</h1>
+  </md-card-header>
+  <md-card-content>
+    <md-list>
+      <md-list-item *ngFor="let score of highscores$ | async">
+        <h2 md-line>{{score.score}} {{score.firstname}} {{score.lastname}} </h2>
+      </md-list-item>
+     </md-list>
+  </md-card-content>
+</md-card>
+

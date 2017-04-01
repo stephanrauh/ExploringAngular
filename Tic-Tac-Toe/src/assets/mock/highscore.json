@@ -1,0 +1,22 @@
+[
+  {"firstname": "Ellen",  "lastname": "Bogen", "score": 200},
+  {"firstname": "Wayne",  "lastname": "Interessierts", "score": 190},
+  {"firstname": "Andy",   "lastname": "Biotika", "score": 180},
+  {"firstname": "Nico",   "lastname": "Tin", "score": 170},
+  {"firstname": "Axel",   "lastname": "Schweiß","score": 160},
+  {"firstname": "Peter",  "lastname": "Silie", "score": 150},
+  {"firstname": "Mario",  "lastname": "Nette", "score": 140},
+  {"firstname": "Nicky",  "lastname": "Tuch", "score": 130},
+  {"firstname": "Dennis", "lastname": "Schläger", "score": 120},
+  {"firstname": "Dennis", "lastname": "Ball", "score": 110},
+  {"firstname": "Rainer", "lastname": "Zufall", "score": 100},
+  {"firstname": "Claire", "lastname": "Grube", "score": 90},
+  {"firstname": "Claire", "lastname": "Werk", "score": 80},
+  {"firstname": "Anna",   "lastname": "Bolika", "score": 70},
+  {"firstname": "Wilma",  "lastname": "Knuddeln", "score": 60},
+  {"firstname": "Klaus",  "lastname": "Thaler", "score": 50},
+  {"firstname": "Curry",  "lastname": "Wurst", "score": 40},
+  {"firstname": "Lilly",  "lastname": "Buttaner","score": 30},
+  {"firstname": "Tino",   "lastname": "Saurier", "score": 20},
+  {"firstname": "Klaus",  "lastname": "Trophobie","score": 10}
+]

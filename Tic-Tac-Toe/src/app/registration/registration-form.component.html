@@ -1,0 +1,25 @@
+<md-card>
+  <md-card-header color="primary">
+    Registration form
+  </md-card-header>
+  <md-card-content>
+    <form novalidate>
+      <div>
+        <md-input-container>
+          <input mdInput placeholder="First name:" name="firstname" [(ngModel)]="firstname">
+        </md-input-container>
+      </div>
+      <div>
+        <md-input-container>
+          <input mdInput placeholder="Last name:" name="lastname" [(ngModel)]="lastname">
+        </md-input-container>
+      </div>
+
+    </form>
+
+  </md-card-content>
+  <md-card-actions>
+    <button md-raised-button (click)="register()">register</button>
+  </md-card-actions>
+
+</md-card>

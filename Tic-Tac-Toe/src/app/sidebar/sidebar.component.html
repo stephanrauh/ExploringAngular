@@ -1,0 +1,38 @@
+<md-toolbar class="md-tall nav-header">
+  <span flex></span>
+  <div layout="column" class="md-toolbar-tools-bottom inset">
+    <h3>Tic Tac Toe!</h3>
+  </div>
+</md-toolbar>
+
+<md-list>
+  <md-list-item>
+    <a [routerLink]="['registration']">
+      <span>
+        <md-icon>group</md-icon>
+      </span>
+      <span>Registration
+      </span>
+    </a>
+  </md-list-item>
+  <md-divider></md-divider>
+  <md-list-item>
+    <a [routerLink]="['play']">
+      <span>
+        <md-icon>grid_on</md-icon>
+      </span>
+      <span class="inset">Tic tac toe
+      </span>
+    </a>
+  </md-list-item>
+  <md-list-item>
+    <a [routerLink]="['highscore']">
+      <span>
+        <md-icon>list</md-icon>
+      </span>
+      <span>Highscores
+      </span>
+    </a>
+  </md-list-item>
+</md-list>
+

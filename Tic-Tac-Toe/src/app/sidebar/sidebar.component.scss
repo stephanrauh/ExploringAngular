@@ -1,0 +1,12 @@
+.nav-header {
+  background-color: adjust-hue(#1093f8, 10%);
+}
+
+/deep/ .mat-sidenav-opened {
+  background-color: lighten(#29AEF8, 30%);
+
+}
+
+/deep/ .toolbar {
+   background-color: #1093f8 !important;
+}
