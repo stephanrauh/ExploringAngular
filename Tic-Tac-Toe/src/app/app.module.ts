@@ -12,7 +12,7 @@ import {environment} from '../environments/environment';
 import {MockHttpModule} from './mock-http/mock-http.module';
 import 'hammerjs';
 import {SidebarComponent} from './sidebar/sidebar.component';
-import {PlaygroundComponent} from './playground/playground.component';
+import {GameBoardComponent} from './game-board/game-board.component';
 import {RegistrationFormComponent} from './registration/registration-form.component';
 import {RouterModule, Routes} from '@angular/router';
 import {IsRegisterdGuard} from './registration/is-registerd-guard';
@@ -23,7 +23,7 @@ import {HistoryService} from './gameplay/history.service';
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'registration'},
   {path: 'registration', component: RegistrationFormComponent},
-  {path: 'play', component: PlaygroundComponent, canActivate: [IsRegisterdGuard]},
+  {path: 'play', component: GameBoardComponent, canActivate: [IsRegisterdGuard]},
   {path: 'highscore', component: HighscoreComponent, canActivate: [IsRegisterdGuard]}
 ];
 
@@ -33,7 +33,7 @@ const routes: Routes = [
     AppComponent,
     GridComponent,
     SidebarComponent,
-    PlaygroundComponent,
+    GameBoardComponent,
     RegistrationFormComponent,
     HighscoreComponent
   ],

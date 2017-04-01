@@ -4,10 +4,10 @@ import {HistoryService} from '../gameplay/history.service';
 
 @Component({
   selector: 'playground',
-  templateUrl: './playground.component.html',
-  styleUrls: ['./playground.component.scss']
+  templateUrl: './game-board.component.html',
+  styleUrls: ['./game-board.component.scss']
 })
-export class PlaygroundComponent implements OnInit {
+export class GameBoardComponent implements OnInit {
 
   constructor(public engineService: EngineService, private historyService: HistoryService) { }
 
