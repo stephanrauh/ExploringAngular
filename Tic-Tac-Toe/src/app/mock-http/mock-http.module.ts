@@ -2,9 +2,9 @@ import {Inject, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MockBackend, MockConnection} from "@angular/http/testing";
 import {
-  BaseRequestOptions, Connection, Http, HttpModule, Response, ResponseOptions, ResponseType,
+  BaseRequestOptions, Connection, Http, HttpModule, RequestMethod, Response, ResponseOptions, ResponseType,
   XHRBackend
-} from "@angular/http";
+} from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
 
@@ -54,6 +54,8 @@ export class MockHttpModule {
       if (url.startsWith("https://example.com/rest/")) {
         url = "/assets/mock/" + url.substring("https://example.com/rest/".length);
       }
+      let methodname= RequestMethod[connection.request.method];
+      url += "/" + methodname + ".json";
     }
     const responseObservable: Observable<void> = realHttp.get(url).map(
       response => {
