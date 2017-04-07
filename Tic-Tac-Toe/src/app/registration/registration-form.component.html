@@ -1,17 +1,17 @@
 <md-card>
   <md-card-header color="primary">
-    Registration form
+    {{'Registration form' | translate}}
   </md-card-header>
   <md-card-content>
     <form novalidate>
       <div>
         <md-input-container>
-          <input mdInput placeholder="First name:" name="firstname" [(ngModel)]="firstname">
+          <input mdInput placeholder="{{'First name:' | translate}}" name="firstname" [(ngModel)]="firstname">
         </md-input-container>
       </div>
       <div>
         <md-input-container>
-          <input mdInput placeholder="Last name:" name="lastname" [(ngModel)]="lastname">
+          <input mdInput placeholder="{{'Last name:' | translate}}" name="lastname" [(ngModel)]="lastname">
         </md-input-container>
       </div>
 
@@ -19,7 +19,7 @@
 
   </md-card-content>
   <md-card-actions>
-    <button md-raised-button (click)="register()">register</button>
+    <button md-raised-button (click)="register()">{{'register'  | translate}}</button>
   </md-card-actions>
 
 </md-card>

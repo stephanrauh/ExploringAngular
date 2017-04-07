@@ -53,9 +53,9 @@ export class MockHttpModule {
     if (!!url) {
       if (url.startsWith("https://example.com/rest/")) {
         url = "/assets/mock/" + url.substring("https://example.com/rest/".length);
+        let methodname= RequestMethod[connection.request.method];
+        url += "/" + methodname + ".json";
       }
-      let methodname= RequestMethod[connection.request.method];
-      url += "/" + methodname + ".json";
     }
     const responseObservable: Observable<void> = realHttp.get(url).map(
       response => {

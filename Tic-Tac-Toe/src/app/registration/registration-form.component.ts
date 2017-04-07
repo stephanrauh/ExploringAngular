@@ -20,8 +20,9 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   public register(): void {
-    this.userService.firstname= this.firstname;
-    this.userService.lastname = this.lastname;
+    this.userService.firstname = this.firstname;
+
+     this.userService.lastname = this.lastname;
  //   if (this.userService.isRegistered()) {
       this.router.navigate(["play"]);
   }

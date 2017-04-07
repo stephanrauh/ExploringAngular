@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {EngineService} from "./gameplay/engine.service";
 import {Http} from "@angular/http";
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,7 @@ import {Http} from "@angular/http";
 })
 export class AppComponent {
 
-  constructor(){}
+  constructor(translate: TranslateService){
+    translate.use("es");
+  }
 }
