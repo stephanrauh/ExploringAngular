@@ -16,10 +16,6 @@ const routes: Routes = [
   {path: '', component: HighscoreComponent}
 ];
 
-export function HttpLoaderFactory(http: Http) {
-  return new TranslateHttpLoader(http);
-}
-
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/highscore/', '.json');
 }

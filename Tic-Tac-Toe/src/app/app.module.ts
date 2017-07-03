@@ -29,10 +29,6 @@ const routes: Routes = [
   {path: 'highscore', loadChildren: "app/highscore/highscore.module#HighscoreModule", canActivate: [IsRegisterdGuard]}
 ];
 
-export function HttpLoaderFactory(http: Http) {
-  return new TranslateHttpLoader(http);
-}
-
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
