@@ -1,0 +1,18 @@
+<h2>User data, language and translations (three asynchronous REST calls depending on each other => using
+  flatMap()):</h2>
+
+<dl>
+  <dt>{{translationService.translations['Last name']}}</dt>
+  <dd>{{(userService.address$ | async)?.lastname}}</dd>
+  <dt>{{translationService.translations['First name']}}:</dt>
+  <dd>{{(userService.address$ | async)?.firstname}}</dd>
+  <dt>{{translationService.translations['Street']}}:</dt>
+  <dd>{{(userService.address$ | async)?.street}}</dd>
+  <dt>{{translationService.translations['Zipcode']}}:</dt>
+  <dd>{{(userService.address$ | async)?.zipcode}}</dd>
+  <dt>{{translationService.translations['City']}}:</dt>
+  <dd>{{(userService.address$ | async)?.city}}</dd>
+  <dt>{{translationService.translations['Preferred language']}}:</dt>
+  <dd>{{languageService.language$ | async}}</dd>
+</dl>
+

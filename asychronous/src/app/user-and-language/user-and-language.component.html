@@ -1,0 +1,17 @@
+<h2>User data and language (two parallel asynchronous REST calls, plus using combineLatest()):</h2>
+
+<dl>
+  <dt>Last name:</dt>
+  <dd>{{(userService.address$ | async)?.lastname}}</dd>
+  <dt>First name:</dt>
+  <dd>{{(userService.address$ | async)?.firstname}}</dd>
+  <dt>Street:</dt>
+  <dd>{{(userService.address$ | async)?.street}}</dd>
+  <dt>Zip code:</dt>
+  <dd>{{(userService.address$ | async)?.zipcode}}</dd>
+  <dt>City:</dt>
+  <dd>{{(userService.address$ | async)?.city}}</dd>
+  <dt>Preferred language:</dt>
+  <dd>{{languageService.language$ | async}}</dd>
+</dl>
+

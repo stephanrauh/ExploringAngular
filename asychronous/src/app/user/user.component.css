@@ -1,0 +1,33 @@
+dl {
+  overflow: hidden;
+  background: none;
+  padding: 0;
+  margin: 0;
+  width: 100%
+}
+
+dt {
+  float: left;
+  width: 20%;
+  /* adjust the width; make sure the total of both is 100% */
+  background: #f8f8f8;
+  padding: 0;
+  margin: 0
+}
+
+dd {
+  float: left;
+  width: 80%;
+  /* adjust the width; make sure the total of both is 100% */
+  background: #f8f8f8;
+  padding: 0;
+  margin: 0;
+}
+
+dd:nth-of-type(odd) {
+  background: #fff
+}
+
+dt:nth-of-type(odd) {
+  background: #fff
+}
