@@ -48,7 +48,6 @@ export class MockHttpModule {
   }
 
   private deviateRequestToAssetsFolder(connection: MockConnection, realHttp: Http) {
-
     let url = connection.request.url;
     if (!!url) {
       if (url.startsWith("https://example.com/rest/")) {

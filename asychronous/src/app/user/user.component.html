@@ -1,15 +1,18 @@
 <h2>User data (one asynchronous REST call):</h2>
 
-<dl>
-  <dt>Last name:</dt>
-  <dd>{{(userService.address$ | async)?.lastname}}</dd>
-  <dt>First name:</dt>
-  <dd>{{(userService.address$ | async)?.firstname}}</dd>
-  <dt>Street:</dt>
-  <dd>{{(userService.address$ | async)?.street}}</dd>
-  <dt>Zip code:</dt>
-  <dd>{{(userService.address$ | async)?.zipcode}}</dd>
-  <dt>City:</dt>
-  <dd>{{(userService.address$ | async)?.city}}</dd>
-</dl>
+<div *ngIf="userService.address$ | async as address; else loading">
+  <dl>
+    <dt>Last name:</dt>
+    <dd>{{address.lastname}}</dd>
+    <dt>First name:</dt>
+    <dd>{{address.firstname}}</dd>
+    <dt>Street:</dt>
+    <dd>{{address.street}}</dd>
+    <dt>Zip code:</dt>
+    <dd>{{address.zipcode}}</dd>
+    <dt>City:</dt>
+    <dd>{{address.city}}</dd>
+  </dl>
+</div>
+<ng-template #loading let-user>Loading...</ng-template>
 
