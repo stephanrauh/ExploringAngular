@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from "jquery/dist/jquery.min.js"
+import * as $ from "jquery"
 
 @Component({
   selector: 'app-menus',
