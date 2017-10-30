@@ -1,0 +1,14 @@
+.carousel-outer {
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-inner {
+  padding-bottom: 20px;
+  height: 50px;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}

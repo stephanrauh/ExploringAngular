@@ -1,0 +1,6 @@
+<div class="carousel-outer" #outer (click)="onClick($event)">
+  <div class="carousel-inner" #inner [@scrollAnimation]="state" (@scrollAnimation.done)="resetState()">
+    <ng-content></ng-content>
+  </div>
+</div>
+<div>Statei: {{state}}</div>
