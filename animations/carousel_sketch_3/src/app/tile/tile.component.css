@@ -1,0 +1,7 @@
+.tile {
+    border: 1px solid black;
+    padding: 10px;
+    background-color: coral;
+    height: 100%;
+    min-width:80px;
+}

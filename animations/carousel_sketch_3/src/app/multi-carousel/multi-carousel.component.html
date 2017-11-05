@@ -1,0 +1,25 @@
+<div fxLayout="row" fxLayoutGap="20px">
+  <div class="button" (click)="move('right')">
+    &lt;
+  </div>
+  <div style="clip-path: inset(0px 0px 0px 0px);left:0px;position:relative;">
+    <div [style.width]="width" fxLayout="row" fxLayoutGap="20px" class="carousel-container" #container
+      [style.transform]="translate" [style.transition]="transition"
+      style="border:1px solid red;"
+      (mouseup)="onMouseUp($event)"
+      (mousedown)="onMouseDown($event)"
+      (mousemove)="onMouseMove($event)"
+      (mouseleave)="onMouseLeave($event)">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div class="button"  (click)="move('left')">
+    &gt;
+  </div>
+</div>
+<hr>
+Current translation: {{currentTranslation}}
+<hr>
+Next translation: {{nextTranslation}}
+<hr>
+CSS: {{translate}}
