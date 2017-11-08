@@ -1,0 +1,10 @@
+<div class="flip-container" (click)="showBack = !showBack" >
+	<div class="flipper" [@state]="showBack">
+		<div class="front">
+			<app-front-side></app-front-side>
+		</div>
+		<div class="back">
+			<app-back-side></app-back-side>
+		</div>
+	</div>
+</div>
