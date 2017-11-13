@@ -2,21 +2,16 @@
 .flip-container {
 	perspective: 1000px;
 }
-	/* flip the pane when hovered */
-	.xflip-container:hover .flipper, .xflip-container.hover .flipper {
-		transform: rotateY(180deg);
-	}
 
 .flip-container, .front, .back {
-	width: 320px;
-	height: 480px;
+	width: 300px;
+	height: 250px;
 }
 
 /* flip speed goes here */
 .flipper {
 	transition: 0.6s;
 	transform-style: preserve-3d;
-
 	position: relative;
 }
 
