@@ -1,0 +1,37 @@
+<mat-toolbar class="mat-tall nav-header">
+  <span flex></span>
+  <div layout="column" class="mat-toolbar-tools-bottom inset">
+    <h3>Tic Tac Toe!</h3>
+  </div>
+</mat-toolbar>
+
+<mat-list>
+  <mat-list-item>
+    <a [routerLink]="['registration']">
+      <span>
+        <mat-icon>group</mat-icon>
+      </span>
+      <span>Registration
+      </span>
+    </a>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <a [routerLink]="['play']">
+      <span>
+        <mat-icon>grid_on</mat-icon>
+      </span>
+      <span class="inset">Tic tac toe
+      </span>
+    </a>
+  </mat-list-item>
+  <mat-list-item>
+    <a [routerLink]="['highscore']">
+      <span>
+        <mat-icon>list</mat-icon>
+      </span>
+      <span>Highscores
+      </span>
+    </a>
+  </mat-list-item>
+</mat-list>

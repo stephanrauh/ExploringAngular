@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-header color="primary">
+    <mat-chip-list>
+      <mat-chip color="primary" selected="true">X {{description('X')}} {{victories(description('X'))}}</mat-chip>
+      <mat-chip color="accent" selected="true">{{description('-')}} {{victories('-')}}</mat-chip>
+      <mat-chip color="warn" selected="true">O {{description('O')}} {{victories(description('O'))}}</mat-chip>
+    </mat-chip-list>
+
+  </mat-card-header>
+  <mat-card-content>
+    <grid></grid>
+
+    <br/>
+  </mat-card-content>
+  <mat-card-actions>
+
+    <button mat-raised-button color="primary" (click)="startNewGame()">new game</button>
+    <button mat-raised-button color="warn" (click)="changeSides()" [disabled]="engineService.gameOver">change sides</button>
+  </mat-card-actions>
+
+</mat-card>

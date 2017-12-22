@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8"/>
+<title>File:Tic tac toe.svg - Wikipedia</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"File","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":6,"wgPageName":"File:Tic_tac_toe.svg","wgTitle":"Tic tac toe.svg","wgCurRevisionId":0,"wgRevisionId":0,"wgArticleId":0,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"File:Tic_tac_toe.svg","wgRelevantArticleId":0,"wgRequestId":"WKXksQpAMFAAAEcvF6oAAAAE","wgIsProbablyEditable":false,"wgRestrictionCreate":[],"wgRestrictionUpload":[],"wgFlaggedRevsParams":{"tags":{}},"wgStableRevisionId":null,"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"preview":false,"publish":false},"wgBetaFeaturesFeatures":[],"wgMediaViewerOnClick":true,"wgMediaViewerEnabledByDefault":true,"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","usePageImages":true,"usePageDescriptions":true},"wgPreferredVariant":"en","wgMFDisplayWikibaseDescriptions":{"search":true,"nearby":true,"watchlist":true,"tagline":true},"wgRelatedArticles":null,"wgRelatedArticlesUseCirrusSearch":true,"wgRelatedArticlesOnlyUseCirrusSearch":false,"wgULSCurrentAutonym":"English","wgNoticeProject":"wikipedia","wgCentralNoticeCookiesToDelete":[],"wgCentralNoticeCategoriesUsingLegacy":["Fundraising","fundraising"],"wgCategoryTreePageCategoryOptions":"{\"mode\":0,\"hideprefix\":20,\"showcount\":true,\"namespaces\":false}","wgCentralAuthMobileDomain":false,"wgVisualEditorToolbarScrollOffset":0,"wgEditSubmitButtonLabelPublish":false});mw.loader.state({"ext.globalCssJs.user.styles":"ready","ext.globalCssJs.site.styles":"ready","site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"loading","user.tokens":"loading","filepage":"ready","mediawiki.action.view.filepage":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready","ext.uls.interlanguage":"ready","ext.wikimediaBadges":"ready","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready","ext.globalCssJs.user":"ready","ext.globalCssJs.site":"ready"});mw.loader.implement("user.options@0j3lz3q",function($,jQuery,require,module){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens@1dqfd7l",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["mediawiki.action.view.metadata","site","mediawiki.page.startup","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.legacy.wikibits","mediawiki.searchSuggest","ext.gadget.teahouse","ext.gadget.ReferenceTooltips","ext.gadget.watchlist-notice","ext.gadget.DRN-wizard","ext.gadget.charinsert","ext.gadget.refToolbar","ext.gadget.extra-toolbar-buttons","ext.gadget.switcher","ext.gadget.featured-articles-links","ext.centralauth.centralautologin","mmv.head","mmv.bootstrap.autostart","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","ext.eventLogging.subscriber","ext.wikimediaEvents","ext.navigationTiming","ext.uls.eventlogger","ext.uls.init","ext.uls.interface","ext.centralNotice.geoIP","ext.centralNotice.startUp","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=en&amp;modules=ext.uls.interlanguage%7Cext.visualEditor.desktopArticleTarget.noscript%7Cext.wikimediaBadges%7Cmediawiki.action.view.filepage%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.sectionAnchor%7Cmediawiki.skinning.interface%7Cskins.vector.styles&amp;only=styles&amp;skin=vector"/>
+<script async="" src="/w/load.php?debug=false&amp;lang=en&amp;modules=startup&amp;only=scripts&amp;skin=vector"></script>
+<link rel="stylesheet" href="https://commons.wikimedia.org/w/index.php?title=MediaWiki:Filepage.css&amp;action=raw&amp;maxage=1209600&amp;usemsgcache=yes&amp;ctype=text%2Fcss&amp;smaxage=1209600"/>
+<meta name="ResourceLoaderDynamicStyles" content=""/>
+<link rel="stylesheet" href="/w/load.php?debug=false&amp;lang=en&amp;modules=site.styles&amp;only=styles&amp;skin=vector"/>
+<meta name="generator" content="MediaWiki 1.29.0-wmf.11"/>
+<meta name="referrer" content="origin-when-cross-origin"/>
+<link rel="apple-touch-icon" href="/static/apple-touch/wikipedia.png"/>
+<link rel="shortcut icon" href="/static/favicon/wikipedia.ico"/>
+<link rel="search" type="application/opensearchdescription+xml" href="/w/opensearch_desc.php" title="Wikipedia (en)"/>
+<link rel="EditURI" type="application/rsd+xml" href="//en.wikipedia.org/w/api.php?action=rsd"/>
+<link rel="copyright" href="//creativecommons.org/licenses/by-sa/3.0/"/>
+<link rel="alternate" type="application/atom+xml" title="Wikipedia Atom feed" href="/w/index.php?title=Special:RecentChanges&amp;feed=atom"/>
+<link rel="canonical" href="https://commons.wikimedia.org/wiki/File:Tic_tac_toe.svg"/>
+<link rel="dns-prefetch" href="//login.wikimedia.org"/>
+<link rel="dns-prefetch" href="//meta.wikimedia.org" />
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-6 ns-subject page-File_Tic_tac_toe_svg rootpage-File_Tic_tac_toe_svg skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+							<div id="siteNotice"><!-- CentralNotice --></div>
+						<div class="mw-indicators">
+<div id="mw-indicator-commons-icon" class="mw-indicator"><a href="https://commons.wikimedia.org/wiki/File:Tic_tac_toe.svg" title="This is a file from the Wikimedia Commons"><img alt="This is a file from the Wikimedia Commons" src="//upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/15px-Commons-logo.svg.png" width="15" height="20" srcset="//upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/22px-Commons-logo.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/30px-Commons-logo.svg.png 2x" data-file-width="1024" data-file-height="1376" /></a></div>
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">File:Tic tac toe.svg</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From Wikipedia, the free encyclopedia</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text"><ul id="filetoc"><li><a href="#file">File</a></li>
+<li><a href="#filehistory">File history</a></li>
+<li><a href="#filelinks">File usage</a></li>
+<li><a href="#globalusage">Global file usage</a></li>
+<li><a href="#metadata">Metadata</a></li></ul><div class="fullImageLink" id="file"><a href="//upload.wikimedia.org/wikipedia/commons/3/32/Tic_tac_toe.svg"><img alt="File:Tic tac toe.svg" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/522px-Tic_tac_toe.svg.png" width="522" height="464" srcset="//upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/783px-Tic_tac_toe.svg.png 1.5x, //upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/1044px-Tic_tac_toe.svg.png 2x" data-file-width="522" data-file-height="464" /></a><div class="mw-filepage-resolutioninfo">Size of this PNG preview of this SVG file: <a href="//upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/522px-Tic_tac_toe.svg.png" class="mw-thumbnail-link">522 × 464 pixels</a>. <span class="mw-filepage-other-resolutions">Other resolutions: <a href="//upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/270px-Tic_tac_toe.svg.png" class="mw-thumbnail-link">270 × 240 pixels</a> | <a href="//upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/540px-Tic_tac_toe.svg.png" class="mw-thumbnail-link">540 × 480 pixels</a> | <a href="//upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/675px-Tic_tac_toe.svg.png" class="mw-thumbnail-link">675 × 600 pixels</a> | <a href="//upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/864px-Tic_tac_toe.svg.png" class="mw-thumbnail-link">864 × 768 pixels</a> | <a href="//upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/1152px-Tic_tac_toe.svg.png" class="mw-thumbnail-link">1,152 × 1,024 pixels</a>.</span></div></div>
+<div class="fullMedia"><a href="//upload.wikimedia.org/wikipedia/commons/3/32/Tic_tac_toe.svg" class="internal" title="Tic tac toe.svg">Original file</a> &#8206;<span class="fileInfo">(SVG file, nominally 522 × 464 pixels, file size: 46 KB)</span>
+</div>
+<div class="sharedUploadNotice">
+<table id="mw-sharedupload" class="plainlinks fmbox fmbox-system" role="presentation"><tr><td class="mbox-image"><a href="/wiki/File:Commons-logo.svg" class="image" title="Wikimedia Commons logo"><img alt="" src="//upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/30px-Commons-logo.svg.png" width="30" height="40" class="noviewer" srcset="//upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/45px-Commons-logo.svg.png 1.5x, //upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/59px-Commons-logo.svg.png 2x" data-file-width="1024" data-file-height="1376" /></a></td><td class="mbox-text" style="text-align: center;">This is a file from the <a href="https://commons.wikimedia.org/wiki/Main_Page" class="extiw" title="commons:Main Page">Wikimedia Commons</a>. Information from its <b><a href="https://commons.wikimedia.org/wiki/File:Tic_tac_toe.svg" class="extiw" title="commons:File:Tic tac toe.svg">description page there</a></b> is shown below.<br/><span style="font-size: smaller;">Commons is a freely licensed media file repository. <a href="https://commons.wikimedia.org/wiki/Commons:Welcome" class="extiw" title="commons:Commons:Welcome">You can help</a>.</span></td></tr></table>
+</div>
+<div id="shared-image-desc"><table class="licensetpl" style="display:none">
+<tr>
+<td><span class="licensetpl_short">Public domain</span><span class="licensetpl_long">Public domain</span><span class="licensetpl_link_req">false</span><span class="licensetpl_attr_req">false</span></td>
+</tr>
+</table>
+<table style="width:100%; clear:both; margin:0.5em auto; background-color:#f7f8ff; border:2px solid #8888aa; direction: ltr; border-spacing: 8px; padding: 0px;" class="layouttemplate mw-content-ltr" lang="en">
+<tr>
+<td><img alt="PD-icon.svg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/PD-icon.svg/64px-PD-icon.svg.png" width="64" height="64" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/PD-icon.svg/96px-PD-icon.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/PD-icon.svg/128px-PD-icon.svg.png 2x" data-file-width="196" data-file-height="196" /></td>
+<td><i>This file is <b>ineligible for <a href="https://en.wikipedia.org/wiki/copyrights" class="extiw" title="w:copyrights">copyright</a></b> and therefore in the <b><a href="https://en.wikipedia.org/wiki/public_domain" class="extiw" title="w:public domain">public domain</a></b> because it consists entirely of information that is <a href="//commons.wikimedia.org/wiki/Commons:Threshold_of_originality" title="Commons:Threshold of originality">common property and contains no original authorship</a>.</i></td>
+</tr>
+</table>
+<div class="hproduct commons-file-information-table">
+<table class="fileinfotpl-type-information toccolours vevent mw-content-ltr" style="width: 100%; direction: ltr;" cellpadding="4">
+<tr style="vertical-align: top">
+<td id="fileinfotpl_desc" class="fileinfo-paramfield" lang="en">Description<span class="summary fn" style="display:none">Tic tac toe.svg</span></td>
+<td class="description">
+<div class="description mw-content-ltr en" dir="ltr" lang="en" style=""><span class="language en" title=""><b>English:</b></span> A typical game of tic tac toe</div>
+<div class="description mw-content-ltr tl" dir="ltr" lang="tl" style=""><span class="language tl" title="Tagalog"><b>Tagalog:</b></span> Isang tipikal na laro ng tic tac toe</div>
+<ul>
+<li>
+<div class="description mw-content-ltr en" dir="ltr" lang="en" style=""><span class="language en" title=""><b>English:</b></span> Tic tac toe.</div>
+</li>
+<li>
+<div class="description mw-content-ltr es" dir="ltr" lang="es" style=""><span class="language es" title="Español"><b>Español:</b></span> Ta te ti</div>
+</li>
+<li>
+<div class="description mw-content-ltr pl" dir="ltr" lang="pl" style=""><span class="language pl" title=""><b>Polski:</b></span> Kółko i krzyżyk.</div>
+</li>
+<li>
+<div class="description mw-content-ltr pt" dir="ltr" lang="pt" style=""><span class="language pt" title=""><b>Português:</b></span> Jogo da velha (pt-br) ou jogo do galo (pt-pt)</div>
+</li>
+<li>
+<div class="description mw-content-ltr ro" dir="ltr" lang="ro" style=""><span class="language ro" title=""><b>Română:</b></span> X şi 0 (X and 0)</div>
+</li>
+<li>
+<div class="description mw-content-ltr tl" dir="ltr" lang="tl" style=""><span class="language tl" title="Tagalog"><b>Tagalog:</b></span> Tic tac toe.</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top">
+<td id="fileinfotpl_date" class="fileinfo-paramfield" lang="en">Date</td>
+<td lang="en"><span style="white-space:nowrap"><time class="dtstart" datetime="2009-05-06">6 May 2009</time></span></td>
+</tr>
+<tr style="vertical-align: top">
+<td id="fileinfotpl_src" class="fileinfo-paramfield" lang="en">Source</td>
+<td><span class="int-own-work" lang="en">Own work</span></td>
+</tr>
+<tr style="vertical-align: top">
+<td id="fileinfotpl_aut" class="fileinfo-paramfield" lang="en">Author</td>
+<td><a href="//commons.wikimedia.org/wiki/User:Symode09" title="User:Symode09">Symode09</a></td>
+</tr>
+<tr style="vertical-align: top">
+<td id="fileinfotpl_ver" class="fileinfo-paramfield" lang="en">Other versions</td>
+<td>
+<p>Derivative works of this file:&#160;<a href="//commons.wikimedia.org/wiki/File:Tic_tac_toe-js.svg" title="File:Tic tac toe-js.svg">Tic tac toe-js.svg</a></p>
+</td>
+</tr>
+</table>
+</div>
+
+
+<!-- 
+NewPP limit report
+Parsed by mw1178
+Cached time: 20170212031146
+Cache expiry: 86400
+Dynamic content: true
+CPU time usage: 0.072 seconds
+Real time usage: 0.104 seconds
+Preprocessor visited node count: 1617/1000000
+Preprocessor generated node count: 0/1500000
+Post‐expand include size: 12128/2097152 bytes
+Template argument size: 5958/2097152 bytes
+Highest expansion depth: 15/40
+Expensive parser function count: 2/500
+Lua time usage: 0.016/10.000 seconds
+Lua memory usage: 1,023 KB/50 MB
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%   88.310      1 -total
+ 70.65%   62.395      1 Template:Information
+ 30.43%   26.875      2 Template:Autotranslate
+ 29.27%   25.851      1 Template:PD-ineligible
+ 16.13%   14.248      1 Template:DerivativeVersions
+ 10.32%    9.111      1 Template:ISOdate
+  8.69%    7.675      8 Template:Description
+  8.22%    7.261      1 Template:Years_since
+  7.83%    6.913      1 Template:F
+  6.58%    5.813     20 Template:Dir
+-->
+
+<!-- Saved in parser cache with key commonswiki:pcache:idhash:2064271-1!*!0!*!en!4!* and timestamp 20170212031146 and revision id 232684273
+ -->
+</div>
+<h2 id="filehistory">File history</h2>
+<div id="mw-imagepage-section-filehistory">
+<p>Click on a date/time to view the file as it appeared at that time.
+</p>
+<table class="wikitable filehistory">
+<tr><th></th><th>Date/Time</th><th>Thumbnail</th><th>Dimensions</th><th>User</th><th>Comment</th></tr>
+<tr><td>current</td><td class='filehistory-selected' style='white-space: nowrap;'><a href="//upload.wikimedia.org/wikipedia/commons/3/32/Tic_tac_toe.svg">05:22, 6 May 2007</a></td><td><a href="//upload.wikimedia.org/wikipedia/commons/3/32/Tic_tac_toe.svg"><img alt="Thumbnail for version as of 05:22, 6 May 2007" src="//upload.wikimedia.org/wikipedia/commons/thumb/3/32/Tic_tac_toe.svg/120px-Tic_tac_toe.svg.png" width="120" height="107" data-file-width="522" data-file-height="464" /></a></td><td>522 × 464 <span style="white-space: nowrap;">(46 KB)</span></td><td>Symode09</td><td dir="ltr">{{Information |Description= A typical game of tic tac toe  * {{en|Tic tac toe.}} * {{es|Ta te ti}} * {{pl|Kółko i krzyżyk.}} * {{pt|Jogo da velha (pt-br) ou jogo do galo (pt-pt)}} * {{ro|X şi 0 (X and 0)}}  |Source=self-made |Date= {{date}} |Author= [</td></tr>
+</table>
+
+</div>
+<h2 id="filelinks">File usage</h2>
+<div id='mw-imagepage-section-linkstoimage'>
+<p>More than 100 pages link to this file.
+The following list shows the first 100 page links to this file only.
+A <a href="/wiki/Special:WhatLinksHere/File:Tic_tac_toe.svg" title="Special:WhatLinksHere/File:Tic tac toe.svg">full list</a> is available.
+</p><ul class="mw-imagepage-linkstoimage">
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/1940s_in_games" title="1940s in games">1940s in games</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/3D_Life" title="3D Life">3D Life</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/3D_tic-tac-toe" title="3D tic-tac-toe">3D tic-tac-toe</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Ants_in_the_Pants" title="Ants in the Pants">Ants in the Pants</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Bag_(puzzle)" title="Bag (puzzle)">Bag (puzzle)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Beer_and_pretzels_game" title="Beer and pretzels game">Beer and pretzels game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Big_Deal:_A_Year_as_a_Professional_Poker_Player" title="Big Deal: A Year as a Professional Poker Player">Big Deal: A Year as a Professional Poker Player</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Big_Monster_Toys" title="Big Monster Toys">Big Monster Toys</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Bigger_Deal:_A_Year_Inside_the_Poker_Boom" title="Bigger Deal: A Year Inside the Poker Boom">Bigger Deal: A Year Inside the Poker Boom</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Blow_football" title="Blow football">Blow football</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Blue_Chairs" title="Blue Chairs">Blue Chairs</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Bont" title="Bont">Bont</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Bull%27s-Eye_Ball" title="Bull's-Eye Ball">Bull&#039;s-Eye Ball</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Canada_Games_Company" title="Canada Games Company">Canada Games Company</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Car_game" title="Car game">Car game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Clackers" title="Clackers">Clackers</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Collectable_action_figure_game" title="Collectable action figure game">Collectable action figure game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Don%27t_Break_the_Ice" title="Don't Break the Ice">Don&#039;t Break the Ice</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/DunDraCon" title="DunDraCon">DunDraCon</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Elephant%27s_foot_umbrella_stand" title="Elephant's foot umbrella stand">Elephant&#039;s foot umbrella stand</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Faceball" title="Faceball">Faceball</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Fantasy_sports_stock_simulation" title="Fantasy sports stock simulation">Fantasy sports stock simulation</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Fantasy_wargame" title="Fantasy wargame">Fantasy wargame</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Find_the_alphabet" title="Find the alphabet">Find the alphabet</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Flag-rush" title="Flag-rush">Flag-rush</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Fortunately,_Unfortunately" title="Fortunately, Unfortunately">Fortunately, Unfortunately</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Forty_forty" title="Forty forty">Forty forty</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/GameStorm.org" title="GameStorm.org">GameStorm.org</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Game_of_chance" title="Game of chance">Game of chance</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Games_of_dare" title="Games of dare">Games of dare</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Gomoku" title="Gomoku">Gomoku</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Hales%E2%80%93Jewett_theorem" title="Hales–Jewett theorem">Hales–Jewett theorem</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Hand_game" title="Hand game">Hand game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Hanetsuki" title="Hanetsuki">Hanetsuki</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Harary%27s_generalized_tic-tac-toe" title="Harary's generalized tic-tac-toe">Harary&#039;s generalized tic-tac-toe</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Impulse-based_turn_system" title="Impulse-based turn system">Impulse-based turn system</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/International_String_Figure_Association" title="International String Figure Association">International String Figure Association</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Jack-in-the-box" title="Jack-in-the-box">Jack-in-the-box</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Lame_duck_(game_design)" title="Lame duck (game design)">Lame duck (game design)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Letter_bank" title="Letter bank">Letter bank</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Lexiko" title="Lexiko">Lexiko</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/L%C3%ADngua_do_P%C3%AA" title="Língua do Pê">Língua do Pê</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/M,n,k-game" title="M,n,k-game">M,n,k-game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/MASH_(game)" title="MASH (game)">MASH (game)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Makura-Nage" title="Makura-Nage">Makura-Nage</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Matching_game" title="Matching game">Matching game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/McLoughlin_Brothers" title="McLoughlin Brothers">McLoughlin Brothers</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Mixed_reality_game" title="Mixed reality game">Mixed reality game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Mr._Bucket" title="Mr. Bucket">Mr. Bucket</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Muk-jji-ppa" title="Muk-jji-ppa">Muk-jji-ppa</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/National_Games_Week" title="National Games Week">National Games Week</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Nine_Men%27s_Morris" title="Nine Men's Morris">Nine Men&#039;s Morris</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Normal_play_convention" title="Normal play convention">Normal play convention</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/OXO" title="OXO">OXO</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Odds_and_evens" title="Odds and evens">Odds and evens</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Paper-and-pencil_game" title="Paper-and-pencil game">Paper-and-pencil game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Payana" title="Payana">Payana</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Pencil_flick" title="Pencil flick">Pencil flick</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Pente" title="Pente">Pente</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Piljke" title="Piljke">Piljke</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Pitching_pennies" title="Pitching pennies">Pitching pennies</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Propataireachd" title="Propataireachd">Propataireachd</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Quantum_tic-tac-toe" title="Quantum tic-tac-toe">Quantum tic-tac-toe</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Quarto_(board_game)" title="Quarto (board game)">Quarto (board game)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Queenie,_Queenie,_who%27s_got_the_ball%3F" title="Queenie, Queenie, who's got the ball?">Queenie, Queenie, who&#039;s got the ball?</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Quiet_game" title="Quiet game">Quiet game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Race_game_(paper_and_pencil_game)" title="Race game (paper and pencil game)">Race game (paper and pencil game)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Renju" title="Renju">Renju</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Rest_of_the_world_in_sports_and_games" title="Rest of the world in sports and games">Rest of the world in sports and games</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Risley_(circus_act)" title="Risley (circus act)">Risley (circus act)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/SOS_(game)" title="SOS (game)">SOS (game)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Score_Four" title="Score Four">Score Four</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Seven_minutes_in_heaven" title="Seven minutes in heaven">Seven minutes in heaven</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Sherlock_Holmes:_Consulting_Detective_(gamebook)" title="Sherlock Holmes: Consulting Detective (gamebook)">Sherlock Holmes: Consulting Detective (gamebook)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Sleeping_lions" title="Sleeping lions">Sleeping lions</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Spellbinder_(game)" title="Spellbinder (game)">Spellbinder (game)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Spellcaster" title="Spellcaster">Spellcaster</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Spellenspektakel" title="Spellenspektakel">Spellenspektakel</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Spiel" title="Spiel">Spiel</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Spin_the_bottle" title="Spin the bottle">Spin the bottle</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Spoken_game" title="Spoken game">Spoken game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Strategy-stealing_argument" title="Strategy-stealing argument">Strategy-stealing argument</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Street_game" title="Street game">Street game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Subgame_perfect_equilibrium" title="Subgame perfect equilibrium">Subgame perfect equilibrium</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/The_Man_Who_Melted_Jack_Dann" title="The Man Who Melted Jack Dann">The Man Who Melted Jack Dann</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/The_chocolate_game" title="The chocolate game">The chocolate game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Three-legged_race" title="Three-legged race">Three-legged race</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Three_Men%27s_Morris" title="Three Men's Morris">Three Men&#039;s Morris</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Tic-tac-toe" title="Tic-tac-toe">Tic-tac-toe</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Tin_Can_Alley" title="Tin Can Alley">Tin Can Alley</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/USA_Rock_Paper_Scissors_League" title="USA Rock Paper Scissors League">USA Rock Paper Scissors League</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Variation_(game)" title="Variation (game)">Variation (game)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Who%27s_Missing_(game)" title="Who's Missing (game)">Who&#039;s Missing (game)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Wire_loop_game" title="Wire loop game">Wire loop game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Women%27s_International_Bowling_Congress" title="Women's International Bowling Congress">Women&#039;s International Bowling Congress</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Word_Freak_(book)" title="Word Freak (book)">Word Freak (book)</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Word_chain" title="Word chain">Word chain</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Zero-player_game" title="Zero-player game">Zero-player game</a></li>
+<li class="mw-imagepage-linkstoimage-ns0"><a href="/wiki/Zip_(game)" title="Zip (game)">Zip (game)</a></li>
+<li class="mw-imagepage-linkstoimage-ns2"><a href="/wiki/User:EvocativeIntrigue/ESP:CL" title="User:EvocativeIntrigue/ESP:CL">User:EvocativeIntrigue/ESP:CL</a></li>
+</ul>
+</div>
+<h2 id="globalusage">Global file usage</h2>
+<div id="mw-imagepage-section-globalusage"><p>The following other wikis use this file:
+</p><ul>
+<li class='mw-gu-onwiki-ar_wikibooks_org'>Usage on ar.wikibooks.org
+<ul>	<li><a class="external" href="//ar.wikibooks.org/wiki/%D9%88%D9%8A%D9%83%D9%8A_%D8%A7%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84:%D8%A7%D9%84%D8%A3%D8%B1%D9%82%D8%A7%D9%85_%D8%A7%D9%84%D8%B5%D8%BA%D9%8A%D8%B1%D8%A9/9">ويكي الأطفال:الأرقام الصغيرة/9</a></li>
+</ul></li>
+<li class='mw-gu-onwiki-as_wikipedia_org'>Usage on as.wikipedia.org
+<ul>	<li><a class="external" href="//as.wikipedia.org/wiki/%E0%A6%B8%E0%A6%BE%E0%A6%81%E0%A6%9A:Game-stub">সাঁচ:Game-stub</a></li>
+</ul></li>
+<li class='mw-gu-onwiki-be-tarask_wikipedia_org'>Usage on be-tarask.wikipedia.org
+<ul>	<li><a class="external" href="//be-tarask.wikipedia.org/wiki/%D0%93%D1%83%D0%BB%D1%8C%D0%BD%D1%8F">Гульня</a></li>
+	<li><a class="external" href="//be-tarask.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D1%91%D0%BD:%D0%9D%D0%B0%D0%BA%D1%96%D0%B4:%D0%93%D1%83%D0%BB%D1%8C%D0%BD%D1%8F">Шаблён:Накід:Гульня</a></li>
+	<li><a class="external" href="//be-tarask.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B4%D1%8B%D1%91%D1%81%D0%BF%D0%BE%D1%80%D1%82">Радыёспорт</a></li>
+</ul></li>
+<li class='mw-gu-onwiki-bg_wikipedia_org'>Usage on bg.wikipedia.org
+<ul>	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%9E%D1%84%D0%B8%D1%86%D0%B5%D1%80_(%D1%88%D0%B0%D1%85%D0%BC%D0%B0%D1%82)">Офицер (шахмат)</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A2%D0%BE%D0%BF_(%D1%88%D0%B0%D1%85%D0%BC%D0%B0%D1%82)">Топ (шахмат)</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A2%D0%B0%D0%BF%D0%B0_(%D0%B8%D0%B3%D1%80%D0%B0)">Тапа (игра)</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BD_(%D1%88%D0%B0%D1%85%D0%BC%D0%B0%D1%82)">Кон (шахмат)</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A5%D0%B5%D1%82%D1%82%D1%80%D0%B8%D0%BA">Хеттрик</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%9B%D0%B0%D0%B7%D0%B5%D1%80%D1%82%D0%B0%D0%B3">Лазертаг</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B7%D0%B2%D0%B0%D0%BB%D0%B5%D0%BD_%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD">Развален телефон</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A1%D0%BA%D1%80%D0%B0%D0%B1%D1%8A%D0%BB">Скрабъл</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD:%D0%98%D0%B3%D1%80%D0%B0">Шаблон:Игра</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/Age_of_Wonders">Age of Wonders</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD:%D0%98%D0%B3%D1%80%D0%B0-%D0%BC%D1%8A%D0%BD%D0%B8%D1%87%D0%B5">Шаблон:Игра-мъниче</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A2%D0%B0%D0%BD%D0%B3%D1%80%D0%B0%D0%BC">Танграм</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%91%D1%83%D1%82%D0%B8%D0%BB%D0%BA%D0%B0_(%D0%B8%D0%B3%D1%80%D0%B0)">Бутилка (игра)</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%94%D0%B6%D0%B8%D0%BD_%D0%9A%D0%B0%D0%B7%D0%B0%D0%BC%D0%B0">Джин Казама</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A0%D1%83%D1%81%D0%BA%D0%B0_%D1%80%D1%83%D0%BB%D0%B5%D1%82%D0%BA%D0%B0">Руска рулетка</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A4%D1%83%D0%BD%D0%B8%D0%B9%D0%BA%D0%B8">Фунийки</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%90%D1%80%D0%BA%D0%B0%D0%B4%D0%BD%D0%B0_%D0%B8%D0%B3%D1%80%D0%B0">Аркадна игра</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%98%D0%B3%D1%80%D0%B0_%D1%81_%D0%BA%D0%B0%D1%80%D1%82%D0%B8">Игра с карти</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%90%D1%88%D0%B8%D0%BA">Ашик</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A2%D0%B0%D1%84%D0%BB">Тафл</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A5%D0%B5%D0%BA_(%D0%B8%D0%B3%D1%80%D0%B0)">Хек (игра)</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%9F%D0%B8%D0%BA%D0%B0">Пика</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/Virus_(%D0%BA%D0%BE%D0%BC%D0%BF%D1%8E%D1%82%D1%8A%D1%80%D0%BD%D0%B0_%D0%B8%D0%B3%D1%80%D0%B0)">Virus (компютърна игра)</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/24:_%D0%98%D0%B3%D1%80%D0%B0%D1%82%D0%B0">24: Играта</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A4%D0%B8%D0%BD%D0%B3%D1%8A%D1%80%D0%B1%D0%BE%D1%80%D0%B4">Фингърборд</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%90%D0%BD%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%B0">Анаграма</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%90%D0%B7%D0%B5%D1%80%D0%BE%D1%82">Азерот</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%93%D0%BB%D0%B5%D0%B4%D0%B0%D0%B9_%D1%81%D0%B8_%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B0%D1%82%D0%B0">Гледай си работата</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/Big_Fat_Awesome_House_Party">Big Fat Awesome House Party</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A1%D0%B5%D1%80%D0%B8%D0%BE%D0%B7%D0%BD%D0%B0_%D0%B8%D0%B3%D1%80%D0%B0">Сериозна игра</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%9E%D1%85%D0%B5%D0%BB">Охел</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/Condemned:_Criminal_Origins">Condemned: Criminal Origins</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%98%D0%B3%D1%80%D0%B0_%D0%BD%D0%B0_%D1%82%D1%80%D0%BE%D0%BD%D0%BE%D0%B2%D0%B5_(%D0%BD%D0%B0%D1%81%D1%82%D0%BE%D0%BB%D0%BD%D0%B0_%D0%B8%D0%B3%D1%80%D0%B0)">Игра на тронове (настолна игра)</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%B0%D0%B6%D0%B0%D1%80%D0%B8_%D0%B8_%D0%B0%D0%BF%D0%B0%D1%88%D0%B8">Стражари и апаши</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/Pro_Evolution_Soccer_2012">Pro Evolution Soccer 2012</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A8%D0%B0%D1%85_(%D1%88%D0%B0%D1%85%D0%BC%D0%B0%D1%82)">Шах (шахмат)</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/Need_For_Speed:_Most_Wanted_(2012)">Need For Speed: Most Wanted (2012)</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%A8%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD:%D0%98%D0%B3%D1%80%D0%B0/doc">Шаблон:Игра/doc</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/Bio-Attack">Bio-Attack</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%92%D1%8A%D0%B7%D0%B4%D1%83%D1%88%D0%B5%D0%BD_%D1%85%D0%BE%D0%BA%D0%B5%D0%B9">Въздушен хокей</a></li>
+	<li><a class="external" href="//bg.wikipedia.org/wiki/%D0%94%D0%BE%D0%B1%D1%8A%D0%BB">Добъл</a></li>
+</ul></li>
+<li class='mw-gu-onwiki-bh_wikipedia_org'>Usage on bh.wikipedia.org
+<ul>	<li><a class="external" href="//bh.wikipedia.org/wiki/%E0%A4%9F%E0%A5%87%E0%A4%AE%E0%A5%8D%E0%A4%AA%E0%A4%B2%E0%A5%87%E0%A4%9F:%E0%A4%97%E0%A5%87%E0%A4%AE-%E0%A4%86%E0%A4%A7%E0%A4%BE%E0%A4%B0">टेम्पलेट:गेम-आधार</a></li>
+	<li><a class="external" href="//bh.wikipedia.org/wiki/%E0%A4%AA%E0%A5%8B%E0%A4%95%E0%A5%87%E0%A4%AE%E0%A5%8B%E0%A4%A8">पोकेमोन</a></li>
+</ul></li>
+<li class='mw-gu-onwiki-bn_wikibooks_org'>Usage on bn.wikibooks.org
+<ul>	<li><a class="external" href="//bn.wikibooks.org/wiki/%E0%A6%89%E0%A6%87%E0%A6%95%E0%A6%BF%E0%A6%B6%E0%A7%88%E0%A6%B6%E0%A6%AC:%E0%A6%9B%E0%A7%8B%E0%A6%9F%E0%A7%8B_%E0%A6%B8%E0%A6%82%E0%A6%96%E0%A7%8D%E0%A6%AF%E0%A6%BE/%E0%A7%AF">উইকিশৈশব:ছোটো সংখ্যা/৯</a></li>
+</ul></li>
+<li class='mw-gu-onwiki-da_wikipedia_org'>Usage on da.wikipedia.org
+<ul>	<li><a class="external" href="//da.wikipedia.org/wiki/Kryds_og_bolle">Kryds og bolle</a></li>
+</ul></li>
+</ul>
+<p>View <a href="/wiki/Special:GlobalUsage/Tic_tac_toe.svg" title="Special:GlobalUsage/Tic tac toe.svg">more global usage</a> of this file.
+</p></div><h2 id="metadata">Metadata</h2>
+<div class="mw-imagepage-section-metadata">This file contains additional information, probably added from the digital camera or scanner used to create or digitize it.
+If the file has been modified from its original state, some details may not fully reflect the modified file.<table id="mw_metadata" class="mw_metadata">
+<tr class="exif-imagewidth collapsable">
+<th>Width</th>
+<td>522.48999</td>
+</tr><tr class="exif-imagelength collapsable">
+<th>Height</th>
+<td>464.26999</td>
+</tr></table>
+</div>
+<noscript><img src="//en.wikipedia.org/wiki/Special:CentralAutoLogin/start?type=1x1" alt="" title="" width="1" height="1" style="border: none; position: absolute;" /></noscript></div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://en.wikipedia.org/wiki/File:Tic_tac_toe.svg">https://en.wikipedia.org/wiki/File:Tic_tac_toe.svg</a>"					</div>
+				<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-anonuserpage">Not logged in</li><li id="pt-anontalk"><a href="/wiki/Special:MyTalk" title="Discussion about edits from this IP address [n]" accesskey="n">Talk</a></li><li id="pt-anoncontribs"><a href="/wiki/Special:MyContributions" title="A list of edits made from this IP address [y]" accesskey="y">Contributions</a></li><li id="pt-createaccount"><a href="/w/index.php?title=Special:CreateAccount&amp;returnto=File%3ATic+tac+toe.svg" title="You are encouraged to create an account and log in; however, it is not mandatory">Create account</a></li><li id="pt-login"><a href="/w/index.php?title=Special:UserLogin&amp;returnto=File%3ATic+tac+toe.svg" title="You're encouraged to log in; however, it's not mandatory. [o]" accesskey="o">Log in</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li  id="ca-nstab-image" class="selected"><span><a href="/wiki/File:Tic_tac_toe.svg"  title="View the file page [c]" accesskey="c">File</a></span></li>
+															<li  id="ca-talk"><span><a href="/wiki/File_talk:Tic_tac_toe.svg"  title="Discussion about the content page [t]" accesskey="t" rel="discussion">Talk</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label">
+							<span>Variants</span><a href="#"></a>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="/wiki/File:Tic_tac_toe.svg" >Read</a></span></li>
+															<li id="ca-view-foreign" class="collapsible"><span><a href="https://commons.wikimedia.org/wiki/File:Tic_tac_toe.svg" >View on Commons</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label">
+						<h3 id="p-cactions-label"><span>More</span><a href="#"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/w/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Search Wikipedia" title="Search Wikipedia [f]" accesskey="f" id="searchInput"/><input type="hidden" value="Special:Search" name="title"/><input type="submit" name="fulltext" value="Search" title="Search Wikipedia for this text" id="mw-searchButton" class="searchButton mw-fallbackSearchButton"/><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton"/>							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="/wiki/Main_Page"  title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id='p-navigation' aria-labelledby='p-navigation-label'>
+			<h3 id='p-navigation-label'>Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="/wiki/Main_Page" title="Visit the main page [z]" accesskey="z">Main page</a></li><li id="n-contents"><a href="/wiki/Portal:Contents" title="Guides to browsing Wikipedia">Contents</a></li><li id="n-featuredcontent"><a href="/wiki/Portal:Featured_content" title="Featured content – the best of Wikipedia">Featured content</a></li><li id="n-currentevents"><a href="/wiki/Portal:Current_events" title="Find background information on current events">Current events</a></li><li id="n-randompage"><a href="/wiki/Special:Random" title="Load a random article [x]" accesskey="x">Random article</a></li><li id="n-sitesupport"><a href="https://donate.wikimedia.org/wiki/Special:FundraiserRedirector?utm_source=donate&amp;utm_medium=sidebar&amp;utm_campaign=C13_en.wikipedia.org&amp;uselang=en" title="Support us">Donate to Wikipedia</a></li><li id="n-shoplink"><a href="//shop.wikimedia.org" title="Visit the Wikipedia store">Wikipedia store</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-interaction' aria-labelledby='p-interaction-label'>
+			<h3 id='p-interaction-label'>Interaction</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-help"><a href="/wiki/Help:Contents" title="Guidance on how to use and edit Wikipedia">Help</a></li><li id="n-aboutsite"><a href="/wiki/Wikipedia:About" title="Find out about Wikipedia">About Wikipedia</a></li><li id="n-portal"><a href="/wiki/Wikipedia:Community_portal" title="About the project, what you can do, where to find things">Community portal</a></li><li id="n-recentchanges"><a href="/wiki/Special:RecentChanges" title="A list of recent changes in the wiki [r]" accesskey="r">Recent changes</a></li><li id="n-contactpage"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us" title="How to contact Wikipedia">Contact page</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-tb' aria-labelledby='p-tb-label'>
+			<h3 id='p-tb-label'>Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="/wiki/Special:WhatLinksHere/File:Tic_tac_toe.svg" title="List of all English Wikipedia pages containing links to this page [j]" accesskey="j">What links here</a></li><li id="t-upload"><a href="/wiki/Wikipedia:File_Upload_Wizard" title="Upload files [u]" accesskey="u">Upload file</a></li><li id="t-specialpages"><a href="/wiki/Special:SpecialPages" title="A list of all special pages [q]" accesskey="q">Special pages</a></li><li id="t-info"><a href="/w/index.php?title=File:Tic_tac_toe.svg&amp;action=info" title="More information about this page">Page information</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id='p-lang' aria-labelledby='p-lang-label'>
+			<h3 id='p-lang-label'>Languages</h3>
+
+			<div class="body">
+									<ul>
+											</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="https://wikimediafoundation.org/wiki/Privacy_policy" class="extiw" title="wmf:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="/wiki/Wikipedia:About" title="Wikipedia:About">About Wikipedia</a></li>
+											<li id="footer-places-disclaimer"><a href="/wiki/Wikipedia:General_disclaimer" title="Wikipedia:General disclaimer">Disclaimers</a></li>
+											<li id="footer-places-contact"><a href="//en.wikipedia.org/wiki/Wikipedia:Contact_us">Contact Wikipedia</a></li>
+											<li id="footer-places-developers"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/How_to_contribute">Developers</a></li>
+											<li id="footer-places-cookiestatement"><a href="https://wikimediafoundation.org/wiki/Cookie_statement">Cookie statement</a></li>
+											<li id="footer-places-mobileview"><a href="//en.m.wikipedia.org/w/index.php?title=File:Tic_tac_toe.svg&amp;mobileaction=toggle_view_mobile" class="noprint stopMobileRedirectToggle">Mobile view</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="https://wikimediafoundation.org/"><img src="/static/images/wikimedia-button.png" srcset="/static/images/wikimedia-button-1.5x.png 1.5x, /static/images/wikimedia-button-2x.png 2x" width="88" height="31" alt="Wikimedia Foundation"/></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="//www.mediawiki.org/"><img src="/static/images/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/static/images/poweredby_mediawiki_132x47.png 1.5x, /static/images/poweredby_mediawiki_176x62.png 2x" width="88" height="31"/></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":136,"wgHostname":"mw1245"});});</script>
+	</body>
+</html>
