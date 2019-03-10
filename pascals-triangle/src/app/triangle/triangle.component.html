@@ -1,0 +1,14 @@
+<form>
+  <div>Height: <input type="text" name="height" [(ngModel)]="triangleService.state.height" /></div>
+  <div>Seed: <input type="text" name="seed" [(ngModel)]="triangleService.state.seed" /></div>
+  <div>{{ triangleService.state.height }}</div>
+</form>
+<hr />
+<div>Duration: {{ triangleService.state.duration }} milliseconds</div>
+<table>
+  <tr *ngFor="let row of triangleService.state.triangle">
+    <td *ngFor="let col of row">
+      {{ col.value }}
+    </td>
+  </tr>
+</table>

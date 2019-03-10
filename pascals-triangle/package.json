@@ -1,0 +1,39 @@
+{
+  "name": "pascals-triangle",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~7.2.0",
+    "@angular/common": "~7.2.0",
+    "@angular/compiler": "~7.2.0",
+    "@angular/core": "~7.2.0",
+    "@angular/forms": "~7.2.0",
+    "@angular/platform-browser": "~7.2.0",
+    "@angular/platform-browser-dynamic": "~7.2.0",
+    "@angular/router": "~7.2.0",
+    "core-js": "^2.6.5",
+    "mobx": "^5.9.0",
+    "rxjs": "~6.4.0",
+    "tslib": "^1.9.3",
+    "zone.js": "~0.8.29"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.13.5",
+    "@angular/cli": "~7.3.5",
+    "@angular/compiler-cli": "~7.2.0",
+    "@angular/language-service": "~7.2.0",
+    "@types/node": "~11.10.5",
+    "codelyzer": "~4.5.0",
+    "ts-node": "~8.0.3",
+    "tslint": "~5.13.1",
+    "typescript": "~3.2.2"
+  }
+}
