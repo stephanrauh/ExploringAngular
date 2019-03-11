@@ -1,14 +1,32 @@
 <form>
   <div>Height: <input type="text" name="height" [(ngModel)]="triangleService.state.height" /></div>
-  <div>Seed: <input type="text" name="seed" [(ngModel)]="triangleService.state.seed" /></div>
-  <div>{{ triangleService.state.height }}</div>
+  <div>Seed: <input type="text" name="seed" [(ngModel)]="triangleService.seed" /></div>
 </form>
 <hr />
+<div>MobX State</div>
+<div>Duration: {{ triangleService.mobxDuration }} milliseconds</div>
+
+<table *ngIf="triangleService.state.height < 10">
+  <tr *ngFor="let row of triangleService.mobxstate.triangle">
+    <td *ngFor="let col of row">
+      {{ col.value }}
+    </td>
+  </tr>
+</table>
+
+<div>
+  MobX sum:
+  {{ triangleService.mobxstate.sum }}
+</div>
+
+<div>Basic JavaScript</div>
 <div>Duration: {{ triangleService.state.duration }} milliseconds</div>
-<table>
+<table *ngIf="triangleService.state.height < 10">
   <tr *ngFor="let row of triangleService.state.triangle">
     <td *ngFor="let col of row">
       {{ col.value }}
     </td>
   </tr>
 </table>
+
+{{ triangleService.state.sum }}

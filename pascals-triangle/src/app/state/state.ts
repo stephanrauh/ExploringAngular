@@ -8,6 +8,7 @@ export class State {
   triangle: Cell[][];
   private _height: number;
   private _seed: number;
+  public sum: number;
   duration: number;
 
   get seed() {
@@ -15,8 +16,12 @@ export class State {
   }
 
   set seed(s: number) {
+    const t0 = performance.now();
     this._seed = s;
     this.calculate();
+    console.log((this.sum = this.calculateSum()));
+    const t1 = performance.now();
+    this.duration = Math.round(1000 * (t1 - t0)) / 1000;
   }
 
   get height() {
@@ -24,13 +29,26 @@ export class State {
   }
 
   set height(h: number) {
+    const t0 = performance.now();
     this._height = h;
     this.calculate();
+    this.sum = this.calculateSum();
+    const t1 = performance.now();
+    this.duration = Math.round(1000 * (t1 - t0)) / 1000;
+  }
+
+  private calculateSum(): number {
+    let s = 0;
+    if (this.triangle)
+      for (const r of this.triangle) {
+        for (const c of r) {
+          s += c.value;
+        }
+      }
+    return s;
   }
 
   constructor(height: number, seed: number) {
-    this.height = height;
-    this.seed = seed;
     this.triangle = new Array<Array<Cell>>();
     for (let row = 0; row < height; row++) {
       this.triangle.push(new Array<Cell>());
@@ -48,12 +66,12 @@ export class State {
       }
     }
     this.calculate();
+    this.height = height;
+    this.seed = seed;
   }
 
   public calculate(): void {
     if (this.triangle) {
-      const t0 = performance.now();
-
       for (let row = 0; row < this.triangle.length; row++) {
         for (let col = 0; col <= row; col++) {
           const c = this.triangle[row][col];
@@ -64,8 +82,6 @@ export class State {
           }
         }
       }
-      const t1 = performance.now();
-      this.duration = Math.round(1000 * (t1 - t0)) / 1000;
     }
   }
 }
