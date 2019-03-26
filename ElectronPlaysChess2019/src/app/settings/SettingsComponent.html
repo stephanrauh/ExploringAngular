@@ -1,0 +1,25 @@
+<form (ngSubmit)="onSubmit()" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Look ahead</label>
+        <div class="col-sm-6">
+            <input [(ngModel)]="chessboard.lookahead" name="lookahead" placeholder="1..5" size="1"
+                   required class="form-control" type="number"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6 control-label">breadth of calculation</label>
+        <div class="col-sm-6">
+            <input [(ngModel)]="chessboard.breadth" name="breadth"
+                   ngControl="breadth" class="form-control"
+                   placeholder="1..20" size="2" required type="number"/>
+            <div [hidden]="chessboard.breadth.valid" class="alert alert-danger hidden">
+                Breadth is required
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form>
