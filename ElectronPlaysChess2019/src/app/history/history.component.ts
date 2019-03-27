@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { ChessEngineAPI } from '../engine/chessboardUI';
+import { ChessboardUI } from '../engine/chessboardUI';
 import { Move } from '../engine/move';
 
 @Component({
-  selector: 'history',
-  templateUrl: './HistoryComponent.html'
+  selector: 'app-history',
+  templateUrl: './history.component.html'
 })
 export class HistoryComponent {
-  constructor(private chessboard: ChessEngineAPI.ChessboardUI) {}
+  constructor(private chessboard: ChessboardUI) {}
 
   public moveHistory(): Array<string> {
     const result: Array<string> = this.chessboard.moveHistory.map(

@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { ChessEngineAPI } from '../engine/chessboardUI';
 import { Move } from '../engine/move';
+import { ChessboardUI } from '../engine/chessboardUI';
 
 @Component({
-  selector: 'chess-app',
-  templateUrl: './chess.component.html',
-  styleUrls: ['./chess.component.css']
+  selector: 'app-root',
+  templateUrl: './chess-app.component.html'
 })
-// Component controller
 export class ChessAppComponent {
-  constructor(private chessboard: ChessEngineAPI.ChessboardUI) {}
+  constructor(private chessboard: ChessboardUI) {}
 
   public suggestedMove: Move = null;
 
@@ -18,7 +16,7 @@ export class ChessAppComponent {
     else return this.suggestedMove.toString();
   }
 
-  public get title(): String {
+  public get title(): string {
     let result = this.chessboard.isWhitePlaying ? 'White move ' : 'Black move ';
     if (this.chessboard.checkMate) result += ' Checkmate!';
     else if (this.chessboard.check) result += ' Check!';
@@ -34,7 +32,7 @@ export class ChessAppComponent {
 
   public turnSides(): boolean {
     this.suggestedMove = null;
-    let move = this.chessboard.suggestMove();
+    const move = this.chessboard.suggestMove();
     if (move !== null) this.chessboard.move(move);
     return false;
   }

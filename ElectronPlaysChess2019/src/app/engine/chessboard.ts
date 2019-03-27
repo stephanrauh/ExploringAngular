@@ -84,7 +84,7 @@ export class Chessboard {
     return this._moves.isLegalMove(fromRow, fromCol, toRow, toCol);
   }
 
-  moveInternally(fromRow, fromCol, toRow, toCol: number, promotion: number): number {
+  moveInternally(fromRow: number, fromCol: number, toRow: number, toCol: number, promotion: number): number {
     const original_whiteKingHasMoved = this.whiteKingHasMoved;
     const original_whiteLeftRookHasMoved = this.whiteLeftRookHasMoved;
     const original_whiteRightRookHasMoved = this.whiteRightRookHasMoved;
@@ -92,8 +92,8 @@ export class Chessboard {
     const original_blackLeftRookHasMoved = this.blackLeftRookHasMoved;
     const original_blackRightRookHasMoved = this.blackRightRookHasMoved;
     const original_enPassantCol = this.enPassantCol;
-    const piece: number = this.fields[fromRow][fromCol];
-    let targetPiece: number = this.fields[toRow][toCol];
+    const piece = this.fields[fromRow][fromCol];
+    let targetPiece = this.fields[toRow][toCol];
     let captureRow = toRow;
     this.fields[fromRow][fromCol] = 0;
     this.fields[toRow][toCol] = piece;
@@ -177,7 +177,7 @@ export class Chessboard {
     );
     return targetPiece;
   }
-  move(fromRow, fromCol, toRow, toCol: number, promotion: number): void {
+  move(fromRow: number, fromCol: number, toRow: number, toCol: number, promotion: number): void {
     const targetPiece = this.moveInternally(fromRow, fromCol, toRow, toCol, promotion);
     this.recalculateLegalMovesAndCheck();
     const move: Move = this.moveHistory[this.moveHistory.length - 1];

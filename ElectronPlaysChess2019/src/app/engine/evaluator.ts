@@ -34,8 +34,8 @@ export class Evaluator {
     500 /* G + H */
   ];
 
-  static PERFORMANCE_MEASURE_SUM: number = 0;
-  static PERFORMANCE_MEASURE_COUNT: number = 0;
+  static PERFORMANCE_MEASURE_SUM = 0;
+  static PERFORMANCE_MEASURE_COUNT = 0;
 
   public static evaluatePosition(
     chessboard: Chessboard,
@@ -43,8 +43,8 @@ export class Evaluator {
     blackThreats: number[][],
     isWhitePlaying: boolean
   ): number {
-    let PERFORMANCE_MEASURE_start = window.performance.now();
-    let fields: number[][] = chessboard.fields;
+    const PERFORMANCE_MEASURE_start = window.performance.now();
+    const fields: number[][] = chessboard.fields;
     let materialSumWhite = 0;
     let materialSumBlack = 0;
     let positionalSumWhite = 0; // white fields in the middle of the chessboard add to this number
@@ -58,7 +58,7 @@ export class Evaluator {
 
     for (let row = 0; row < 8; row++) {
       for (let col = 0; col < 8; col++) {
-        let piece = fields[row][col];
+        const piece = fields[row][col];
         if (piece > 0) {
           // white
           materialSumWhite += PieceUtils.materialValue(piece);
@@ -70,7 +70,7 @@ export class Evaluator {
             }
           } else positionalSumWhite += Evaluator.POSITIONAL_VALUES[row][col];
           let threatLevel = blackThreats[row][col] - whiteThreats[row][col];
-          if (isWhitePlaying) threatLevel++; //the own piece is threatened - white must react
+          if (isWhitePlaying) threatLevel++; // the own piece is threatened - white must react
           threatSumWhite += threatLevel * Evaluator.WHITE_PAWN_POSITION_VALUES[row][col];
         } else if (piece < 0) {
           // black
@@ -83,11 +83,11 @@ export class Evaluator {
             }
           } else positionalSumBlack += Evaluator.POSITIONAL_VALUES[7 - row][col];
           let threatLevel = whiteThreats[row][col] - blackThreats[row][col];
-          if (!isWhitePlaying) threatLevel++; //the own piece is threatened - white must react
+          if (!isWhitePlaying) threatLevel++; // the own piece is threatened - white must react
           threatSumBlack += threatLevel * Evaluator.WHITE_PAWN_POSITION_VALUES[row][col];
         } else {
           // empty field
-          let threatLevel = blackThreats[row][col] - whiteThreats[row][col];
+          const threatLevel = blackThreats[row][col] - whiteThreats[row][col];
           if (isWhitePlaying) {
             if (threatLevel < 0) coverageSumWhite++;
             else if (threatLevel > 0) {
@@ -97,7 +97,7 @@ export class Evaluator {
         }
       }
     }
-    let valueOfPawn = PieceUtils.materialValue(1);
+    const valueOfPawn = PieceUtils.materialValue(1);
     let result =
       materialSumWhite +
       positionalSumWhite +
@@ -116,7 +116,7 @@ export class Evaluator {
 
     if (isWhitePlaying) result = -result;
 
-    let PERFORMANCE_MEASURE_stop = window.performance.now();
+    const PERFORMANCE_MEASURE_stop = window.performance.now();
     Evaluator.PERFORMANCE_MEASURE_SUM += PERFORMANCE_MEASURE_stop - PERFORMANCE_MEASURE_start;
     Evaluator.PERFORMANCE_MEASURE_COUNT++;
 

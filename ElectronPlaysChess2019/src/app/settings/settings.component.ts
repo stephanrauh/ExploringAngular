@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { ChessEngineAPI } from '../engine/chessboardUI';
+import { ChessboardUI } from '../engine/chessboardUI';
 
 @Component({
-  selector: 'settings',
-  templateUrl: './SettingsComponent.html'
+  selector: 'app-settings',
+  templateUrl: './settings.component.html'
 })
 export class SettingsComponent {
-  constructor(private chessboard: ChessEngineAPI.ChessboardUI) {}
+  constructor(private chessboard: ChessboardUI) {}
 
   public onSubmit() {
     alert('Hello ' + this.chessboard.breadth + ' / ' + this.chessboard.lookahead);

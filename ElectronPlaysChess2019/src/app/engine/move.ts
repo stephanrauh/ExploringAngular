@@ -2,9 +2,9 @@ import { Moves } from './moves';
 
 export class Move {
   public value: number; // result of the evaluation of the position. Not part of the constructor because it is added later.
-  public check: boolean = false;
-  public checkMate: boolean = false;
-  public staleMate: boolean = false;
+  public check = false;
+  public checkMate = false;
+  public staleMate = false;
 
   constructor(
     public fromRow: number,
@@ -27,7 +27,7 @@ export class Move {
   ) {}
 
   toString(): string {
-    let colNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+    const colNames = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
     let result = colNames[this.fromCol];
     result += 8 - this.fromRow;
     if (0 === this.capture) result += '-';

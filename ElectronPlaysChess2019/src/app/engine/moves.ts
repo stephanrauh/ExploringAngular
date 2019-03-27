@@ -9,11 +9,11 @@ export class Moves {
   private _ownThreats: number[][] = null;
   private _opponentThreats: number[][] = null;
 
-  check: boolean = false;
-  checkMate: boolean = false;
-  staleMate: boolean = false;
-  ownCheck: boolean = false;
-  ownCheckMate: boolean = false;
+  public check = false;
+  public checkMate = false;
+  public staleMate = false;
+  public ownCheck = false;
+  public ownCheckMate = false;
 
   constructor(private chessboard: Chessboard) {
     this.calculateLegalMoves();
@@ -40,21 +40,20 @@ export class Moves {
 
   isLegalMove(fromRow: number, fromCol: number, toRow: number, toCol: number) {
     this.calculateLegalMoves();
-    for (let index in this._legalMoves) {
-      let move: Move = this._legalMoves[index];
+    for (const move of this._legalMoves) {
       if (move.fromRow === fromRow && move.fromCol === fromCol && move.toRow === toRow && move.toCol === toCol) return true;
     }
     return false;
   }
 
   /** Note that this function has side effects. It is responsible for setting the
-        attributes check, ownCheck, checkMate, ownCheckMate and stalemate of the chessboard.
-    */
+   *  attributes check, ownCheck, checkMate, ownCheckMate and stalemate of the chessboard.
+   */
   calculateLegalMoves() {
     if (null === this._legalMoves) {
       let result: Array<Move> = new Array<Move>();
       let opponentResult: Array<Move> = new Array<Move>();
-      let ownThreats: number[][] = [
+      const ownThreats: number[][] = [
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
@@ -64,7 +63,7 @@ export class Moves {
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0]
       ];
-      let opponentThreats: number[][] = [
+      const opponentThreats: number[][] = [
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
@@ -80,10 +79,10 @@ export class Moves {
       let opponentKingRow: number;
       let opponentKingCol: number;
 
-      for (let row: number = 0; row < this.chessboard.fields.length; row++) {
-        let currentRow: number[] = this.chessboard.fields[row];
-        for (let col: number = 0; col < currentRow.length; col++) {
-          let piece: number = this.chessboard.fields[row][col];
+      for (let row = 0; row < this.chessboard.fields.length; row++) {
+        const currentRow: number[] = this.chessboard.fields[row];
+        for (let col = 0; col < currentRow.length; col++) {
+          const piece: number = this.chessboard.fields[row][col];
           if (this.chessboard.isWhitePlaying) {
             if (piece > 0) this.addWhiteMoves(row, col, piece, this.chessboard.fields, result, ownThreats);
             else if (piece < 0) this.addBlackMoves(row, col, piece, this.chessboard.fields, opponentResult, opponentThreats);
@@ -113,8 +112,8 @@ export class Moves {
         move => !this.kingInChessAfterMove(this.chessboard, move, opponentKingRow, opponentKingCol, ownThreats)
       );
 
-      let whiteThreats: number[][] = this.chessboard.isWhitePlaying ? ownThreats : opponentThreats;
-      let blackThreats: number[][] = this.chessboard.isWhitePlaying ? opponentThreats : ownThreats;
+      const whiteThreats = this.chessboard.isWhitePlaying ? ownThreats : opponentThreats;
+      const blackThreats = this.chessboard.isWhitePlaying ? opponentThreats : ownThreats;
       result.forEach(move => {
         this.chessboard.moveInternally(move.fromRow, move.fromCol, move.toRow, move.toCol, move.promotion);
         move.value = Evaluator.evaluatePosition(this.chessboard, whiteThreats, blackThreats, this.chessboard.isWhitePlaying);
@@ -147,7 +146,7 @@ export class Moves {
 
   /** Quick check is the king is in check. */
   kingInChessAfterMove(chessboard: Chessboard, move: Move, kingRow: number, kingCol: number, opponentThreats: number[][]): boolean {
-    let moveCount = this.chessboard.moveHistory.length;
+    const moveCount = this.chessboard.moveHistory.length;
     try {
       if (move.fromRow === kingRow && move.fromCol === kingCol) {
         if (opponentThreats[move.toRow][move.toCol] > 0) return true;
@@ -176,8 +175,8 @@ export class Moves {
       kingRow = move.toRow;
       kingCol = move.toCol;
     }
-    let fields = chessboard.fields;
-    let king = fields[kingRow][kingCol];
+    const fields = chessboard.fields;
+    const king = fields[kingRow][kingCol];
     let row = kingRow;
     let col = kingCol;
     let check = false;
@@ -192,7 +191,7 @@ export class Moves {
       check = check || this.fieldContainsPiece(fields, row - 1, col + 2, king > 0 ? Piece.BLACK_KNIGHT : Piece.WHITE_KNIGHT);
       check = check || this.fieldContainsPiece(fields, row - 2, col - 1, king > 0 ? Piece.BLACK_KNIGHT : Piece.WHITE_KNIGHT);
       check = check || this.fieldContainsPiece(fields, row - 1, col - 2, king > 0 ? Piece.BLACK_KNIGHT : Piece.WHITE_KNIGHT);
-      let opponentPawnDir = king > 0 ? -1 : 1;
+      const opponentPawnDir = king > 0 ? -1 : 1;
       check = check || this.fieldContainsPiece(fields, row + opponentPawnDir, col - 1, king > 0 ? Piece.BLACK_PAWN : Piece.WHITE_PAWN);
       check = check || this.fieldContainsPiece(fields, row + opponentPawnDir, col + 1, king > 0 ? Piece.BLACK_PAWN : Piece.WHITE_PAWN);
       check = check || this.fieldContainsPiece(fields, row, col + 1, king > 0 ? Piece.BLACK_KING : Piece.WHITE_KING);
@@ -252,7 +251,7 @@ export class Moves {
       reachedLastLine = true;
     } finally {
       this.chessboard.revertLastMoveInternally();
-      //            console.log("Thourough check analysis: check = " + check + " for " + (king > 0 ? "white" : "black") + " last move: " + move.toString())
+      // console.log("Thourough check analysis: check = " + check + " for " + (king > 0 ? "white" : "black") + " last move: " + move.toString())
       //            this.chessboard.fields.forEach((row) => {
       //                 let line: String = ""
       //                row.forEach((piece) => { if (piece < 0) line += " " + piece; else line += "  " + piece })
@@ -298,21 +297,21 @@ export class Moves {
   }
 
   isTargetEmptyOrCanBeCaptured(toRow: number, toCol: number, sourcePiece: number, fields: number[][]): boolean {
-    let targetPiece: number = fields[toRow][toCol];
+    const targetPiece = fields[toRow][toCol];
     if (sourcePiece > 0 && targetPiece <= 0) return true;
     if (sourcePiece < 0 && targetPiece >= 0) return true;
     return false;
   }
 
   isTargetCanBeCaptured(toRow: number, toCol: number, sourcePiece: number, fields: number[][]): boolean {
-    let targetPiece: number = fields[toRow][toCol];
+    const targetPiece = fields[toRow][toCol];
     if (sourcePiece > 0 && targetPiece < 0) return true;
     if (sourcePiece < 0 && targetPiece > 0) return true;
     return false;
   }
 
   isTargetEmpty(toRow: number, toCol: number, fields: number[][]): boolean {
-    let targetPiece: number = fields[toRow][toCol];
+    const targetPiece = fields[toRow][toCol];
     if (targetPiece === 0) return true;
     return false;
   }
@@ -360,7 +359,8 @@ export class Moves {
     if (toRow < 0 || toRow >= 8) return false;
     if (toCol < 0 || toCol >= 8) return false;
     if (this.isTargetEmpty(toRow, toCol, fields)) {
-      if (sourcePiece !== 1 && sourcePiece !== -1) threats[toRow][toCol]++; // pawn can't capture when they call this method, so they are no threat
+      // pawn can't capture when they call this method, so they are no threat
+      if (sourcePiece !== 1 && sourcePiece !== -1) threats[toRow][toCol]++;
       if (considerPromotion && (toRow === 0 || toRow === 7)) {
         result.push(new Move(fromRow, fromCol, toRow, toCol, 2, fields[toRow][toCol]));
         result.push(new Move(fromRow, fromCol, toRow, toCol, 3, fields[toRow][toCol]));
@@ -415,10 +415,10 @@ export class Moves {
   ) {
     let toCol = fromCol;
     let toRow = fromRow + pawnMoveDirection;
-    let sourcePiece = fields[fromRow][fromCol];
+    const sourcePiece = fields[fromRow][fromCol];
     if (this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats, true)) {
       if (sourcePiece > 0 && fromRow === 6) {
-        //white initial pawn double move
+        // white initial pawn double move
         toRow = toRow + pawnMoveDirection;
         this.addMoveIfTargetIsEmpty(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats);
       } else if (sourcePiece < 0 && fromRow === 1) {
@@ -467,7 +467,7 @@ export class Moves {
   addCommonMovesForAKnight(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>, threats: number[][]) {
     let toCol = fromCol + 1;
     let toRow = fromRow + 2;
-    let sourcePiece = fields[fromRow][fromCol];
+    const sourcePiece = fields[fromRow][fromCol];
     this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats);
     toCol = fromCol + 2;
     toRow = fromRow + 1;
@@ -495,7 +495,7 @@ export class Moves {
   addCommonMovesForABishop(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>, threats: number[][]) {
     let toCol = fromCol;
     let toRow = fromRow;
-    let sourcePiece = fields[fromRow][fromCol];
+    const sourcePiece = fields[fromRow][fromCol];
     while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, ++toRow, ++toCol, sourcePiece, fields, result, threats)) {}
     this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats);
 
@@ -518,7 +518,7 @@ export class Moves {
   addCommonMovesForARook(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>, threats: number[][]) {
     let toCol = fromCol;
     let toRow = fromRow;
-    let sourcePiece = fields[fromRow][fromCol];
+    const sourcePiece = fields[fromRow][fromCol];
     while (this.addMoveIfTargetIsEmpty(fromRow, fromCol, ++toRow, toCol, sourcePiece, fields, result, threats)) {}
     this.addMoveIfTargetCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats);
 
@@ -545,7 +545,7 @@ export class Moves {
   addCommonMovesForAKing(fromRow: number, fromCol: number, fields: number[][], result: Array<Move>, threats: number[][]) {
     let toCol = fromCol;
     let toRow = fromRow + 1;
-    let sourcePiece = fields[fromRow][fromCol];
+    const sourcePiece = fields[fromRow][fromCol];
     this.addMoveIfTargetIsEmptyOrCanBeCaptured(fromRow, fromCol, toRow, toCol, sourcePiece, fields, result, threats);
     toCol = fromCol + 1;
     toRow = fromRow + 1;

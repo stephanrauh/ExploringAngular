@@ -1,42 +1,30 @@
-import { Component } from '@angular/core';
-import { ChessEngineAPI } from '../engine/chessboardUI';
+import { Component, Input } from '@angular/core';
 import { PieceUtils } from '../engine/pieces';
+import { ChessboardUI } from '../engine/chessboardUI';
 
 @Component({
-  selector: 'field',
-  templateUrl: './FieldComponent.html',
-  inputs: ['row', 'col', 'piece'],
-  outputs: ['row', 'col', 'piece']
+  selector: 'app-field',
+  templateUrl: './field.component.html'
 })
 export class FieldComponent {
-  private _row: number;
+  @Input()
+  public row: number;
+
+  @Input()
   public piece: number;
-  public _col: number;
 
-  public set row(index: number) {
-    this._row = index;
-  }
+  @Input()
+  public col: number;
 
-  public set col(index: number) {
-    this._col = index;
-  }
+  constructor(private chessboard: ChessboardUI) {}
 
-  public get col() {
-    return this._col;
-  }
-  public get row() {
-    return this._row;
-  }
-
-  constructor(private chessboard: ChessEngineAPI.ChessboardUI) {}
-
-  private backgroundFileName(rowindex: number, colindex: number): String {
+  public backgroundFileName(rowindex: number, colindex: number): string {
     if ((rowindex + colindex) % 2 === 1) return 'assets/wikimediaimages/b_empty.png';
     else return 'assets/wikimediaimages/w_empty.png';
   }
 
-  private borderClass(row: number, col: number): String {
-    let piece = this.chessboard.fields[row][col];
+  public borderClass(row: number, col: number): string {
+    const piece = this.chessboard.fields[row][col];
     let isOwnPiece = false;
     if (this.chessboard.isWhitePlaying && piece > 0) isOwnPiece = true;
     if (!this.chessboard.isWhitePlaying && piece < 0) isOwnPiece = true;
@@ -48,7 +36,7 @@ export class FieldComponent {
     return 'field';
   }
 
-  private ownThreats(row: number, col: number): number {
+  public ownThreats(row: number, col: number): number {
     return this.chessboard.ownThreats(row, col);
   }
 
@@ -56,23 +44,23 @@ export class FieldComponent {
     return this.chessboard.opponentThreats(row, col);
   }
 
-  private fileName(piece: number) {
+  public fileName(piece: number) {
     return PieceUtils.fileName(piece);
   }
 
-  private ondragstart(row: number, col: number) {
+  public ondragstart(row: number, col: number) {
     this.chessboard.setSelectedPiece(row, col);
   }
 
-  private ondragover(row: number, col: number) {
+  public ondragover(row: number, col: number) {
     if (this.chessboard.isLegalMove2(row, col)) event.preventDefault();
   }
 
-  private ondragdrop(row: number, col: number) {
+  public ondragdrop(row: number, col: number) {
     this.chessboard.onclick(row, col);
   }
 
-  private onclick(row: number, col: number) {
+  public onclick(row: number, col: number) {
     this.chessboard.onclick(row, col);
   }
 }

@@ -17,9 +17,9 @@ export enum Piece {
 export class PieceUtils {
   public static fileName(piece: number): string {
     if (0 === piece) return 'assets/wikimediaimages/empty.png';
-    let prefix = piece < 0 ? 'b_' : 'w_';
+    const prefix = piece < 0 ? 'b_' : 'w_';
     if (piece < 0) piece = -piece;
-    let pieceName: String;
+    let pieceName: string;
     switch (piece) {
       case 1:
         pieceName = 'pawn';
